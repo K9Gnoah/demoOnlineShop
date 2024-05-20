@@ -10,26 +10,23 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="<c:url value='/template/bootstrap.min.css' />"/>
+    <link rel="stylesheet" href="<c:url value='/template/jquery.min.js' />"/>
+    <link rel="stylesheet" href="<c:url value='/template/bootstrap.min.js' />"/>
 </head>
 <body>
 <div class="container">
-    <h2>Vertical (basic) form</h2>
     <form action="/action_page.php">
         <div class="form-group">
             <label for="email">Email:</label>
             <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
         </div>
         <div class="form-group">
-            <label for="pwd">Password:</label>
-            <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
+            <label for="template">Template email:</label>
+            <textarea class="form-control" rows="5" id="template"></textarea>
         </div>
-        <div class="checkbox">
-            <label><input type="checkbox" name="remember"> Remember me</label>
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
+
+        <button type="submit" class="btn btn-primary">Send mail</button>
     </form>
 </div>
 </body>
