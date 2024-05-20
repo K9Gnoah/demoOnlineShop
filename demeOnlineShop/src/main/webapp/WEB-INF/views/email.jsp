@@ -11,23 +11,30 @@
 <head>
     <title>Title</title>
     <link rel="stylesheet" href="<c:url value='/template/bootstrap.min.css' />"/>
-    <link rel="stylesheet" href="<c:url value='/template/jquery.min.js' />"/>
-    <link rel="stylesheet" href="<c:url value='/template/bootstrap.min.js' />"/>
+    <script type="text/javascript" src="<c:url value="/template/jquery.min.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/template/bootstrap.min.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/ckeditor/ckeditor.js"/>"></script>
+
 </head>
 <body>
 <div class="container">
-    <form action="/action_page.php">
-        <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
-        </div>
-        <div class="form-group">
-            <label for="template">Template email:</label>
-            <textarea class="form-control" rows="5" id="template"></textarea>
-        </div>
+    <h2>Gửi email cho khách hàng cũ</h2>
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="text" class="form-control" id="email" name="email">
+    </div>
+    <div class="form-group">
+        <label for="template">Template email:</label>
+        <textarea class="form-control" rows="5" id="template" name="template"></textarea>
+    </div>
 
-        <button type="submit" class="btn btn-primary">Send mail</button>
-    </form>
+    <button type="button" class="btn btn-primary" id="btnSendEmail">Send mail</button>
 </div>
+<script>
+    var editor = '';
+    $(document).ready(function () {
+        // editor = CKEDITOR.replace('template');
+    });
+</script>
 </body>
 </html>
