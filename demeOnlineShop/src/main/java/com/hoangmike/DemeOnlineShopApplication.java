@@ -1,4 +1,4 @@
-package com.hoangmike.demeOnlineShop;
+package com.hoangmike;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

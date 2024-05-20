@@ -1,4 +1,4 @@
-package com.hoangmike.demeOnlineShop;
+package com.hoangmike;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
