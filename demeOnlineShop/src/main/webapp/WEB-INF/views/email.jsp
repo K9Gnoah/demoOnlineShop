@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<c:url var="formUrl" value="/api/email"/>
 <html>
 <head>
     <title>Title</title>
@@ -35,6 +36,32 @@
     $(document).ready(function () {
         // editor = CKEDITOR.replace('template');
     });
+
+    $('#btnSendEmail').click(function (event) {
+        event.preventDefault();
+        var data = {};
+        data["email"] = $("#email").val();
+        data["template"] = $("#template").val();
+        callAPI(data);
+    });
+
+    function callAPI(data) {
+        $.ajax({
+            url: '${formUrl}',
+            type: 'POST',
+            dataType: 'json',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            success: function (res) {
+                console.log('success');
+            },
+            error: function (res) {
+                console.log('failed');
+            }
+        });
+    }
+
+
 </script>
 </body>
 </html>

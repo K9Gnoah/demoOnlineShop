@@ -1,2 +1,2 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
-<c:redirect url="/email"/>
+<c:redirect url="/showLoginForm"/>
