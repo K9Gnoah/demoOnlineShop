@@ -25,4 +25,9 @@ public class LoginController {
         }
         else return "404";
     }
+
+    @GetMapping("/home")
+    public String home(Model model) {
+        return "homepage";
+    }
 }
