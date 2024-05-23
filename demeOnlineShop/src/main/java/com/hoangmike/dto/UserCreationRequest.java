@@ -1,13 +1,22 @@
 package com.hoangmike.dto;
 
+import jakarta.validation.constraints.*;
+
 public class UserCreationRequest {
+    @Size(min=5, message = "username must be at least 5 characters")
     private String userName;
+    @Size(min = 6, message = "password must be at least 6 characters")
     private String password;
+    @Email(message = "you must input correct email format")
     private String email;
+    @Size(min=9, message = "phone must be at least 9 numbers")
     private String phone;
+    @NotNull(message = "full name field can not null")
     private String fullName;
-    private boolean userStatus;
-    private int roleId;
+    @NotNull(message = "user status field can not null")
+    private Boolean userStatus;
+    @NotNull(message = "role id can not null")
+    private Integer roleId;
 
     public String getUserName() {
         return userName;
