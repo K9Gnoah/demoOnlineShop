@@ -34,7 +34,7 @@
         </tr>
     </thead>
     <tbody>
-        <c:forEach var="i" items="${listProduct}">
+        <c:forEach var="i" items="${listProduct.content}">
             <tr>
                 <td>${i.productID}</td>
                 <td>${i.productName}</td>
@@ -54,6 +54,21 @@
     </tbody>
 
 </table>
+    <div>
+        <c:if test="${listProduct.hasPrevious()}">
+            <a href="?page=${listProduct.number - 1}&size=${listProduct.size}">Previous</a>
+        </c:if>
+        Page ${listProduct.number + 1} of ${listProduct.totalPages}
+        <c:if test="${listProduct.hasNext()}">
+            <a href="?page=${listProduct.number + 1}&size=${listProduct.size}">Next</a>
+        </c:if>
+    </div>
+    <div>
+        <c:forEach begin="1" end="${listProduct.totalPages}" var="i">
+            <a href="?page=${i - 1}&size=${listProduct.size}">${i}</a>
+        </c:forEach>
+    </div>
+
 <a href="/addProductForm">Add product</a>
     <script type="text/javascript">
         $(document).ready(function(){

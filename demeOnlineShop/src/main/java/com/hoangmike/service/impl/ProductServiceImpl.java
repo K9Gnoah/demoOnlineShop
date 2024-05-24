@@ -5,6 +5,8 @@ import com.hoangmike.entity.Product;
 import com.hoangmike.repository.ProductRepository;
 import com.hoangmike.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -63,6 +65,11 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> getAllProducts() {
         List<Product> productsList = productRepository.findAll();
         return (List<Product>)productRepository.findAll();
+    }
+
+    @Override
+    public Page<Product> findPaginated(int page, int size) {
+        return productRepository.findAll(PageRequest.of(page, size));
     }
 
 
