@@ -1,10 +1,14 @@
 package com.hoangmike.controllerAPI;
 
-import com.hoangmike.dto.UserCreationRequest;
+import com.hoangmike.dto.request.ApiResponse;
+import com.hoangmike.dto.request.UserCreationRequest;
+import com.hoangmike.dto.response.UserResponse;
 import com.hoangmike.entity.User;
 import com.hoangmike.service.UserService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,28 +16,37 @@ import java.util.List;
 
 @RestController("apiUserController")
 @RequestMapping("/api/users")
+@RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE,makeFinal = true)
 public class UserController {
-    @Autowired
-    private UserService userService;
+    UserService userService;
 
     @PostMapping
-    User createUser(@RequestBody @Valid UserCreationRequest request) {
-        return userService.createUser(request);
+    ApiResponse<UserResponse> createUser(@RequestBody @Valid UserCreationRequest request) {
+        ApiResponse<UserResponse> apiResponse = new ApiResponse<>();
+        apiResponse.setResult(userService.createUser(request));
+        return apiResponse;
     }
 
     @GetMapping
-    List<User> getUsers() {
-        return userService.getAllUser();
+    ApiResponse<List<User>> getUsers() {
+        ApiResponse<List<User>> apiResponse = new ApiResponse<>();
+        apiResponse.setResult(userService.getAllUser());
+        return apiResponse;
     }
 
     @GetMapping("/{userId}")
-    User getUserByID(@PathVariable("userId") String userId) {
-        return userService.getUserById(userId);
+    ApiResponse<UserResponse> getUserByID(@PathVariable("userId") String userId) {
+        ApiResponse<UserResponse> apiResponse = new ApiResponse<>();
+        apiResponse.setResult(userService.getUserById(userId));
+        return apiResponse;
     }
 
     @PutMapping("/{userId}")
-    User updateUserByID(@PathVariable String userId, @RequestBody @Valid UserCreationRequest request) {
-        return userService.updateUserById(userId, request);
+    ApiResponse<UserResponse> updateUserByID(@PathVariable String userId, @RequestBody @Valid UserCreationRequest request) {
+        ApiResponse<UserResponse> apiResponse = new ApiResponse<>();
+        apiResponse.setResult(userService.updateUserById(userId, request));
+        return apiResponse;
     }
 
     @DeleteMapping("/{userId}")

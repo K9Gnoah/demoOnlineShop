@@ -1,35 +1,44 @@
 package com.hoangmike.controllerAPI;
 
-import com.hoangmike.dto.ProductCreationRequest;
+import com.hoangmike.dto.request.ApiResponse;
+import com.hoangmike.dto.request.ProductCreationRequest;
+import com.hoangmike.dto.response.ProductResponse;
 import com.hoangmike.entity.Product;
 import com.hoangmike.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController("apiProductController")
 @RequestMapping("/api/products")
+@RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE,makeFinal = true)
 public class ProductController {
-    @Autowired
-    private ProductService productService;
+    ProductService productService;
 
     @GetMapping("/{productId}")
-    Product getProductById(@PathVariable("productId") int productId) {
-        return productService.getProductById(productId);
+    ApiResponse<Product> getProductById(@PathVariable("productId") int productId) {
+        ApiResponse apiResponse = new ApiResponse();
+        apiResponse.setResult(productService.getProductById(productId));
+        return apiResponse;
     }
 
 
     @PostMapping
-    public String insertProduct(@RequestBody ProductCreationRequest request) {
-        productService.addProduct(request);
-        return "add product success";
+    ApiResponse<Product> insertProduct(@RequestBody ProductCreationRequest request) {
+        ApiResponse apiResponse = new ApiResponse();
+        apiResponse.setResult(productService.addProduct(request));
+        return apiResponse;
     }
 
     @PutMapping("/{productId}")
-    public String updateProduct(@PathVariable("productId") int productId, @RequestBody ProductCreationRequest request) {
-        productService.updateProduct(productId, request);
-        return "update product success";
+    ApiResponse<ProductResponse> updateProduct(@PathVariable("productId") int productId, @RequestBody ProductCreationRequest request) {
+        ApiResponse<ProductResponse> apiResponse = new ApiResponse();
+        apiResponse.setResult(productService.updateProduct(productId, request));
+        return apiResponse;
     }
 
     @DeleteMapping("/{productId}")

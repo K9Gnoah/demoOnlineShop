@@ -1,46 +1,45 @@
 package com.hoangmike.service.impl;
 
-import com.hoangmike.dto.ProductCreationRequest;
+import com.hoangmike.dto.request.ProductCreationRequest;
+import com.hoangmike.dto.response.ProductResponse;
 import com.hoangmike.entity.Product;
+import com.hoangmike.exception.AppException;
+import com.hoangmike.exception.ErrorCode;
+import com.hoangmike.mapper.ProductMapper;
 import com.hoangmike.repository.ProductRepository;
 import com.hoangmike.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
+@RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class ProductServiceImpl implements ProductService {
-    @Autowired
     ProductRepository productRepository;
+    ProductMapper productMapper;
 
 
     @Override
-    public void addProduct(ProductCreationRequest request) {
+    public ProductResponse addProduct(ProductCreationRequest request) {
         Product product = new Product();
-
-        product.setProductName(request.getProductName());
-        product.setProductDescription(request.getProductDescription());
-        product.setProductPrice(request.getProductPrice());
-        product.setProductImage(request.getProductImage());
-        product.setProductStatus(request.isProductStatus());
-        product.setProductQuantity(request.getProductQuantity());
-        product.setCategoryId(request.getCategoryId());
-        productRepository.save(product);
+        if(productRepository.existsByProductName(request.getProductName()))
+            throw new AppException(ErrorCode.PRODUCT_EXISTED);
+        productMapper.AddOrUpdateProduct(product, request);
+        return productMapper.toProductResponse(productRepository.save(product));
     }
 
     @Override
-    public void updateProduct(int productId, ProductCreationRequest request) {
-        Product product = getProductById(productId);
-        product.setProductName(request.getProductName());
-        product.setProductDescription(request.getProductDescription());
-        product.setProductPrice(request.getProductPrice());
-        product.setProductImage(request.getProductImage());
-        product.setProductStatus(request.isProductStatus());
-        product.setProductQuantity(request.getProductQuantity());
-        product.setCategoryId(request.getCategoryId());
-        productRepository.save(product);
+    public ProductResponse updateProduct(int productId, ProductCreationRequest request) {
+        Product product = productRepository.findById(Long.valueOf(productId)).orElseThrow(()->new AppException(ErrorCode.PRODUCT_NOT_FOUND));
+        if(productRepository.existsByProductName(request.getProductName()))
+            throw new AppException(ErrorCode.PRODUCT_EXISTED);
+        else productMapper.AddOrUpdateProduct(product, request);
+        return productMapper.toProductResponse(productRepository.save(product));
     }
 
 
@@ -51,14 +50,14 @@ public class ProductServiceImpl implements ProductService {
             productRepository.deleteById((long) productId);
         }
         else{
-            throw new RuntimeException("User not found");
+            throw new AppException(ErrorCode.PRODUCT_NOT_FOUND);
         }
     }
 
     @Override
-    public Product getProductById(int productId) {
-        return productRepository.findById((long) productId)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+    public ProductResponse getProductById(int productId) {
+        return productMapper.toProductResponse(productRepository.findById((long) productId)
+                .orElseThrow(() -> new AppException(ErrorCode.PRODUCT_NOT_FOUND)));
     }
 
     @Override

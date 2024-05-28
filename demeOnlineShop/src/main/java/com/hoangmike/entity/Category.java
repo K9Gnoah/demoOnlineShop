@@ -4,37 +4,23 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.FieldDefaults;
 
 @Entity
+@Getter
+@Setter
+@FieldDefaults(level = AccessLevel.PRIVATE)
+
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int categoryId;
+    int categoryId;
 
-    private String categoryName;
-    private boolean categoryStatus;
+    String categoryName;
+    boolean categoryStatus;
 
-    public int getCategoryId() {
-        return categoryId;
-    }
 
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
-    }
-
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
-    }
-
-    public boolean isCategoryStatus() {
-        return categoryStatus;
-    }
-
-    public void setCategoryStatus(boolean categoryStatus) {
-        this.categoryStatus = categoryStatus;
-    }
 }

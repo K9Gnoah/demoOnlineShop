@@ -1,4 +1,4 @@
-package com.hoangmike.dto;
+package com.hoangmike.dto.request;
 
 public class LoginDTO {
     private String username;

@@ -1,20 +1,15 @@
-package com.hoangmike.entity;
+package com.hoangmike.dto.response;
 
-import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-@Entity
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+public class UserResponse {
     String id;
-
     String userName;
     String password;
     String email;
@@ -22,6 +17,5 @@ public class User {
     String fullName;
     boolean userStatus;
     int roleId;
-
 
 }
