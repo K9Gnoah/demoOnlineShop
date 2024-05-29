@@ -9,6 +9,7 @@ public enum ErrorCode {
     PRODUCT_EXISTED(1005, "Product name existed"),
     USER_NOT_FOUND(1006, "User not found"),
     PRODUCT_NOT_FOUND(1007, "Product not found"),
+    UNAUTHENTICATED(1008, "Unauthenticated"),
     ;
 
     ErrorCode(int code, String message) {

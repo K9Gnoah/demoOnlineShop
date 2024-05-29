@@ -35,7 +35,7 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-12">
-                                <form id="login-form" action="/submitLoginForm" method="post" role="form" style="display: block;">
+                                <form id="login-form" onsubmit="login(event)" role="form" style="display: block;">
                                     <div class="form-group">
                                         <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
                                     </div>
@@ -91,5 +91,29 @@
             </div>
         </div>
     </div>
+    <script>
+        async function login(event) {
+            event.preventDefault();
+            const userName = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            const response = await fetch('/auth/log-in', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ userName, password })
+            });
+
+            const result = await response.json();
+
+            if (result.code === 1000 && result.result.authenticated) {
+                window.location.href = '/adminDashBoard';
+            } else {
+                alert('Login failed!');
+            }
+        }
+
+    </script>
 </body>
 </html>

@@ -38,7 +38,7 @@
                         <span class="hide-menu">Home</span>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="./index.html" aria-expanded="false">
+                        <a class="sidebar-link" href="/adminDashBoard" aria-expanded="false">
                 <span>
                   <i class="ti ti-layout-dashboard"></i>
                 </span>
@@ -66,11 +66,11 @@
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="./ui-card.html" aria-expanded="false">
+                        <a class="sidebar-link" href="/productList" aria-expanded="false">
                 <span>
                   <i class="ti ti-cards"></i>
                 </span>
-                            <span class="hide-menu">Card</span>
+                            <span class="hide-menu">Product List</span>
                         </a>
                     </li>
                     <li class="sidebar-item">

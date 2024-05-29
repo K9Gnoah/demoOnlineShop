@@ -1,5 +1,7 @@
 package com.hoangmike.controller;
 
+import com.hoangmike.dto.request.AuthenticationRequest;
+import com.hoangmike.service.AuthenticationService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,15 +15,12 @@ public class LoginController {
         return "loginForm";
     }
 
-    @PostMapping("/submitLoginForm")
-    public String submitLogin(@RequestParam(name="username") String username,
-            @RequestParam(name = "password") String password) {
-
-        if(username.equals("admin") && password.equals("123")) {
-            return "redirect:/home";
-        }
-        else return "404";
-    }
+//    @PostMapping("/submitLoginForm")
+//    public String submitLogin(@RequestParam(name="username") String username,
+//            @RequestParam(name = "password") String password) {
+//
+//        return "redirect:/home";
+//    }
 
     @GetMapping("/home")
     public String home(Model model) {
