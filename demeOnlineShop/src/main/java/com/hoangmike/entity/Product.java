@@ -1,9 +1,6 @@
 package com.hoangmike.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,6 +17,7 @@ public class Product {
     int productID;
 
     String productName;
+    @Column(columnDefinition = "TEXT")
     String productDescription;
     double productPrice;
     String productImage;

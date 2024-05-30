@@ -311,10 +311,10 @@
                     productName: $("#product_name").val(),
                     productDescription: $("#product_description").val(),
                     productPrice: parseFloat($("#product_price").val()),
-                    productImage: $("#product_image").val(), // Lưu ý: File uploads cần xử lý khác
-                    productStatus: $("#product_status").val() === "Appear",
+                    // productImage: $("#product_image").val(), // Lưu ý: File uploads cần xử lý khác
+                    productStatus: $("#product_status").val() === "true",
                     productQuantity: parseInt($("#available_quantity").val()),
-                    categoryId: $("#product_categorie").val() === "Trái cây nhập khẩu" ? 1 : 2
+                    categoryId: $("#product_categorie").val() === "1" ? 1 : 2
                 };
 
                 $.ajax({
@@ -324,7 +324,7 @@
                     data: JSON.stringify(formData),
                     success: function (result) {
                         alert(result);
-                        location.reload();  // Reload lại trang sau khi xóa thành công
+                        location.replace("/productList")
                     },
                     error: function (e) {
                         console.log(e);

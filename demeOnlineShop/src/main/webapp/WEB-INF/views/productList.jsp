@@ -18,6 +18,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="<c:url value='/template/homepage/css/style.css' />"/>
 </head>
 <body>
 <!--  Body Wrapper -->
@@ -233,23 +234,47 @@
                         </tbody>
 
                     </table>
-                    <div>
-                        <c:if test="${listProduct.hasPrevious()}">
-                            <a href="?page=${listProduct.number - 1}&size=${listProduct.size}">Previous</a>
-                        </c:if>
-                        Page ${listProduct.number + 1} of ${listProduct.totalPages}
-                        <c:if test="${listProduct.hasNext()}">
-                            <a href="?page=${listProduct.number + 1}&size=${listProduct.size}">Next</a>
-                        </c:if>
-                    </div>
-                    <div>
-                        <c:forEach begin="1" end="${listProduct.totalPages}" var="i">
-                            <a href="?page=${i - 1}&size=${listProduct.size}">${i}</a>
-                        </c:forEach>
-                    </div>
+<%--                    <div>--%>
+<%--                        <c:if test="${listProduct.hasPrevious()}">--%>
+<%--                            <a href="?page=${listProduct.number - 1}&size=${listProduct.size}">Previous</a>--%>
+<%--                        </c:if>--%>
+<%--                        Page ${listProduct.number + 1} of ${listProduct.totalPages}--%>
+<%--                        <c:if test="${listProduct.hasNext()}">--%>
+<%--                            <a href="?page=${listProduct.number + 1}&size=${listProduct.size}">Next</a>--%>
+<%--                        </c:if>--%>
+<%--                    </div>--%>
+<%--                    <div>--%>
+<%--                        <c:forEach begin="1" end="${listProduct.totalPages}" var="i">--%>
+<%--                            <a href="?page=${i - 1}&size=${listProduct.size}">${i}</a>--%>
+<%--                        </c:forEach>--%>
+<%--                    </div>--%>
 
                     <a href="/addProductForm">Add product</a>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col text-center">
+            <div class="block-27">
+                <ul>
+                    <c:if test="${listProduct.hasPrevious()}">
+                        <li><a href="?page=${listProduct.number - 1}&size=${listProduct.size}">&lt;</a></li>
+                    </c:if>
+                    <c:forEach begin="1" end="${listProduct.totalPages}" var="i">
+                        <c:choose>
+                            <c:when test="${i == (listProduct.number + 1)}">
+                                <li class="active"><span>${i}</span></li>
+                            </c:when>
+                            <c:otherwise>
+                                <li><a href="?page=${i - 1}&size=${listProduct.size}">${i}</a></li>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                    <c:if test="${listProduct.hasNext()}">
+                        <li><a href="?page=${listProduct.number + 1}&size=${listProduct.size}">&gt;</a></li>
+                    </c:if>
+                </ul>
             </div>
         </div>
     </div>

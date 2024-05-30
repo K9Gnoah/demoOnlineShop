@@ -11,6 +11,8 @@ import com.hoangmike.service.ProductService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.mapstruct.BeanMapping;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -36,9 +38,13 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductResponse updateProduct(int productId, ProductCreationRequest request) {
         Product product = productRepository.findById(Long.valueOf(productId)).orElseThrow(()->new AppException(ErrorCode.PRODUCT_NOT_FOUND));
-        if(productRepository.existsByProductName(request.getProductName()))
+        if(product.getProductName().equals(request.getProductName())){
+            productMapper.AddOrUpdateProduct(product, request);
+        }
+        else if(productRepository.existsByProductName(request.getProductName())) {
             throw new AppException(ErrorCode.PRODUCT_EXISTED);
-        else productMapper.AddOrUpdateProduct(product, request);
+        }
+        else  productMapper.AddOrUpdateProduct(product, request);
         return productMapper.toProductResponse(productRepository.save(product));
     }
 
@@ -69,6 +75,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Page<Product> findPaginated(int page, int size) {
         return productRepository.findAll(PageRequest.of(page, size));
+    }
+
+    @Override
+    public Page<Product> findActiveProductPag(int page, int size) {
+        return productRepository.findByProductStatus(PageRequest.of(page, size), true);
     }
 
 

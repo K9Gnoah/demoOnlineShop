@@ -27,8 +27,6 @@ public class ProductController {
     public String productList(Model model,
                               @RequestParam(name = "page", defaultValue = "0") int page,
                               @RequestParam(name = "size", defaultValue = "4") int size) {
-//        List<Product> listProduct = productService.getAllProducts();
-//        model.addAttribute("listProduct", listProduct);
         Page<Product> productPage = productService.findPaginated(page, size);
         model.addAttribute("listProduct", productPage);
         return "productList";
