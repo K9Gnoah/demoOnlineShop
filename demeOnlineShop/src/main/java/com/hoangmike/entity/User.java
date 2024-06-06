@@ -1,14 +1,19 @@
 package com.hoangmike.entity;
 
+
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class User {
     @Id
@@ -21,7 +26,7 @@ public class User {
     String phone;
     String fullName;
     boolean userStatus;
-    int roleId;
+private Set<Role> roles = new HashSet<>();
 
 
 }

@@ -4,6 +4,7 @@ import com.hoangmike.dto.request.AuthenticationRequest;
 import com.hoangmike.dto.request.IntrospectRequest;
 import com.hoangmike.dto.response.AuthenticationResponse;
 import com.hoangmike.dto.response.IntrospectResponse;
+import com.hoangmike.entity.User;
 import com.hoangmike.exception.AppException;
 import com.hoangmike.exception.ErrorCode;
 import com.hoangmike.repository.UserRepository;
@@ -17,14 +18,17 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.NonFinal;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.text.ParseException;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
+import java.util.StringJoiner;
 
 @Service
 @RequiredArgsConstructor
@@ -33,20 +37,22 @@ import java.util.Date;
 public class AuthenticationService {
     UserRepository userRepository;
 
+//    @NonFinal
+//    protected static final String SIGNER_KEY = "oT9YdQcUsxPUSh0DvhtQUjSCAlqaCGFewxjx9JDhfil7ZBzrR1YKcHjt+3/zbwCb";
     @NonFinal
-    protected static final String SIGNER_KEY = "oT9YdQcUsxPUSh0DvhtQUjSCAlqaCGFewxjx9JDhfil7ZBzrR1YKcHjt+3/zbwCb";
+    @Value("${jwt.signerKey}")
+    protected String SIGNER_KEY;
 
     public AuthenticationResponse authenticate(AuthenticationRequest request){
-        var user = userRepository.findByUserName(request.getUserName())
-                .orElseThrow(()-> new AppException(ErrorCode.USER_NOT_FOUND));
-
+        User user = userRepository.findByUserName(request.getUserName())
+                .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
         boolean authenticated =  passwordEncoder.matches(request.getPassword(),
                 user.getPassword());
         if(!authenticated)
             throw new AppException(ErrorCode.UNAUTHENTICATED);
 
-        var token = genarateToken(request.getUserName());
+        var token = genarateToken(user);
         return AuthenticationResponse.builder()
                 .token(token)
                 .authenticated(true)
@@ -54,15 +60,16 @@ public class AuthenticationService {
 
     }
 
-    private String genarateToken(String username){
+    private String genarateToken(User user){
         JWSHeader header = new JWSHeader(JWSAlgorithm.HS512);
         JWTClaimsSet jwtClaimsSet = new JWTClaimsSet.Builder()
-                .subject(username)
+                .subject(user.getUserName())
                 .issuer("hoangmike.com")
                 .issueTime(new Date())
                 .expirationTime(new Date(
                         Instant.now().plus(1, ChronoUnit.HOURS).toEpochMilli()
                 ))
+                .claim("scope",buildScope(user))//custome token
                 .build();
         Payload payload = new Payload(jwtClaimsSet.toJSONObject());
         JWSObject jwsObject = new JWSObject(header, payload);
@@ -89,5 +96,12 @@ public class AuthenticationService {
         return IntrospectResponse.builder()
                 .valid(verified && exprireTime.after(new Date()))
                 .build();
+    }
+
+    private String buildScope(User user){
+        StringJoiner stringJoiner = new StringJoiner(" "); //dùng custome scope vì scope là list
+        if(!CollectionUtils.isEmpty(user.getRoles()))
+            user.getRoles().forEach(s -> stringJoiner.add(s));
+        return stringJoiner.toString();
     }
 }

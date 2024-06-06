@@ -4,6 +4,8 @@ import jakarta.validation.constraints.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.Set;
+
 
 @Data
 @NoArgsConstructor
@@ -23,8 +25,9 @@ public class UserCreationRequest {
     String fullName;
     @NotNull(message = "user status field can not null")
     Boolean userStatus;
-    @NotNull(message = "role id can not null")
-    Integer roleId;
+//    @NotNull(message = "role id can not null")
+//    Integer roleId;
+    Set<String> roles;
 
 
 

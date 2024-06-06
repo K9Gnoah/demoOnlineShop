@@ -9,7 +9,7 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Login</title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -35,7 +35,7 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-12">
-                                <form id="login-form" onsubmit="login(event)" role="form" style="display: block;">
+                                <form action="${pageContext.request.contextPath}/login" method="post" id="login-form" role="form" style="display: block;">
                                     <div class="form-group">
                                         <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
                                     </div>
@@ -65,13 +65,13 @@
                                 </form>
                                 <form id="register-form" action="https://phpoll.com/register/process" method="post" role="form" style="display: none;">
                                     <div class="form-group">
-                                        <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
+                                        <input type="text" name="username1" id="username1" tabindex="1" class="form-control" placeholder="Username" value="">
                                     </div>
                                     <div class="form-group">
-                                        <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="">
+                                        <input type="email" name="email1" id="email1" tabindex="1" class="form-control" placeholder="Email Address" value="">
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+                                        <input type="password" name="password1" id="password1" tabindex="2" class="form-control" placeholder="Password">
                                     </div>
                                     <div class="form-group">
                                         <input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password">
@@ -91,29 +91,43 @@
             </div>
         </div>
     </div>
-    <script>
-        async function login(event) {
-            event.preventDefault();
-            const userName = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-
-            const response = await fetch('/auth/log-in', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ userName, password })
-            });
-
-            const result = await response.json();
-
-            if (result.code === 1000 && result.result.authenticated) {
-                window.location.href = '/adminDashBoard';
-            } else {
-                alert('Login failed!');
-            }
-        }
-
-    </script>
+<script>
+    // $("#login-submit").click(function(e) {
+    //     e.preventDefault();
+    //     $.ajax({
+    //         url: '/auth/log-in',
+    //         type: 'POST',
+    //         contentType: 'application/json',
+    //         data: JSON.stringify({
+    //             userName: $("#username").val(),
+    //             password: $("#password").val()
+    //         }),
+    //         success: function(response) {
+    //             if (response.result && response.result.authenticated) {
+    //                 localStorage.setItem('token', response.result.token);
+    //                 window.location.href = '/adminDashBoard';
+    //                 $.ajax({
+    //                     url: '/adminDashBoard',
+    //                     type: 'GET',
+    //                     beforeSend: function(xhr) {
+    //                         xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.getItem('token'));
+    //                     },
+    //                     success: function(response) {
+    //                         $('body').html(response);
+    //                         window.location.href='/adminDashBoard'
+    //                     },
+    //                     error: function(jqXHR, textStatus, errorThrown) {
+    //                         if (jqXHR.status === 401) {
+    //                             window.location.href = '/showLoginForm';
+    //                         }
+    //                     }
+    //                 });
+    //             } else {
+    //                 alert('Invalid username or password');
+    //             }
+    //         }
+    //     });
+    // });
+</script>
 </body>
 </html>

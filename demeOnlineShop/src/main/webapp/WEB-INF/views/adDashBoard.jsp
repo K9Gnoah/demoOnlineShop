@@ -7,6 +7,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 
 <html>
 <head>
@@ -15,6 +17,7 @@
     <link rel="stylesheet" href="<c:url value='/template/admin/assets/css/styles.min.css' />"/>
 </head>
 <body>
+<sec:authorize access="hasRole('ROLE_ADMIN')">
 <!--  Body Wrapper -->
 <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
      data-sidebar-position="fixed" data-header-position="fixed">
@@ -537,7 +540,9 @@
             </div>
         </div>
     </div>
-</div>
+    <script>
+
+    </script>
 <script type="text/javascript" src="<c:url value="/template/admin/assets/libs/jquery/dist/jquery.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/template/admin/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/template/admin/assets/js/sidebarmenu.js"/>"></script>
@@ -545,5 +550,6 @@
 <script type="text/javascript" src="<c:url value="/template/admin/assets/libs/apexcharts/dist/apexcharts.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/template/admin/assets/libs/simplebar/dist/simplebar.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/template/admin/assets/js/dashboard.js"/>"></script>
-</body>
+    </sec:authorize>
+    </body>
 </html>

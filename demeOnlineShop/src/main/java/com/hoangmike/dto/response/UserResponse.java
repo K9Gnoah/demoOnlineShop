@@ -3,6 +3,8 @@ package com.hoangmike.dto.response;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.Set;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -11,11 +13,10 @@ import lombok.experimental.FieldDefaults;
 public class UserResponse {
     String id;
     String userName;
-    String password;
     String email;
     String phone;
     String fullName;
     boolean userStatus;
-    int roleId;
-
+//    int roleId;
+    Set<String> roles;
 }
