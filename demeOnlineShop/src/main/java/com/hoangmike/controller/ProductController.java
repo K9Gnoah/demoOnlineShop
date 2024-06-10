@@ -4,14 +4,12 @@ import com.hoangmike.entity.Product;
 import com.hoangmike.service.impl.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
-
-
-import java.util.List;
 
 @Controller("webProductController")
 public class ProductController {
@@ -24,6 +22,7 @@ public class ProductController {
     }
 
     @GetMapping("/productList")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String productList(Model model,
                               @RequestParam(name = "page", defaultValue = "0") int page,
                               @RequestParam(name = "size", defaultValue = "4") int size) {

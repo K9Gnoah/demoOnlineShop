@@ -2,13 +2,15 @@ package com.hoangmike.entity;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 @Entity
-@Getter
-@Setter
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class User {
     @Id
@@ -21,7 +23,6 @@ public class User {
     String phone;
     String fullName;
     boolean userStatus;
-    int roleId;
-
+    String role;
 
 }
