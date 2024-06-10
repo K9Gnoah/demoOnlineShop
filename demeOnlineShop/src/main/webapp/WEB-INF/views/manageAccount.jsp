@@ -1,15 +1,15 @@
 <%--
   Created by IntelliJ IDEA.
   User: THINKPAD
-  Date: 5/21/2024
-  Time: 8:49 AM
+  Date: 6/10/2024
+  Time: 4:09 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>Product List</title>
+    <title>Manage Account</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
@@ -100,11 +100,11 @@
                         <span class="hide-menu">AUTH</span>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="./authentication-login.html" aria-expanded="false">
+                        <a class="sidebar-link" href="./logout" aria-expanded="false">
                 <span>
                   <i class="ti ti-login"></i>
                 </span>
-                            <span class="hide-menu">Login</span>
+                            <span class="hide-menu">Log Out</span>
                         </a>
                     </li>
                     <li class="sidebar-item">
@@ -203,30 +203,26 @@
                         <thead class="thead-dark">
                         <tr>
                             <th>ID</th>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>Price</th>
-                            <th>Image</th>
+                            <th>User Name</th>
+                            <th>Email</th>
+                            <th>Full Name</th>
                             <th>Status</th>
-                            <th>Quantity</th>
-                            <th>Category</th>
+                            <th>Role</th>
                             <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach var="i" items="${listProduct.content}">
+                        <c:forEach var="i" items="${listUser.content}">
                             <tr>
-                                <td>${i.productID}</td>
-                                <td>${i.productName}</td>
-                                <td>${i.productDescription}</td>
-                                <td>${i.productPrice}</td>
-                                <td><img src="${i.productImage}" class="img-fluid" style="max-width: 100px;"></td>
-                                <td>${i.productStatus}</td>
-                                <td>${i.productQuantity}</td>
-                                <td>${i.categoryId}</td>
+                                <td>${i.id}</td>
+                                <td>${i.userName}</td>
+                                <td>${i.email}</td>
+                                <td>${i.fullName}</td>
+                                <td>${i.userStatus}</td>
+                                <td>${i.role}</td>
                                 <td>
-                                    <a href="/updateProduct/${i.productID}" class="btn btn-primary mb-2">Update</a>
-                                    <button class="deleteproduct btn btn-danger" data-id="${i.productID}">Delete
+                                    <a href="/updateProduct/${i.id}" class="btn btn-primary mb-2">Update</a>
+                                    <button class="deleteproduct btn btn-danger" data-id="${i.id}">Delete
                                     </button>
                                 </td>
                             </tr>
@@ -234,6 +230,7 @@
                         </tbody>
 
                     </table>
+
                     <a href="/addProductForm">Add product</a>
                 </div>
             </div>
@@ -243,21 +240,21 @@
         <div class="col text-center">
             <div class="block-27">
                 <ul>
-                    <c:if test="${listProduct.hasPrevious()}">
-                        <li><a href="?page=${listProduct.number - 1}&size=${listProduct.size}">&lt;</a></li>
+                    <c:if test="${listUser.hasPrevious()}">
+                        <li><a href="?page=${listUser.number - 1}&size=${listUser.size}">&lt;</a></li>
                     </c:if>
-                    <c:forEach begin="1" end="${listProduct.totalPages}" var="i">
+                    <c:forEach begin="1" end="${listUser.totalPages}" var="i">
                         <c:choose>
-                            <c:when test="${i == (listProduct.number + 1)}">
+                            <c:when test="${i == (listUser.number + 1)}">
                                 <li class="active"><span>${i}</span></li>
                             </c:when>
                             <c:otherwise>
-                                <li><a href="?page=${i - 1}&size=${listProduct.size}">${i}</a></li>
+                                <li><a href="?page=${i - 1}&size=${listUser.size}">${i}</a></li>
                             </c:otherwise>
                         </c:choose>
                     </c:forEach>
-                    <c:if test="${listProduct.hasNext()}">
-                        <li><a href="?page=${listProduct.number + 1}&size=${listProduct.size}">&gt;</a></li>
+                    <c:if test="${listUser.hasNext()}">
+                        <li><a href="?page=${listUser.number + 1}&size=${listUser.size}">&gt;</a></li>
                     </c:if>
                 </ul>
             </div>

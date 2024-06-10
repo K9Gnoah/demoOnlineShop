@@ -15,13 +15,6 @@ public class LoginController {
         return "loginForm";
     }
 
-//    @PostMapping("/submitLoginForm")
-//    public String submitLogin(@RequestParam(name="username") String username,
-//            @RequestParam(name = "password") String password) {
-//
-//        return "redirect:/home";
-//    }
-
     @GetMapping("/home")
     public String home(Model model) {
         return "homepage";

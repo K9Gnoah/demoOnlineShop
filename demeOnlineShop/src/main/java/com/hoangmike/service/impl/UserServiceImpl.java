@@ -11,6 +11,8 @@ import com.hoangmike.service.UserService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -69,5 +71,10 @@ public class UserServiceImpl implements UserService {
         if(userRepository.existsById(id))
             userRepository.deleteById(id);
         else throw new AppException(ErrorCode.USER_NOT_FOUND);
+    }
+
+    @Override
+    public Page<User> findPaginated(int page, int size) {
+        return userRepository.findAll(PageRequest.of(page, size));
     }
 }

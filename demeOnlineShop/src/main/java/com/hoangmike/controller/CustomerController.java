@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,12 +22,28 @@ public class CustomerController {
 
 
     @GetMapping("/showProduct")
-    @PreAuthorize("hasAuthority('USER')")
     public String showProduct(Model model,
                               @RequestParam(name = "page", defaultValue = "0") int page,
                               @RequestParam(name = "size", defaultValue = "8") int size) {
         Page<Product> productPage = productService.findActiveProductPag(page, size);
         model.addAttribute("listProduct", productPage);
         return "showProduct";
+    }
+    @GetMapping("/addToCart")
+    @PreAuthorize("hasRole('ROLE_CUSTOMER')")
+    public String addToCart() {
+        return "addToCart";
+    }
+
+    @GetMapping("/buyNow")
+    @PreAuthorize("hasRole('ROLE_CUSTOMER')")
+    public String buyNow() {
+        return "buyNow";
+    }
+
+    @GetMapping("/voteHeart")
+    @PreAuthorize("hasRole('ROLE_CUSTOMER')")
+    public String voteHeart() {
+        return "voteHeart";
     }
 }

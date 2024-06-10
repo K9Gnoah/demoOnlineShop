@@ -50,11 +50,11 @@
                         <span class="hide-menu">UI COMPONENTS</span>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="./ui-buttons.html" aria-expanded="false">
+                        <a class="sidebar-link" href="./manageAccount" aria-expanded="false">
                 <span>
                   <i class="ti ti-article"></i>
                 </span>
-                            <span class="hide-menu">Buttons</span>
+                            <span class="hide-menu">Manage Account</span>
                         </a>
                     </li>
                     <li class="sidebar-item">
@@ -94,11 +94,11 @@
                         <span class="hide-menu">AUTH</span>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="./authentication-login.html" aria-expanded="false">
+                        <a class="sidebar-link" href="./logout" aria-expanded="false">
                 <span>
                   <i class="ti ti-login"></i>
                 </span>
-                            <span class="hide-menu">Login</span>
+                            <span class="hide-menu">Log Out</span>
                         </a>
                     </li>
                     <li class="sidebar-item">
