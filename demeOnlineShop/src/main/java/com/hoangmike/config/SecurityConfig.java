@@ -36,38 +36,38 @@ public class SecurityConfig {
 
     @Value("${jwt.signerKey}")
     private String signerKey;
-//
-//    @Bean
-//    public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-//        httpSecurity
-//                .authorizeHttpRequests(request -> request
-//                        .requestMatchers(HttpMethod.GET, GET_PUBLIC_ENDPOINTS).permitAll()
-//                        .requestMatchers(HttpMethod.POST, POST_PUBLIC_ENDPOINTS).permitAll()
-//                        .requestMatchers(PUBLIC_RESOURCE).permitAll()
-//                        .requestMatchers(HttpMethod.GET, "/api/users","/adminDashBoard").hasRole(Role.ADMIN.name())
-//                        .anyRequest().authenticated()
-//                )
-//                .oauth2ResourceServer(oauth2 ->
-//                        oauth2.jwt(jwtConfigurer ->
-//                                jwtConfigurer.decoder(jwtDecoder())
-//                                        .jwtAuthenticationConverter(jwtAuthenticationConverter()))
-//                        )
-//                .csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable());
-//        return httpSecurity.build();
-//    }
-//
-//
-//    //config hiển thị hasAuthority SCOPE_ADMIN -> ROLE_ADMIN (k cần thiết lắm )
-//    @Bean
-//    JwtAuthenticationConverter jwtAuthenticationConverter(){
-//        JwtGrantedAuthoritiesConverter jwtGrantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
-//        jwtGrantedAuthoritiesConverter.setAuthorityPrefix("ROLE_");
-//
-//        JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
-//        jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(jwtGrantedAuthoritiesConverter);
-//
-//        return jwtAuthenticationConverter;
-//    }
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity
+                .authorizeHttpRequests(request -> request
+                        .requestMatchers(HttpMethod.GET, GET_PUBLIC_ENDPOINTS).permitAll()
+                        .requestMatchers(HttpMethod.POST, POST_PUBLIC_ENDPOINTS).permitAll()
+                        .requestMatchers(PUBLIC_RESOURCE).permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/users","/adminDashBoard").hasRole(Role.ADMIN.name())
+                        .anyRequest().authenticated()
+                )
+                .oauth2ResourceServer(oauth2 ->
+                        oauth2.jwt(jwtConfigurer ->
+                                jwtConfigurer.decoder(jwtDecoder())
+                                        .jwtAuthenticationConverter(jwtAuthenticationConverter()))
+                        )
+                .csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable());
+        return httpSecurity.build();
+    }
+
+
+    //config hiển thị hasAuthority SCOPE_ADMIN -> ROLE_ADMIN (k cần thiết lắm )
+    @Bean
+    JwtAuthenticationConverter jwtAuthenticationConverter(){
+        JwtGrantedAuthoritiesConverter jwtGrantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
+        jwtGrantedAuthoritiesConverter.setAuthorityPrefix("ROLE_");
+
+        JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
+        jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(jwtGrantedAuthoritiesConverter);
+
+        return jwtAuthenticationConverter;
+    }
 
 
     @Bean
