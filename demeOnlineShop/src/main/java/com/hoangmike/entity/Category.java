@@ -1,13 +1,12 @@
 package com.hoangmike.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -21,6 +20,9 @@ public class Category {
 
     String categoryName;
     boolean categoryStatus;
+
+    @OneToMany(mappedBy = "category")
+    List<Product> products;
 
 
 }

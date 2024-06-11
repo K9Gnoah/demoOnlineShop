@@ -25,4 +25,7 @@ public class User {
     boolean userStatus;
     String role;
 
+    @OneToOne
+    Cart cart;
+
 }

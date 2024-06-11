@@ -18,6 +18,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
@@ -29,33 +30,30 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductResponse addProduct(ProductCreationRequest request) {
         Product product = new Product();
-        if(productRepository.existsByProductName(request.getProductName()))
+        if (productRepository.existsByProductName(request.getProductName()))
             throw new AppException(ErrorCode.PRODUCT_EXISTED);
+
         productMapper.AddOrUpdateProduct(product, request);
         return productMapper.toProductResponse(productRepository.save(product));
     }
 
     @Override
     public ProductResponse updateProduct(int productId, ProductCreationRequest request) {
-        Product product = productRepository.findById(Long.valueOf(productId)).orElseThrow(()->new AppException(ErrorCode.PRODUCT_NOT_FOUND));
-        if(product.getProductName().equals(request.getProductName())){
+        Product product = productRepository.findById(Long.valueOf(productId)).orElseThrow(() -> new AppException(ErrorCode.PRODUCT_NOT_FOUND));
+        if (product.getProductName().equals(request.getProductName())) {
             productMapper.AddOrUpdateProduct(product, request);
-        }
-        else if(productRepository.existsByProductName(request.getProductName())) {
+        } else if (productRepository.existsByProductName(request.getProductName())) {
             throw new AppException(ErrorCode.PRODUCT_EXISTED);
-        }
-        else  productMapper.AddOrUpdateProduct(product, request);
+        } else productMapper.AddOrUpdateProduct(product, request);
         return productMapper.toProductResponse(productRepository.save(product));
     }
 
 
-
     @Override
     public void deleteProduct(int productId) {
-        if(getProductById(productId) != null) {
+        if (getProductById(productId) != null) {
             productRepository.deleteById((long) productId);
-        }
-        else{
+        } else {
             throw new AppException(ErrorCode.PRODUCT_NOT_FOUND);
         }
     }
@@ -67,9 +65,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getAllProducts() {
+    public List<ProductResponse> getAllProducts() {
         List<Product> productsList = productRepository.findAll();
-        return (List<Product>)productRepository.findAll();
+        return productMapper.toProductResponse(productsList);
     }
 
     @Override

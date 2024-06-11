@@ -216,17 +216,17 @@
                         <tbody>
                         <c:forEach var="i" items="${listProduct.content}">
                             <tr>
-                                <td>${i.productID}</td>
+                                <td>${i.productId}</td>
                                 <td>${i.productName}</td>
                                 <td>${i.productDescription}</td>
                                 <td>${i.productPrice}</td>
                                 <td><img src="${i.productImage}" class="img-fluid" style="max-width: 100px;"></td>
                                 <td>${i.productStatus}</td>
                                 <td>${i.productQuantity}</td>
-                                <td>${i.categoryId}</td>
+                                <td>${i.category.categoryId}</td>
                                 <td>
-                                    <a href="/updateProduct/${i.productID}" class="btn btn-primary mb-2">Update</a>
-                                    <button class="deleteproduct btn btn-danger" data-id="${i.productID}">Delete
+                                    <a href="/updateProduct/${i.productId}" class="btn btn-primary mb-2">Update</a>
+                                    <button class="deleteproduct btn btn-danger" data-id="${i.productId}">Delete
                                     </button>
                                 </td>
                             </tr>

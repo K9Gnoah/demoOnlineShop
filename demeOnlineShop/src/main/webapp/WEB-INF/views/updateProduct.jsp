@@ -202,7 +202,7 @@
                                         <label class="form-label" for="product_id">PRODUCT ID</label>
                                         <input id="product_id" name="product_id" placeholder="PRODUCT ID"
                                                class="form-control"
-                                               required="" type="text" readonly value="${product.productID}">
+                                               required="" type="text" readonly value="${product.productId}">
                                     </div>
 
                                     <div class="mb-3">

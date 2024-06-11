@@ -14,7 +14,7 @@ import lombok.experimental.FieldDefaults;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int productID;
+    int productId;
 
     String productName;
     @Column(columnDefinition = "TEXT")
@@ -23,7 +23,10 @@ public class Product {
     String productImage;
     boolean productStatus;
     int productQuantity;
-    int categoryId;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    Category category;
 
 
 }

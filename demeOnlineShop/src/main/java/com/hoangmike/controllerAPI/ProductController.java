@@ -48,7 +48,7 @@ public class ProductController {
     }
 
     @GetMapping
-    public List<Product> productList() {
+    public List<ProductResponse> productList() {
         return productService.getAllProducts();
     }
 }
