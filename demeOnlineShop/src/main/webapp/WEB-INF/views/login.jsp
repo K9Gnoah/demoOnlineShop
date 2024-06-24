@@ -15,9 +15,20 @@
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <link rel="stylesheet" href="<c:url value='/template/login/style.css' />"/>
     <script type="text/javascript" src="<c:url value="/template/login/scripts.js"/>"></script>
+    <style>
+        .alert-success {
+            color: #155724;
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
+
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
                 <div class="panel panel-login">
@@ -35,7 +46,10 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-12">
-                                <form id="login-form" onsubmit="login(event)" role="form" style="display: block;">
+                                <c:if test="${not empty message}">
+                                    <div class="alert alert-success" >${message}</div>
+                                </c:if>
+                                <form id="login-form" method="post" action="${pageContext.request.contextPath}/login" role="form" style="display: block;">
                                     <div class="form-group">
                                         <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
                                     </div>
@@ -63,18 +77,31 @@
                                         </div>
                                     </div>
                                 </form>
-                                <form id="register-form" action="https://phpoll.com/register/process" method="post" role="form" style="display: none;">
+                                <form id="register-form" action="${pageContext.request.contextPath}/register/save" method="post" role="form" style="display: none;">
                                     <div class="form-group">
-                                        <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
+                                        <input type="text" name="firstName" id="firstName" tabindex="1" class="form-control" placeholder="Enter First Name" value="${user.firstName}">
+                                        <c:if test="${not empty errors.firstName}">
+                                            <p class="text-danger">${errors.firstName}</p>
+                                        </c:if>
                                     </div>
                                     <div class="form-group">
-                                        <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="">
+                                        <input type="text" name="lastName" id="lastName" tabindex="1" class="form-control" placeholder="Enter Last Name" value="${user.lastName}">
+                                        <c:if test="${not empty errors.lastName}">
+                                            <p class="text-danger">${errors.lastName}</p>
+                                        </c:if>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="${user.email}">
+                                        <c:if test="${not empty errors.email}">
+                                            <p class="text-danger">${errors.email}</p>
+                                        </c:if>
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password">
+                                        <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password" value="${user.password}">
+                                        <c:if test="${not empty errors.password}">
+                                            <p class="text-danger">${errors.password}</p>
+                                        </c:if>
                                     </div>
                                     <div class="form-group">
                                         <div class="row">
@@ -91,29 +118,5 @@
             </div>
         </div>
     </div>
-    <script>
-        async function login(event) {
-            event.preventDefault();
-            const userName = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-
-            const response = await fetch('/auth/log-in', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ userName, password })
-            });
-
-            const result = await response.json();
-
-            if (result.code === 1000 && result.result.authenticated) {
-                window.location.href = '/adminDashBoard';
-            } else {
-                alert('Login failed!');
-            }
-        }
-
-    </script>
 </body>
 </html>

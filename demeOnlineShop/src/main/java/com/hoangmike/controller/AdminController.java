@@ -16,7 +16,6 @@ public class AdminController {
     private UserServiceImpl userService;
 
     @GetMapping("/adminDashBoard")
-    @PreAuthorize("hasAuthority('ADMIN')")
     public String adminDashBoard() {
         return "adDashBoard";
     }

@@ -20,15 +20,6 @@ public class CustomerController {
     @Autowired
     private ProductServiceImpl productService;
 
-
-    @GetMapping("/showProduct")
-    public String showProduct(Model model,
-                              @RequestParam(name = "page", defaultValue = "0") int page,
-                              @RequestParam(name = "size", defaultValue = "8") int size) {
-        Page<Product> productPage = productService.findActiveProductPag(page, size);
-        model.addAttribute("listProduct", productPage);
-        return "showProduct";
-    }
     @GetMapping("/addToCart")
     @PreAuthorize("hasRole('ROLE_CUSTOMER')")
     public String addToCart() {

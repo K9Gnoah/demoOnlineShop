@@ -10,6 +10,8 @@ public enum ErrorCode {
     USER_NOT_FOUND(1006, "User not found"),
     PRODUCT_NOT_FOUND(1007, "Product not found"),
     UNAUTHENTICATED(1008, "Unauthenticated"),
+    PASSWORD_INCORRCECT(1009, "Password is incorrect"),
+    PASSWORD_INVALID(1010, "New password must be different from the old password"),
     ;
 
     ErrorCode(int code, String message) {

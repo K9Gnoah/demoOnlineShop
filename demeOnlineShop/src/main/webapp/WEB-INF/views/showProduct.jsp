@@ -70,7 +70,7 @@
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">Shop</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown04">
-                        <a class="dropdown-item" href="/customer/showProduct">Shop</a>
+                        <a class="dropdown-item" href="/common/showProduct">Shop</a>
                         <a class="dropdown-item" href="wishlist.html">Wishlist</a>
                         <a class="dropdown-item" href="product-single.html">Single Product</a>
                         <a class="dropdown-item" href="cart.html">Cart</a>
@@ -78,13 +78,43 @@
                     </div>
                 </li>
                 <li class="nav-item"><a href="/common/aboutPage" class="nav-link">About</a></li>
-                <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
+                <li class="nav-item"><a href="/common/aboutPage" class="nav-link">Blog</a></li>
                 <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
                 <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span
                         class="icon-shopping_cart"></span>[0]</a></li>
+                <%--                info--%>
 
+                <li class="nav-item dropdown">
+                    <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2"
+                       data-bs-toggle="dropdown"
+                       aria-expanded="false">
+                        <img src="<c:url value="/template/admin/assets/images/profile/user-1.jpg"/>" alt=""
+                             width="35" height="35" class="rounded-circle">
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"
+                         aria-labelledby="drop2">
+                        <div class="message-body">
+                            <a href="/user/profile" class="d-flex align-items-center gap-2 dropdown-item">
+                                <i class="ti ti-user fs-6"></i>
+                                <p class="mb-0 fs-3">My Profile</p>
+                            </a>
+                            <a href="/user/changepass/${user.id}" class="d-flex align-items-center gap-2 dropdown-item">
+                                <i class="ti ti-mail fs-6"></i>
+                                <p class="mb-0 fs-3">Change Password</p>
+                            </a>
+                            <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                                <i class="ti ti-list-check fs-6"></i>
+                                <p class="mb-0 fs-3">My Task</p>
+                            </a>
+                            <a href="/logout"
+                               class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
+                        </div>
+                    </div>
+                </li>
             </ul>
         </div>
+
+        <a class="navbar-brand"> Hello ${user.username}</a>
     </div>
 </nav>
 <!-- END nav -->
@@ -93,7 +123,7 @@
     <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
             <div class="col-md-9 ftco-animate text-center">
-                <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Products</span></p>
+                <p class="breadcrumbs"><span class="mr-2"><a href="/home">Home</a></span> <span>Products</span></p>
                 <h1 class="mb-0 bread">Products</h1>
             </div>
         </div>
@@ -224,6 +254,7 @@
                         <li><a href="#" class="py-2 d-block">About</a></li>
                         <li><a href="#" class="py-2 d-block">Journal</a></li>
                         <li><a href="#" class="py-2 d-block">Contact Us</a></li>
+
                     </ul>
                 </div>
             </div>

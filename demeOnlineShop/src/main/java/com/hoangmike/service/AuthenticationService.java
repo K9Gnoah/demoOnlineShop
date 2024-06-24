@@ -37,7 +37,7 @@ public class AuthenticationService {
     protected static final String SIGNER_KEY = "oT9YdQcUsxPUSh0DvhtQUjSCAlqaCGFewxjx9JDhfil7ZBzrR1YKcHjt+3/zbwCb";
 
     public AuthenticationResponse authenticate(AuthenticationRequest request){
-        var user = userRepository.findByUserName(request.getUserName())
+        var user = userRepository.findByUsername(request.getUsername())
                 .orElseThrow(()-> new AppException(ErrorCode.USER_NOT_FOUND));
 
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
@@ -46,7 +46,7 @@ public class AuthenticationService {
         if(!authenticated)
             throw new AppException(ErrorCode.UNAUTHENTICATED);
 
-        var token = genarateToken(request.getUserName());
+        var token = genarateToken(request.getUsername());
         return AuthenticationResponse.builder()
                 .token(token)
                 .authenticated(true)

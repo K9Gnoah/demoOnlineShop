@@ -17,17 +17,17 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserToUserDetail implements UserDetails {
-    private String userName;
+    private String username;
     private String password;
     private List<GrantedAuthority> authorities;
 
-    public UserToUserDetail(User user) {
-        userName = user.getUserName();
-        password = user.getPassword();
-        authorities = Arrays.stream(user.getRole().split(","))
-                .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toList());
-    }
+//    public UserToUserDetail(User user) {
+//        userName = user.getUserName();
+//        password = user.getPassword();
+//        authorities = Arrays.stream(user.getRole().split(","))
+//                .map(SimpleGrantedAuthority::new)
+//                .collect(Collectors.toList());
+//    }
 
 
     @Override
@@ -41,7 +41,7 @@ public class UserToUserDetail implements UserDetails {
 
     @Override
     public String getUsername() {
-        return userName;
+        return username;
     }
 
     @Override

@@ -1,31 +1,51 @@
 package com.hoangmike.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.experimental.FieldDefaults;
+import lombok.Setter;
 
-@Entity
-@Data
-@AllArgsConstructor
+import java.util.ArrayList;
+import java.util.List;
+
+@Getter
+@Setter
 @NoArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE)
-public class User {
+@AllArgsConstructor
+@Entity
+@Table(name="users")
+public class User
+{
+    private static final long serialVersionUID = 1L;
+
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    String userName;
-    String password;
-    String email;
-    String phone;
-    String fullName;
-    boolean userStatus;
-    String role;
+    @Column(nullable=false)
+    private String username;
 
-    @OneToOne
-    Cart cart;
+    @Column(nullable=false, unique=true)
+    private String email;
+
+    @Column(nullable=false)
+    private String password;
+
+    @Column(nullable=false)
+    private boolean userStatus;
+
+    private String phone;
+
+    private String address;
+
+    private String avatar;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+    @JoinTable(
+            name="users_roles",
+            joinColumns={@JoinColumn(name="USER_ID", referencedColumnName="ID")},
+            inverseJoinColumns={@JoinColumn(name="ROLE_ID", referencedColumnName="ID")})
+    private List<Role> roles = new ArrayList<>();
 
 }
