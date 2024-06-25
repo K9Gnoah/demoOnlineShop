@@ -20,21 +20,8 @@ public class CustomerController {
     @Autowired
     private ProductServiceImpl productService;
 
-    @GetMapping("/addToCart")
-    @PreAuthorize("hasRole('ROLE_CUSTOMER')")
-    public String addToCart() {
-        return "addToCart";
-    }
-
-    @GetMapping("/buyNow")
-    @PreAuthorize("hasRole('ROLE_CUSTOMER')")
-    public String buyNow() {
-        return "buyNow";
-    }
-
-    @GetMapping("/voteHeart")
-    @PreAuthorize("hasRole('ROLE_CUSTOMER')")
-    public String voteHeart() {
-        return "voteHeart";
+    @GetMapping("/cart")
+    public String cart(Model model){
+        return "cart";
     }
 }

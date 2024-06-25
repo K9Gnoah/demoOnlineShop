@@ -30,6 +30,16 @@
     <link rel="stylesheet" href="<c:url value='/template/homepage/css/icomoon.css' />"/>
     <link rel="stylesheet" href="<c:url value='/template/homepage/css/style.css' />"/>
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+    <style>
+        .add-to-cart-button {
+            border-radius: 50%; /* Tạo hiệu ứng bo tròn */
+            background-color: #82ae46; /* Đặt màu nền là xanh */
+            color: white; /* Đặt màu chữ là trắng */
+            border: none; /* Loại bỏ viền */
+            padding: 10px 15px; /* Thêm padding để nút có kích thước phù hợp */
+        }
+    </style>
 </head>
 <body class="goto-here">
 <div class="py-1 bg-primary">
@@ -80,8 +90,8 @@
                 <li class="nav-item"><a href="/common/aboutPage" class="nav-link">About</a></li>
                 <li class="nav-item"><a href="/common/aboutPage" class="nav-link">Blog</a></li>
                 <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-                <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span
-                        class="icon-shopping_cart"></span>[0]</a></li>
+                <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span id="cart-count"
+                        class="icon-shopping_cart"></span></a></li>
                 <%--                info--%>
 
                 <li class="nav-item dropdown">
@@ -161,14 +171,15 @@
                             </div>
                             <div class="bottom-area d-flex px-3">
                                 <div class="m-auto d-flex">
-                                    <a href="/customer/addToCart/${i.productId}
-                                       class="add-to-cart d-flex justify-content-center align-items-center text-center">
-                                        <span><i class="ion-ios-menu"></i></span>
-                                    </a>
-                                    <a href="/customer/buyNow/${i.productId}" class="buy-now d-flex justify-content-center align-items-center mx-1">
+                                            <button class="add-to-cart-button" data-product-id="${i.productId}">
+                                                <i class="ti ti-playlist-add"></i>
+                                            </button>
+                                    <a href="/customer/buyNow/${i.productId}"
+                                       class="buy-now d-flex justify-content-center align-items-center mx-1">
                                         <span><i class="ion-ios-cart"></i></span>
                                     </a>
-                                    <a href="/customer/voteHeart/${i.productId}" class="heart d-flex justify-content-center align-items-center ">
+                                    <a href="/customer/voteHeart/${i.productId}"
+                                       class="heart d-flex justify-content-center align-items-center ">
                                         <span><i class="ion-ios-heart"></i></span>
                                     </a>
                                 </div>
@@ -315,6 +326,44 @@
                 stroke="#F96D00"/>
     </svg>
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url: "/cart/count",
+            type: "GET",
+            success: function (response) {
+                $("#cart-count").text(response);
+            }
+        });
+
+        $(".add-to-cart-button").click(function () {
+            var productId = $(this).data("product-id");
+
+            $.ajax({
+                url: "/cart/add/" + productId,
+                type: "POST",
+                success: function (response) {
+                    alert("Add to cart successfully!");
+
+                    //get the currtent cart item count
+                    $.ajax({
+                        url: "/cart/count",
+                        type: "GET",
+                        success: function (response) {
+                            $("#cart-count").text(response);
+                        }
+                    });
+                },
+                error: function (response) {
+                    alert("An error occurred");
+                }
+            });
+        });
+    });
+</script>
 
 <script type="text/javascript" src="<c:url value="/template/homepage/js/jquery.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/template/homepage/js/jquery-migrate-3.0.1.min.js"/>"></script>

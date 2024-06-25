@@ -13,14 +13,14 @@ import java.util.List;
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int cartID;
+    private Long id;
 
-    @OneToMany(mappedBy = "cart")
-    private List<CartItem> items;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cart_id")
+    private List<CartItem> items = new ArrayList<>();
 
-    public Cart(){
-        items = new ArrayList<>();
-    }
+    @OneToOne
+    User user;
 
     public void addItem(CartItem item){
         items.add(item);
