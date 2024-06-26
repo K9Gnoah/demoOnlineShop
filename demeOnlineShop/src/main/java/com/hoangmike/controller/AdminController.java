@@ -21,7 +21,6 @@ public class AdminController {
     }
 
     @GetMapping("/manageAccount")
-    @PreAuthorize("hasAuthority('ADMIN')")
     public String manageAccount(Model model,
                                 @RequestParam(name = "page", defaultValue = "0") int page,
                                 @RequestParam(name = "size", defaultValue = "4") int size){

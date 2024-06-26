@@ -215,9 +215,9 @@
                         <c:forEach var="i" items="${listUser.content}">
                             <tr>
                                 <td>${i.id}</td>
-                                <td>${i.userName}</td>
+                                <td>${i.username}</td>
                                 <td>${i.email}</td>
-                                <td>${i.fullName}</td>
+                                <td>${i.fullname}</td>
                                 <td>${i.userStatus}</td>
                                 <td>${i.role}</td>
                                 <td>

@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="<c:url value='/template/homepage/css/icomoon.css' />"/>
     <link rel="stylesheet" href="<c:url value='/template/homepage/css/style.css' />"/>
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css"/>
     <style>
         .add-to-cart-button {
             border-radius: 50%; /* Tạo hiệu ứng bo tròn */
@@ -83,15 +83,16 @@
                         <a class="dropdown-item" href="/common/showProduct">Shop</a>
                         <a class="dropdown-item" href="wishlist.html">Wishlist</a>
                         <a class="dropdown-item" href="product-single.html">Single Product</a>
-                        <a class="dropdown-item" href="cart.html">Cart</a>
+                        <a class="dropdown-item" href="/customer/cart">Cart</a>
                         <a class="dropdown-item" href="checkout.html">Checkout</a>
                     </div>
                 </li>
                 <li class="nav-item"><a href="/common/aboutPage" class="nav-link">About</a></li>
                 <li class="nav-item"><a href="/common/aboutPage" class="nav-link">Blog</a></li>
                 <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-                <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span id="cart-count"
-                        class="icon-shopping_cart"></span></a></li>
+                <li class="nav-item cta cta-colored"><a href="/customer/cart" class="nav-link"><span id="cart-count"
+                                                                                                     class="icon-shopping_cart"></span></a>
+                </li>
                 <%--                info--%>
 
                 <li class="nav-item dropdown">
@@ -171,9 +172,9 @@
                             </div>
                             <div class="bottom-area d-flex px-3">
                                 <div class="m-auto d-flex">
-                                            <button class="add-to-cart-button" data-product-id="${i.productId}">
-                                                <i class="ti ti-playlist-add"></i>
-                                            </button>
+                                    <button class="add-to-cart-button" data-product-id="${i.productId}">
+                                        <i class="ti ti-playlist-add"></i>
+                                    </button>
                                     <a href="/customer/buyNow/${i.productId}"
                                        class="buy-now d-flex justify-content-center align-items-center mx-1">
                                         <span><i class="ion-ios-cart"></i></span>

@@ -22,7 +22,6 @@ public class ProductController {
     }
 
     @GetMapping("/productList")
-    @PreAuthorize("hasAuthority('ADMIN')")
     public String productList(Model model,
                               @RequestParam(name = "page", defaultValue = "0") int page,
                               @RequestParam(name = "size", defaultValue = "4") int size) {

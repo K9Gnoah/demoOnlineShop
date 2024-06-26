@@ -3,6 +3,7 @@ package com.hoangmike.entity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Data;
+import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ public class Cart {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "cart_id")
+    @ToString.Exclude
     private List<CartItem> items = new ArrayList<>();
 
     @OneToOne
@@ -35,11 +37,4 @@ public class Cart {
         items.get(index).setQuantity(quantity);
     }
 
-    public double getTotalPrice(){
-        double totalPrice = 0;
-        for(CartItem item : items){
-            totalPrice += item.getProduct().getProductPrice() * item.getQuantity();
-        }
-        return totalPrice;
-    }
 }

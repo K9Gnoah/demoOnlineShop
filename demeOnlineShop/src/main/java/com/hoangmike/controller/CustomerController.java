@@ -1,6 +1,9 @@
 package com.hoangmike.controller;
 
 import com.hoangmike.entity.Product;
+import com.hoangmike.entity.User;
+import com.hoangmike.service.CartService;
+import com.hoangmike.service.CustomUserDetailsService;
 import com.hoangmike.service.impl.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -10,18 +13,30 @@ import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/customer")
+@RequestMapping("/customer/cart")
 @EnableMethodSecurity
 public class CustomerController {
     @Autowired
     private ProductServiceImpl productService;
+    @Autowired
+    private CartService cartService;
 
-    @GetMapping("/cart")
+    @GetMapping
     public String cart(Model model){
+        model.addAttribute("cart", cartService.getCart());
+        User currentUser = CustomUserDetailsService.getCurrentUserEntity();
+        model.addAttribute("user", currentUser);
         return "cart";
+    }
+
+    @PostMapping("/update")
+    public String updateCartItem(@RequestParam Long itemId, @RequestParam int quantity){
+        cartService.updateCartItem(itemId, quantity);
+        return "redirect:/customer/cart";
     }
 }

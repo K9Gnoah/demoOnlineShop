@@ -32,4 +32,11 @@ public class CartController {
         int count = cartService.getCartItemCount();
         return ResponseEntity.ok(count);
     }
+
+    @DeleteMapping("/remove/{itemId}")
+    public ResponseEntity<Void> removeItem(@PathVariable Long itemId){
+        cartService.removeItem(itemId);
+        return ResponseEntity.ok().build();
+    }
+
 }

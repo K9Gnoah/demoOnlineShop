@@ -83,4 +83,33 @@ public class CartService {
         Cart cart = getCart();
         return cart.getItems().stream().mapToInt(CartItem::getQuantity).sum();
     }
+
+    public void updateCartItem(Long itemId, int quantity){
+        CartItem item = cartItemRepository.findById(itemId)
+                .orElse(null);
+        if(item != null){
+            item.setQuantity(quantity);
+            cartItemRepository.save(item);
+        }
+    }
+
+    public void removeItem(Long itemId){
+        Cart cart = getCart();
+
+        CartItem itemToRemove = null;
+        for(CartItem item : cart.getItems()){
+            if(item.getId().equals(itemId)){
+                itemToRemove = item;
+                break;
+            }
+        }
+
+        //remove the item from the cart
+        if(itemToRemove != null){
+            cart.removeItem(itemToRemove);
+            //remove the item form the database
+            cartItemRepository.delete(itemToRemove);
+        }
+        cartRepository.save(cart);
+    }
 }
