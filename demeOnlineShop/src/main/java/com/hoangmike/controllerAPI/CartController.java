@@ -1,6 +1,7 @@
 package com.hoangmike.controllerAPI;
 
 import com.hoangmike.dto.request.ApiResponse;
+import com.hoangmike.dto.request.UpdateCartDTO;
 import com.hoangmike.entity.Cart;
 import com.hoangmike.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,12 @@ public class CartController {
         Cart cart = cartService.getCart();
         response.setResult(cart);
         return response;
+    }
+
+    @PutMapping("/update")
+    public String updateCart(@RequestBody UpdateCartDTO updateCartDTO){
+        cartService.updateCartItem(updateCartDTO);
+        return "update cart success";
     }
 
     @PostMapping("/add/{productId}")

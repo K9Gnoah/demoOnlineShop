@@ -51,24 +51,12 @@
                             <span class="hide-menu">Dashboard</span>
                         </a>
                     </li>
-                    <li class="nav-small-cap">
-                        <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                        <span class="hide-menu">UI COMPONENTS</span>
-                    </li>
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="./manageAccount" aria-expanded="false">
                 <span>
                   <i class="ti ti-article"></i>
                 </span>
                             <span class="hide-menu">Manage Account</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="./ui-alerts.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-alert-circle"></i>
-                </span>
-                            <span class="hide-menu">Alerts</span>
                         </a>
                     </li>
                     <li class="sidebar-item">
@@ -79,22 +67,7 @@
                             <span class="hide-menu">Product List</span>
                         </a>
                     </li>
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="./ui-forms.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-file-description"></i>
-                </span>
-                            <span class="hide-menu">Forms</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="./ui-typography.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-typography"></i>
-                </span>
-                            <span class="hide-menu">Typography</span>
-                        </a>
-                    </li>
+
                     <li class="nav-small-cap">
                         <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                         <span class="hide-menu">AUTH</span>
@@ -115,26 +88,7 @@
                             <span class="hide-menu">Register</span>
                         </a>
                     </li>
-                    <li class="nav-small-cap">
-                        <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                        <span class="hide-menu">EXTRA</span>
-                    </li>
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="./icon-tabler.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-mood-happy"></i>
-                </span>
-                            <span class="hide-menu">Icons</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="./sample-page.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-aperture"></i>
-                </span>
-                            <span class="hide-menu">Sample Page</span>
-                        </a>
-                    </li>
+
                 </ul>
 
             </nav>
@@ -162,8 +116,6 @@
                 </ul>
                 <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
                     <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
-                        <a href="https://adminmart.com/product/modernize-free-bootstrap-admin-dashboard/"
-                           target="_blank" class="btn btn-primary">Download Free</a>
                         <li class="nav-item dropdown">
                             <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2"
                                data-bs-toggle="dropdown"
@@ -186,7 +138,7 @@
                                         <i class="ti ti-list-check fs-6"></i>
                                         <p class="mb-0 fs-3">My Task</p>
                                     </a>
-                                    <a href="./authentication-login.html"
+                                    <a href="/logout"
                                        class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
                                 </div>
                             </div>
@@ -203,10 +155,11 @@
                         <thead class="thead-dark">
                         <tr>
                             <th>ID</th>
-                            <th>User Name</th>
                             <th>Email</th>
                             <th>Full Name</th>
-                            <th>Status</th>
+                            <th>Address</th>
+                            <th>Avatar</th>
+                            <th>Phone</th>
                             <th>Role</th>
                             <th>Action</th>
                         </tr>
@@ -215,15 +168,18 @@
                         <c:forEach var="i" items="${listUser.content}">
                             <tr>
                                 <td>${i.id}</td>
-                                <td>${i.username}</td>
                                 <td>${i.email}</td>
-                                <td>${i.fullname}</td>
-                                <td>${i.userStatus}</td>
-                                <td>${i.role}</td>
+                                <td>${i.username}</td>
+                                <td>${i.address}</td>
+                                <td>${i.avatar}</td>
+                                <td>${i.phone}</td>
                                 <td>
-                                    <a href="/updateProduct/${i.id}" class="btn btn-primary mb-2">Update</a>
-                                    <button class="deleteproduct btn btn-danger" data-id="${i.id}">Delete
-                                    </button>
+                                    <c:forEach var="role" items="${i.roles}">
+                                        ${role.name} <br/>
+                                    </c:forEach>
+                                </td>
+                                <td>
+                                    <a href="/updateAccount/${i.id}" class="btn btn-primary mb-2">Update</a>
                                 </td>
                             </tr>
                         </c:forEach>

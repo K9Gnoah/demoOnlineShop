@@ -1,5 +1,6 @@
 package com.hoangmike.service;
 
+import com.hoangmike.dto.request.UpdateCartDTO;
 import com.hoangmike.entity.Cart;
 import com.hoangmike.entity.CartItem;
 import com.hoangmike.entity.User;
@@ -84,12 +85,14 @@ public class CartService {
         return cart.getItems().stream().mapToInt(CartItem::getQuantity).sum();
     }
 
-    public void updateCartItem(Long itemId, int quantity){
-        CartItem item = cartItemRepository.findById(itemId)
-                .orElse(null);
-        if(item != null){
-            item.setQuantity(quantity);
-            cartItemRepository.save(item);
+    public void updateCartItem(UpdateCartDTO updateCartDTO){
+        CartItem cartItem = cartItemRepository.findCartItemById(updateCartDTO.getId());
+        if(cartItem == null){
+            throw new RuntimeException("Cart item not found");
+        }
+        else{
+        cartItem.setQuantity(updateCartDTO.getQuantity());
+            cartItemRepository.save(cartItem);
         }
     }
 

@@ -38,6 +38,30 @@
     <link rel="stylesheet" href="<c:url value='/template/homepage/css/flaticon.css' />"/>
     <link rel="stylesheet" href="<c:url value='/template/homepage/css/icomoon.css' />"/>
     <link rel="stylesheet" href="<c:url value='/template/homepage/css/style.css' />"/>
+    <style>
+        #update-cart {
+            background-color: #82ae46; /* Màu nền */
+            border: 1px; /* Không viền */
+            color: white; /* Màu chữ */
+            padding: 15px 32px; /* Đệm */
+            text-align: center; /* Căn giữa chữ */
+            text-decoration: none; /* Không gạch chân */
+            display: inline-block;
+            font-size: 16px; /* Kích thước chữ */
+            margin: 4px 2px;
+            cursor: pointer; /* Con trỏ chuột */
+            border-radius: 12px; /* Bo góc */
+        }
+
+        #update-cart:hover {
+            background-color: #45a049; /* Màu nền khi di chuột qua */
+        }
+
+        #update-cart:disabled {
+            background-color: #ccc; /* Màu nền khi nút bị vô hiệu hóa */
+            cursor: not-allowed; /* Con trỏ chuột khi nút bị vô hiệu hóa */
+        }
+    </style>
 </head>
 <body class="goto-here">
 <div class="py-1 bg-primary">
@@ -142,6 +166,9 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 ftco-animate">
+                <div>
+                    CARD ID :<input type="text" class="cart-id-num" value="${cart.id}" readonly>
+                </div>
                 <div class="cart-list">
                     <table class="table">
                         <thead class="thead-primary">
@@ -158,22 +185,24 @@
                         <tbody>
                         <c:forEach var="item" items="${cart.items}">
                             <tr>
-                                <td class="product-remove"><a data-id="${item.id}"><span class="ion-ios-close"></span></a></td>
+                                <td class="product-remove"><a data-id="${item.id}">${item.id}<span class="ion-ios-close"></span></a></td>
                                 <td>${item.product.productId}</td>
                                 <td class="image-prod">
                                     <div class="img" style="background-image:url('<c:url
                                             value="${item.product.productImage}"/>');"></div>
                                 </td>
                                 <td>${item.product.productName}</td>
-                                <td class="price">${item.product.productPrice}</td>
+                                <td class="price">${item.product.productPrice} VND</td>
                                 <td class="quantity">
                                     <div class="input-group mb-3">
                                         <input type="number" name="quantity" class="quantity form-control input-number"
                                                value="${item.quantity}" min="1" max="100" oninput="updateTotal(this)">
                                     </div>
                                 </td>
-                                <td class="total">${item.product.productPrice * item.quantity}</td>
+                                <td class="total">${item.product.productPrice * item.quantity} VND</td>
                             </tr>
+                            <c:set var="delivery" value="${totalDelivery + (item.product.productPrice * item.quantity)}"/>
+                            <c:set var="totalDelivery" value="${delivery - 20000}"/>
                         </c:forEach>
                         </tbody>
                     </table>
@@ -181,59 +210,26 @@
             </div>
         </div>
         <div class="row justify-content-end">
-            <div class="col-lg-4 mt-5 cart-wrap ftco-animate">
-                <div class="cart-total mb-3">
-                    <h3>Coupon Code</h3>
-                    <p>Enter your coupon code if you have one</p>
-                    <form action="#" class="info">
-                        <div class="form-group">
-                            <label for="">Coupon code</label>
-                            <input type="text" class="form-control text-left px-3" placeholder="">
-                        </div>
-                    </form>
-                </div>
-                <p><a href="checkout.html" class="btn btn-primary py-3 px-4">Apply Coupon</a></p>
-            </div>
-            <div class="col-lg-4 mt-5 cart-wrap ftco-animate">
-                <div class="cart-total mb-3">
-                    <h3>Estimate shipping and tax</h3>
-                    <p>Enter your destination to get a shipping estimate</p>
-                    <form action="#" class="info">
-                        <div class="form-group">
-                            <label for="">Country</label>
-                            <input type="text" class="form-control text-left px-3" placeholder="">
-                        </div>
-                        <div class="form-group">
-                            <label for="country">State/Province</label>
-                            <input type="text" class="form-control text-left px-3" placeholder="">
-                        </div>
-                        <div class="form-group">
-                            <label for="country">Zip/Postal Code</label>
-                            <input type="text" class="form-control text-left px-3" placeholder="">
-                        </div>
-                    </form>
-                </div>
-                <p><a href="checkout.html" class="btn btn-primary py-3 px-4">Estimate</a></p>
-            </div>
-            <div class="col-lg-4 mt-5 cart-wrap ftco-animate">
+            <div class="col-lg-12 mt-5 cart-wrap ftco-animate">
+                <button id = "update-cart" disabled>Update Cart</button>
                 <div class="cart-total mb-3">
                     <h3>Cart Totals</h3>
                     <p class="d-flex">
                         <span>Subtotal</span>
-                        <span>$20.60</span>
+                        <span>${delivery} VND</span>
                     </p>
                     <p class="d-flex">
                         <span>Delivery</span>
-                        <span>$0.00</span>
+                        <span>20000 VND</span>
                     </p>
                     <p class="d-flex">
                         <span>Discount</span>
-                        <span>$3.00</span>
+                        <span>0%</span>
                     </p>
                     <hr>
                     <p class="d-flex total-price">
                         <span>Total</span>
-                        <span>$17.60</span>
+                        <span>${totalDelivery} VND</span>
                     </p>
                 </div>
                 <p><a href="checkout.html" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
@@ -394,6 +390,41 @@
         var row = input.closest('tr');
         updateTotalForRow(row);
     }
+
+    //khi thay đổi số lượng sản phẩm thì enable button update
+    $('.quantity.form-control.input-number').on('input', function () {
+        //kích hoạt nút "cập nhật giỏ hàng"
+        $('#update-cart').prop('disabled', false);
+    });
+
+    //khi người dùng nhấn nút update-cart
+    $('#update-cart').click(function (event){
+        event.preventDefault()
+        // Loop through all items in the cart
+        $('.quantity.form-control.input-number').each(function(){
+            var id = $(this).closest('tr').find('.product-remove a').data('id');
+            var quantity = $(this).val();
+
+            var formData = {
+                id: id,
+                quantity: quantity
+            }
+            $.ajax({
+                url: '/cart/update',
+                type: 'PUT',
+                contentType: "application/json",
+                data: JSON.stringify(formData),
+                success: function (response){
+                    location.reload();
+                },
+                error: function (response){
+                    alert(response.responseText);
+                }
+            })
+        });
+
+        // $('#update-cart').prop('disabled', true);
+    });
     $(document).ready(function () {
         $('.product-remove a').on('click', function(e){
             e.preventDefault();

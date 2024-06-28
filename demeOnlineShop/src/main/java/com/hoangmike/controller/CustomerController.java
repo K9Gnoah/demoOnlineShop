@@ -5,6 +5,7 @@ import com.hoangmike.entity.User;
 import com.hoangmike.service.CartService;
 import com.hoangmike.service.CustomUserDetailsService;
 import com.hoangmike.service.impl.ProductServiceImpl;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -12,13 +13,10 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/customer/cart")
+@RequestMapping("/customer")
 @EnableMethodSecurity
 public class CustomerController {
     @Autowired
@@ -26,7 +24,7 @@ public class CustomerController {
     @Autowired
     private CartService cartService;
 
-    @GetMapping
+    @GetMapping("/cart")
     public String cart(Model model){
         model.addAttribute("cart", cartService.getCart());
         User currentUser = CustomUserDetailsService.getCurrentUserEntity();
@@ -34,9 +32,9 @@ public class CustomerController {
         return "cart";
     }
 
-    @PostMapping("/update")
-    public String updateCartItem(@RequestParam Long itemId, @RequestParam int quantity){
-        cartService.updateCartItem(itemId, quantity);
-        return "redirect:/customer/cart";
+    @GetMapping("/checkout")
+    public String checkout(Model model){
+        return "checkout";
     }
+
 }
