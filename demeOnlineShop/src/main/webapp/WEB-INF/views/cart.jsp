@@ -106,10 +106,10 @@
                         <a class="dropdown-item" href="wishlist.html">Wishlist</a>
                         <a class="dropdown-item" href="product-single.html">Single Product</a>
                         <a class="dropdown-item" href="/customer/cart">Cart</a>
-                        <a class="dropdown-item" href="checkout.html">Checkout</a>
+                        <a class="dropdown-item" href="/customer/checkout">Checkout</a>
                     </div>
                 </li>
-                <li class="nav-item"><a href="/common/" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="/common/aboutPage" class="nav-link">About</a></li>
                 <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
                 <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
                 <li class="nav-item cta cta-colored"><a href="/customer/cart" class="nav-link"><span id="cart-count"
@@ -232,7 +232,7 @@
                         <span>${totalDelivery} VND</span>
                     </p>
                 </div>
-                <p><a href="checkout.html" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
+                <p><a href="/customer/checkout" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
             </div>
         </div>
     </div>
@@ -281,8 +281,8 @@
                 <div class="ftco-footer-widget mb-4 ml-md-5">
                     <h2 class="ftco-heading-2">Menu</h2>
                     <ul class="list-unstyled">
-                        <li><a href="#" class="py-2 d-block">Shop</a></li>
-                        <li><a href="#" class="py-2 d-block">About</a></li>
+                        <li><a href="/common/common/showProduct" class="py-2 d-block">Shop</a></li>
+                        <li><a href="/common/aboutPage" class="py-2 d-block">About</a></li>
                         <li><a href="#" class="py-2 d-block">Journal</a></li>
                         <li><a href="#" class="py-2 d-block">Contact Us</a></li>
                     </ul>

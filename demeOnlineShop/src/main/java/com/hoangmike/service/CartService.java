@@ -115,4 +115,10 @@ public class CartService {
         }
         cartRepository.save(cart);
     }
+
+    public void clearCart(){
+        Cart cart = getCart();
+        cart.getItems().clear();
+        cartRepository.save(cart);
+    }
 }

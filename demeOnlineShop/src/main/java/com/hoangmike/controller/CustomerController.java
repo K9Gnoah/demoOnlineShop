@@ -34,6 +34,9 @@ public class CustomerController {
 
     @GetMapping("/checkout")
     public String checkout(Model model){
+        model.addAttribute("cart", cartService.getCart());
+        User currentUser = CustomUserDetailsService.getCurrentUserEntity();
+        model.addAttribute("user", currentUser);
         return "checkout";
     }
 

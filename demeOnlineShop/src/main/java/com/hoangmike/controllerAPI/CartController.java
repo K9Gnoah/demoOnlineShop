@@ -4,6 +4,7 @@ import com.hoangmike.dto.request.ApiResponse;
 import com.hoangmike.dto.request.UpdateCartDTO;
 import com.hoangmike.entity.Cart;
 import com.hoangmike.service.CartService;
+import com.hoangmike.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,9 @@ import org.springframework.web.bind.annotation.*;
 public class CartController {
     @Autowired
     private CartService cartService;
+
+    @Autowired
+    private OrderService orderService;
 
     @GetMapping
     public ApiResponse getCart(){
@@ -45,5 +49,14 @@ public class CartController {
         cartService.removeItem(itemId);
         return ResponseEntity.ok().build();
     }
+
+    @PostMapping("/checkout")
+    public ResponseEntity<Void> checkOut(){
+        orderService.createOrder();
+        return ResponseEntity.ok().build();
+    }
+
+
+
 
 }
