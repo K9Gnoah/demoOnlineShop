@@ -1,7 +1,11 @@
 package com.hoangmike.dto.response;
 
+import com.hoangmike.entity.Role;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -17,6 +21,6 @@ public class UserResponse {
     String address;
     String avatar;
     boolean userStatus;
-    int roleId;
+    List<Role> roles = new ArrayList<>();
 
 }

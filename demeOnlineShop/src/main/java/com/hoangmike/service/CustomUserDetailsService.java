@@ -3,6 +3,7 @@ package com.hoangmike.service;
 import com.hoangmike.entity.Role;
 import com.hoangmike.entity.User;
 import com.hoangmike.repository.UserRepository;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -26,13 +27,16 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(email);
-        if (user != null) {
-            return new org.springframework.security.core.userdetails.User(user.getEmail(),
-                    user.getPassword(),
-                    mapRolesToAuthorities(user.getRoles()));
-        } else {
+        if (user==null) {
             throw new UsernameNotFoundException("Invalid username or password.");
         }
+        else if(!user.isUserStatus()){
+            throw new DisabledException("User is disabled");
+        }
+        else
+        return new org.springframework.security.core.userdetails.User(user.getEmail(),
+                user.getPassword(),
+                mapRolesToAuthorities(user.getRoles()));
     }
 
     private Collection< ? extends GrantedAuthority> mapRolesToAuthorities(Collection <Role> roles) {

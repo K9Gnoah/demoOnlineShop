@@ -1,24 +1,17 @@
 <%--
   Created by IntelliJ IDEA.
   User: THINKPAD
-  Date: 6/10/2024
-  Time: 4:09 PM
+  Date: 7/2/2024
+  Time: 3:30 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>Manage Account</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="shortcut icon" type="image/png" href="<c:url value='/template/admin/assets/images/logos/favicon.png'/>"/>
     <link rel="stylesheet" href="<c:url value='/template/admin/assets/css/styles.min.css' />"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="<c:url value='/template/homepage/css/style.css' />"/>
+    <title>Update Account</title>
 </head>
 <body>
 <!--  Body Wrapper -->
@@ -52,7 +45,7 @@
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="./manageAccount" aria-expanded="false">
+                        <a class="sidebar-link" href="/manageAccount" aria-expanded="false">
                 <span>
                   <i class="ti ti-article"></i>
                 </span>
@@ -138,7 +131,7 @@
                                         <i class="ti ti-list-check fs-6"></i>
                                         <p class="mb-0 fs-3">My Task</p>
                                     </a>
-                                    <a href="/logout"
+                                    <a href="./authentication-login.html"
                                        class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
                                 </div>
                             </div>
@@ -148,71 +141,51 @@
             </nav>
         </header>
         <!--  Header End -->
+
         <div class="container-fluid">
-            <div class="container mt-4">
-                <div class="table-responsive">
-                    <table class="table table-bordered table-hover">
-                        <thead class="thead-dark">
-                        <tr>
-                            <th>ID</th>
-                            <th>Email</th>
-                            <th>Full Name</th>
-                            <th>Address</th>
-                            <th>Avatar</th>
-                            <th>Phone</th>
-                            <th>Role</th>
-                            <th>Action</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <c:forEach var="i" items="${listUser.content}">
-                            <tr>
-                                <td>${i.id}</td>
-                                <td>${i.email}</td>
-                                <td>${i.username}</td>
-                                <td>${i.address}</td>
-                                <td>${i.avatar}</td>
-                                <td>${i.phone}</td>
-                                <td>
-                                    <c:forEach var="role" items="${i.roles}">
-                                        ${role.name} <br/>
-                                    </c:forEach>
-                                </td>
-                                <td>
-                                    <a href="/updateAdmin/${i.id}" class="btn btn-primary mb-2">Update</a>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                        </tbody>
+            <div class="container-fluid">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title fw-semibold mb-4">Forms</h5>
+                        <div class="card">
+                            <div class="card-body">
+                                <form>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="user_id">ID</label>
+                                        <input id="user_id" name="user_id" placeholder="USER ID" class="form-control"
+                                               required="" type="text" readonly value="${userUpd.id}">
+                                    </div>
 
-                    </table>
-
-                    <a href="/addProductForm">Add product</a>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="username">USER NAME</label>
+                                        <input id="username" name="username" placeholder="USER NAME"
+                                               class="form-control" required="" type="text"
+                                               value="${userUpd.username}" readonly>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="email">EMAIL</label>
+                                        <input id="email" name="email" placeholder="EMAIL" class="form-control"
+                                               required="" type="email" value="${userUpd.email}" readonly>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="phone">PHONE</label>
+                                        <input id="phone" name="phone" placeholder="PHONE" class="form-control"
+                                               required="" type="text" value="${userUpd.phone}" readonly>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="address">ADDRESS</label>
+                                        <input id="address" name="email" placeholder="ADDRESS" class="form-control"
+                                               required="" type="text" value="${userUpd.address}" readonly>
+                                    </div>
+                                    <div class="mb-3">
+                                        <labe class="form-label" for="role">ROLE</labe>
+                                        <input id="role" name="role" placeholder="ROLE" class="form-control" required="" type="text" value="${userUpd.roles.name}">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="row mt-5">
-        <div class="col text-center">
-            <div class="block-27">
-                <ul>
-                    <c:if test="${listUser.hasPrevious()}">
-                        <li><a href="?page=${listUser.number - 1}&size=${listUser.size}">&lt;</a></li>
-                    </c:if>
-                    <c:forEach begin="1" end="${listUser.totalPages}" var="i">
-                        <c:choose>
-                            <c:when test="${i == (listUser.number + 1)}">
-                                <li class="active"><span>${i}</span></li>
-                            </c:when>
-                            <c:otherwise>
-                                <li><a href="?page=${i - 1}&size=${listUser.size}">${i}</a></li>
-                            </c:otherwise>
-                        </c:choose>
-                    </c:forEach>
-                    <c:if test="${listUser.hasNext()}">
-                        <li><a href="?page=${listUser.number + 1}&size=${listUser.size}">&gt;</a></li>
-                    </c:if>
-                </ul>
             </div>
         </div>
     </div>
@@ -224,40 +197,39 @@
 <script type="text/javascript" src="<c:url value="/template/admin/assets/js/sidebarmenu.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/template/admin/assets/js/app.min.js"/>"></script>
 <script type="text/javascript"
-        src="<c:url value="/template/admin/assets/libs/apexcharts/dist/apexcharts.min.js"/>"></script>
-<script type="text/javascript"
         src="<c:url value="/template/admin/assets/libs/simplebar/dist/simplebar.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/template/admin/assets/js/dashboard.js"/>"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        $(".deleteproduct").click(function (event) {
+        $("#uploadbutton").click(function (event) {
             event.preventDefault();
 
-            var productId = $(this).data("id");
-            // Hiển thị hộp thoại xác nhận
-            var confirmation = confirm("Are you sure you want to delete this product?");
-            if (confirmation) {
-                // Người dùng chọn Yes, thực hiện xóa sản phẩm
-                $.ajax({
-                    url: "/api/products/" + productId,  // URL của API
-                    type: "DELETE",
-                    success: function (result) {
-                        alert(result);
-                        location.reload();  // Reload lại trang sau khi xóa thành công
-                    },
-                    error: function (e) {
-                        console.log(e);
-                        alert("Error: " + e.responseText);
-                    }
-                });
-            } else {
-                // Người dùng chọn No, hủy bỏ hành động xóa
-                alert("Delete action was cancelled.");
-            }
+            var productID = $("#product_id").val();
+            var formData = {
+                productName: $("#product_name").val(),
+                productDescription: $("#product_description").val(),
+                productPrice: parseFloat($("#product_price").val()),
+                // productImage: $("#product_image").val(), // Lưu ý: File uploads cần xử lý khác
+                productStatus: $("#product_status").val() === "true",
+                productQuantity: parseInt($("#available_quantity").val()),
+                categoryId: $("#product_categorie").val() === "1" ? 1 : 2
+            };
 
+            $.ajax({
+                url: "/api/products/" + productID,  // URL của API
+                type: "PUT",
+                contentType: "application/json",
+                data: JSON.stringify(formData),
+                success: function (result) {
+                    alert("update successfully");
+                    location.replace("/productList")
+                },
+                error: function (e) {
+                    console.log(e);
+                    alert("Error: " + e.responseText);
+                }
+            });
         });
     });
 </script>
-
 </body>
 </html>

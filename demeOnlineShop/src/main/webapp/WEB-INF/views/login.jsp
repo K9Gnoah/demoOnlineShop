@@ -51,10 +51,10 @@
                                 </c:if>
                                 <form id="login-form" method="post" action="${pageContext.request.contextPath}/login" role="form" style="display: block;">
                                     <div class="form-group">
-                                        <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
+                                        <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="" required>
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+                                        <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password" required>
                                     </div>
                                     <div class="form-group text-center">
                                         <input type="checkbox" tabindex="3" class="" name="remember" id="remember">
@@ -79,26 +79,26 @@
                                 </form>
                                 <form id="register-form" action="${pageContext.request.contextPath}/register/save" method="post" role="form" style="display: none;">
                                     <div class="form-group">
-                                        <input type="text" name="firstName" id="firstName" tabindex="1" class="form-control" placeholder="Enter First Name" value="${user.firstName}">
+                                        <input type="text" name="firstName" id="firstName" tabindex="1" class="form-control" placeholder="Enter First Name" value="${user.firstName}" required>
                                         <c:if test="${not empty errors.firstName}">
                                             <p class="text-danger">${errors.firstName}</p>
                                         </c:if>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" name="lastName" id="lastName" tabindex="1" class="form-control" placeholder="Enter Last Name" value="${user.lastName}">
+                                        <input type="text" name="lastName" id="lastName" tabindex="1" class="form-control" placeholder="Enter Last Name" value="${user.lastName}" required>
                                         <c:if test="${not empty errors.lastName}">
                                             <p class="text-danger">${errors.lastName}</p>
                                         </c:if>
                                     </div>
 
                                     <div class="form-group">
-                                        <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="${user.email}">
+                                        <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="${user.email}" required>
                                         <c:if test="${not empty errors.email}">
                                             <p class="text-danger">${errors.email}</p>
                                         </c:if>
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password" value="${user.password}">
+                                        <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password" value="${user.password}" required>
                                         <c:if test="${not empty errors.password}">
                                             <p class="text-danger">${errors.password}</p>
                                         </c:if>

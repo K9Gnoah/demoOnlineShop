@@ -51,8 +51,8 @@ public class CartController {
     }
 
     @PostMapping("/checkout")
-    public ResponseEntity<Void> checkOut(){
-        orderService.createOrder();
+    public ResponseEntity<Void> checkOut(@RequestParam String address, @RequestParam String name, @RequestParam String phone){
+        orderService.createOrder(address, name, phone);
         return ResponseEntity.ok().build();
     }
 

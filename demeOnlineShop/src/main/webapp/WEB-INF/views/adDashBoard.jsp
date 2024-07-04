@@ -140,6 +140,28 @@
         </header>
         <!--  Header End -->
         <div class="container-fluid">
+
+            <c:if test="${not empty statistics}">
+                <table>
+                    <tr>
+                        <th>Product ID</th>
+                        <th>Product Name</th>
+                        <th>Total Sold</th>
+                        <th>Total In Stock</th>
+                        <th>Total Resource</th>
+                    </tr>
+                    <c:forEach var="stat" items="${statistics}">
+                        <tr>
+                            <td><c:out value="${stat[0]}" /></td>
+                            <td><c:out value="${stat[1]}" /></td>
+                            <td><c:out value="${stat[2]}" /></td>
+                            <td><c:out value="${stat[3]}" /></td>
+                            <td><c:out value="${stat[4]}" /></td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </c:if>
+
             <!--  Row 1 -->
             <div class="row">
                 <div class="col-lg-8 d-flex align-items-strech">

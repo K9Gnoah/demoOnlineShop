@@ -23,6 +23,9 @@ public class CommonController {
         return "aboutPage";
     }
 
+    @GetMapping("/blog")
+    public String blog(){return "blog";}
+
     @GetMapping("/showProduct")
     public String showProduct(Model model,
                               @RequestParam(name = "page", defaultValue = "0") int page,

@@ -6,6 +6,8 @@ import com.hoangmike.entity.Product;
 import com.hoangmike.exception.AppException;
 import com.hoangmike.exception.ErrorCode;
 import com.hoangmike.mapper.ProductMapper;
+import com.hoangmike.repository.CartItemRepository;
+import com.hoangmike.repository.OrderItemRepository;
 import com.hoangmike.repository.ProductRepository;
 import com.hoangmike.service.ProductService;
 import lombok.AccessLevel;
@@ -25,6 +27,8 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
     ProductRepository productRepository;
     ProductMapper productMapper;
+    private final CartItemRepository cartItemRepository;
+    private final OrderItemRepository orderItemRepository;
 
 
     @Override
@@ -51,11 +55,11 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void deleteProduct(int productId) {
-        if (getProductById(productId) != null) {
-            productRepository.deleteById((long) productId);
-        } else {
-            throw new AppException(ErrorCode.PRODUCT_NOT_FOUND);
-        }
+        Product product = productRepository.findById((long) productId)
+                .orElseThrow(() -> new AppException(ErrorCode.PRODUCT_NOT_FOUND));
+        cartItemRepository.deleteByProductId((long) productId);
+        orderItemRepository.deleteByProductId((long) productId);
+        productRepository.deleteById((long) productId);
     }
 
     @Override

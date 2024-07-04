@@ -30,7 +30,14 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            } else{
+            } else if(authority.getAuthority().equals("ROLE_DELIVER")){
+                try {
+                    redirectStrategy.sendRedirect(request, response, "/deliver/listOrder");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            else{
                     throw new IllegalStateException();
             }
 

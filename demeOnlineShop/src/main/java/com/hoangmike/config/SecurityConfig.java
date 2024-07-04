@@ -35,6 +35,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests((authorize) ->
                         authorize.requestMatchers("/adminDashBoard").hasRole("ADMIN")
                                 .requestMatchers("/customer/**").hasRole("CUSTOMER")
+                                .requestMatchers("/deliver/**").hasRole("DELIVER")
                                 .requestMatchers("/user/**").authenticated()
                                 .requestMatchers("/common/**").permitAll()
                                 .anyRequest().permitAll()

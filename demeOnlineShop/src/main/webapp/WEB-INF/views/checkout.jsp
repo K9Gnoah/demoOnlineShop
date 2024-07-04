@@ -142,19 +142,19 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-xl-12 ftco-animate">
-                <form action="#" class="billing-form">
+                <form action="#" id="checkoutForm" class="billing-form">
                     <h3 class="mb-4 billing-heading">Billing Details</h3>
                     <div class="row align-items-end">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="username">Name</label>
-                                <input type="text" id="username" class="form-control" placeholder="" value="${user.username}" readonly>
+                                <label for="name">Name</label>
+                                <input type="text" id="name" name="name" class="form-control" placeholder="" value="${user.username}" readonly>
                             </div>
                         </div>                        <div class="w-100"></div>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="address">Address</label>
-                                <input type="text" id="address" class="form-control" placeholder="" value="${user.address}" readonly>
+                                <input type="text" id="address" name="address" class="form-control" placeholder="" value="${user.address}">
                             </div>
                         </div>
                         <div class="w-100"></div>
@@ -162,7 +162,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="phone">Phone</label>
-                                <input type="text" id="phone" class="form-control" placeholder="" value="${user.phone}" readonly>
+                                <input type="text" id="phone" name="phone" class="form-control" placeholder="" value="${user.phone}" readonly>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -258,7 +258,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <p><a href="#"class="btn btn-primary py-3 px-4">Place an order</a></p>
+                            <p><a href="#"class="btn btn-primary py-3 px-4" id="placeOrder">Place an order</a></p>
                         </div>
                     </div>
                 </div>
@@ -385,20 +385,23 @@
 
 <script>
     $(document).ready(function(){
-        $(".btn-primary").click(function (e){
+        $("#placeOrder").click(function (e){
             e.preventDefault();
+            var formData = $("#checkoutForm").serialize();
             $.ajax({
                 url: '/cart/checkout',
                 type: 'POST',
+                data: formData,
                 success: function(response){
                     console.log(response);
+                    alert("Place an order successfully!")
                 },
-                error: function(error){
+                error: function (error){
                     console.log(error);
                 }
+            });
+        });
 
-            })
-        })
 
         var quantitiy=0;
         $('.quantity-right-plus').click(function(e){
@@ -428,6 +431,14 @@
             // Increment
             if(quantity>0){
                 $('#quantity').val(quantity - 1);
+            }
+        });
+
+        $.ajax({
+            url: "/cart/count",
+            type: "GET",
+            success: function (response) {
+                $("#cart-count").text(response);
             }
         });
 

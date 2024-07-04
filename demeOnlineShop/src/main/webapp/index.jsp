@@ -78,10 +78,11 @@
                     </div>
                 </li>
                 <li class="nav-item"><a href="/common/aboutPage" class="nav-link">About</a></li>
-                <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
+                <li class="nav-item"><a href="/common/blog" class="nav-link">Blog</a></li>
                 <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-                <li class="nav-item cta cta-colored"><a href="customer/cart" class="nav-link"><span
-                        class="icon-shopping_cart"></span>[0]</a></li>
+                <li class="nav-item cta cta-colored"><a href="customer/cart" class="nav-link"><span id="cart-count"
+                                                                                                    class="icon-shopping_cart"></span></a>
+                </li>
                 <%--                info--%>
 
                 <li class="nav-item dropdown">
@@ -794,7 +795,17 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 <script type="text/javascript" src="<c:url value="/template/homepage/js/google-map.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/template/homepage/js/main.js"/>"></script>
-
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url: "/cart/count",
+            type: "GET",
+            success: function (response) {
+                $("#cart-count").text(response);
+            }
+        });
+    });
+</script>
 
 </body>
 </html>

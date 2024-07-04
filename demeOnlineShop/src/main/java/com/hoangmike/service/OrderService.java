@@ -29,7 +29,13 @@ public class OrderService {
     @Autowired
     private CartRepository cartRepository;
 
-    public void createOrder() {
+    public List<Order> getAllOrders() {
+        List<Order> orders = orderRepository.findAll();
+        orders.forEach(order -> order.getOrderItems().size());
+        return orders;
+    }
+
+    public void createOrder(String address, String name, String phone) {
         // get the cart
         Cart cart = cartService.getCart();
 
@@ -37,6 +43,10 @@ public class OrderService {
         Order order = new Order();
         order.setUser(cart.getUser());
         order.setOrderDate(new Date());
+        order.setStatus(OrderStatus.PENDING);
+        order.setAddress(address);
+        order.setName(name);
+        order.setPhone(phone);
 
         // convert CartItems to OrderItems and add them to the order
         for (CartItem cartItem : cart.getItems()) {
@@ -49,16 +59,19 @@ public class OrderService {
         // save the order (order items will be saved because of cascade)
         orderRepository.save(order);
 
-        // update the stock
-        for (CartItem item : cart.getItems()) {
-            Product product = item.getProduct();
-            product.setProductQuantity(product.getProductQuantity() - item.getQuantity());
-            productRepository.save(product);
-        }
-
         // clear the cart
         cart.getItems().clear();
         cartRepository.save(cart);
+    }
+
+    public void updateOrderStatus(Long orderId, OrderStatus status){
+        Order order = orderRepository.findById(orderId).orElseThrow(()-> new RuntimeException("Order not found"));
+        order.setStatus(status);
+        orderRepository.save(order);
+    }
+
+    public List<Object[]> getProductStatistics(){
+        return productRepository.getProductsStatistics();
     }
 
 }
