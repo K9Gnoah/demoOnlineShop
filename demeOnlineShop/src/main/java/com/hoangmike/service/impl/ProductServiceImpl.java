@@ -75,6 +75,14 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public Product findProductById(int productId) {
+        Product product = new Product();
+        product = productRepository.findById((long) productId)
+                .orElseThrow(() -> new AppException(ErrorCode.PRODUCT_NOT_FOUND));
+        return product;
+    }
+
+    @Override
     public Page<Product> findPaginated(int page, int size) {
         return productRepository.findAll(PageRequest.of(page, size));
     }
@@ -82,6 +90,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Page<Product> findActiveProductPag(int page, int size) {
         return productRepository.findByProductStatus(PageRequest.of(page, size), true);
+    }
+
+    @Override
+    public Page<Product> findByCategory(Integer category, int page, int size) {
+        return productRepository.findByCategoryId(PageRequest.of(page, size), category);
     }
 
 

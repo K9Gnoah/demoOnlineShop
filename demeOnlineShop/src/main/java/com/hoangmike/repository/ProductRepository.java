@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -17,8 +18,10 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     Page<Product> findByProductStatus(Pageable pageable, boolean status);
 
+    @Query("SELECT p FROM Product p WHERE p.category.id = :categoryId")
+    Page<Product> findByCategoryId(Pageable pageable, @Param("categoryId") Integer categoryId);
 
-    @Query( value = "SELECT \n" +
+    @Query(value = "SELECT \n" +
             "\tp.product_id,\n" +
             "    p.product_name,\n" +
             "    COALESCE(SUM(o.quantity), 0) as TOTAL_SOLD,\n" +

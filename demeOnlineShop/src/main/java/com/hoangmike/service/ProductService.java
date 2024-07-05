@@ -14,6 +14,8 @@ public interface ProductService {
     void deleteProduct (int productId);
     ProductResponse getProductById (int productId);
     List<ProductResponse> getAllProducts ();
+    Product findProductById (int productId);
     public Page<Product> findPaginated(int page, int size);
     public Page<Product> findActiveProductPag(int page, int size);
+    public Page<Product> findByCategory(Integer category, int page, int size);
 }

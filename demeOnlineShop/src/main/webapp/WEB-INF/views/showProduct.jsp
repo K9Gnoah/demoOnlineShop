@@ -146,11 +146,9 @@
         <div class="row justify-content-center">
             <div class="col-md-10 mb-5 text-center">
                 <ul class="product-category">
-                    <li><a href="#" class="active">All</a></li>
-                    <li><a href="#">Vegetables</a></li>
-                    <li><a href="#">Fruits</a></li>
-                    <li><a href="#">Juice</a></li>
-                    <li><a href="#">Dried</a></li>
+                    <li><a href="?category=" class="active">All</a></li>
+                    <li><a href="?category=1">Hoa quả nhập khẩu</a></li>
+                    <li><a href="?category=2">Hoa quả nội địa </a></li>
                 </ul>
             </div>
         </div>
@@ -158,12 +156,12 @@
             <c:forEach var="i" items="${listProduct.content}">
                 <div class="col-md-6 col-lg-3 ftco-animate">
                     <div class="product">
-                        <a href="#" class="img-prod"><img class="img-fluid" src="${i.productImage}"
+                        <a href="/common/productDetails/${i.productId}" class="img-prod"><img class="img-fluid" src="${i.productImage}"
                                                           alt="Colorlib Template">
                             <div class="overlay"></div>
                         </a>
                         <div class="text py-3 pb-4 px-3 text-center">
-                            <h3><a href="#">${i.productName}</a></h3>
+                            <h3><a href="/common/productDetails/${i.productId}">${i.productName}</a></h3>
                             <div class="d-flex">
                                 <div class="pricing">
                                     <p class="price"><span>${i.productPrice} VNĐ</span></p>
@@ -196,7 +194,9 @@
                 <div class="block-27">
                     <ul>
                         <c:if test="${listProduct.hasPrevious()}">
-                            <li><a href="?page=${listProduct.number - 1}&size=${listProduct.size}">&lt;</a></li>
+                            <li>
+                                <a href="?page=${listProduct.number - 1}&size=${listProduct.size}<c:if test='${not empty param.category}'>&category=${param.category}</c:if>">&lt;</a>
+                            </li>
                         </c:if>
                         <c:forEach begin="1" end="${listProduct.totalPages}" var="i">
                             <c:choose>
@@ -204,12 +204,16 @@
                                     <li class="active"><span>${i}</span></li>
                                 </c:when>
                                 <c:otherwise>
-                                    <li><a href="?page=${i - 1}&size=${listProduct.size}">${i}</a></li>
+                                    <li>
+                                        <a href="?page=${i - 1}&size=${listProduct.size}<c:if test='${not empty param.category}'>&category=${param.category}</c:if>">${i}</a>
+                                    </li>
                                 </c:otherwise>
                             </c:choose>
                         </c:forEach>
                         <c:if test="${listProduct.hasNext()}">
-                            <li><a href="?page=${listProduct.number + 1}&size=${listProduct.size}">&gt;</a></li>
+                            <li>
+                                <a href="?page=${listProduct.number + 1}&size=${listProduct.size}<c:if test='${not empty param.category}'>&category=${param.category}</c:if>">&gt;</a>
+                            </li>
                         </c:if>
                     </ul>
                 </div>
