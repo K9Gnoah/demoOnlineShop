@@ -28,5 +28,21 @@ public class Product {
     @JoinColumn(name = "category_id")
     Category category;
 
+    public Product() {
+    }
 
+
+    public Product(int productId,String productName, int quantity) {
+        this.productId = productId;
+        this.productName = productName;
+        this.productQuantity = quantity;
+    }
+
+    @Override
+    public String toString() {
+        return "ProductInfo{" +
+                "productName='" + productName + '\'' +
+                ", quantity=" + productQuantity +
+                '}';
+    }
 }

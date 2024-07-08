@@ -22,18 +22,29 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     Page<Product> findByCategoryId(Pageable pageable, @Param("categoryId") Integer categoryId);
 
     @Query(value = "SELECT \n" +
-            "\tp.product_id,\n" +
-            "    p.product_name,\n" +
-            "    COALESCE(SUM(o.quantity), 0) as TOTAL_SOLD,\n" +
-            "    SUM(p.product_quantity) as TOTAL_IN_STOCK,\n" +
-            "    SUM(p.product_quantity) + COALESCE(SUM(o.quantity), 0) AS TOTAL_RESOURCE\n" +
+            "\tb.product_id,\n" +
+            "    b.product_name,\n" +
+            "    COALESCE(a.TOTAL_SOLD, 0) AS TOTAL_SOLD,\n" +
+            "    COALESCE(a.CANCELLED, 0) AS CANCELLED,\n" +
+            "    COALESCE(a.PENDING, 0) AS PENDING,\n" +
+            "    b.product_quantity as TOTAL_IN_STOCK\n" +
+            "FROM(\n" +
+            "SELECT \n" +
+            "    oi.product_id,\n" +
+            "    SUM(CASE WHEN o.status = 'DELIVERED' THEN oi.quantity ELSE 0 END) AS TOTAL_SOLD,\n" +
+            "    SUM(CASE WHEN o.status = 'CANCELLED' THEN oi.quantity ELSE 0 END) AS CANCELLED,\n" +
+            "    SUM(CASE WHEN o.status = 'PENDING' THEN oi.quantity ELSE 0 END) AS PENDING\n" +
             "FROM \n" +
-            "\tproduct p\n" +
+            "    order_items oi\n" +
             "LEFT JOIN \n" +
-            "\torder_items o \n" +
-            "ON \n" +
-            "\tp.product_id = o.product_id\n" +
-            "GROUP BY\n" +
-            "\tp.product_id;", nativeQuery = true)
+            "    orders o ON o.id = oi.order_id\n" +
+            "GROUP BY \n" +
+            "    oi.product_id\n" +
+            ") a\n" +
+            "RIGHT JOIN (\n" +
+            "SELECT product_id, product_name, product_quantity\n" +
+            "FROM product) b\n" +
+            "ON a.product_id = b.product_id\n" +
+            "ORDER BY b.product_id", nativeQuery = true)
     List<Object[]> getProductsStatistics();
 }

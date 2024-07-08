@@ -36,8 +36,19 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            }
-            else{
+            } else if(authority.getAuthority().equals("ROLE_SALER")) {
+                try {
+                    redirectStrategy.sendRedirect(request, response, "/saler/salerPage");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else if (authority.getAuthority().equals("ROLE_MARKETERS")) {
+                try {
+                    redirectStrategy.sendRedirect(request, response, "/home");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+        } else{
                     throw new IllegalStateException();
             }
 

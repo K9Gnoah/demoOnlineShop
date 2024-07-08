@@ -1,7 +1,9 @@
 package com.hoangmike.controller;
 
 import com.hoangmike.entity.OrderStatus;
+import com.hoangmike.entity.User;
 import com.hoangmike.repository.OrderRepository;
+import com.hoangmike.service.CustomUserDetailsService;
 import com.hoangmike.service.DeliverService;
 import com.hoangmike.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,8 @@ public class DeliverController {
 
     @GetMapping("/listOrder")
     public String listorder(Model model){
+        User currentUser = CustomUserDetailsService.getCurrentUserEntity();
+        model.addAttribute("user", currentUser);
         model.addAttribute("orders", orderService.getAllOrders());
         return "deliverPage";
     }

@@ -36,6 +36,7 @@ public class SecurityConfig {
                         authorize.requestMatchers("/adminDashBoard").hasRole("ADMIN")
                                 .requestMatchers("/customer/**").hasRole("CUSTOMER")
                                 .requestMatchers("/deliver/**").hasRole("DELIVER")
+                                .requestMatchers("/saler/**").hasRole("SALER")
                                 .requestMatchers("/user/**").authenticated()
                                 .requestMatchers("/common/**").permitAll()
                                 .anyRequest().permitAll()

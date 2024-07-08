@@ -21,7 +21,7 @@ public class ProductController {
         return "addProductForm";
     }
 
-    @GetMapping("/productList")
+    @GetMapping("/saler/productList")
     public String productList(Model model,
                               @RequestParam(name = "page", defaultValue = "0") int page,
                               @RequestParam(name = "size", defaultValue = "4") int size) {

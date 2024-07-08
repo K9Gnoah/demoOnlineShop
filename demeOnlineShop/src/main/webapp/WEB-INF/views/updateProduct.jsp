@@ -36,22 +36,7 @@
                         <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                         <span class="hide-menu">Home</span>
                     </li>
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="/adminDashBoard" aria-expanded="false">
-                <span>
-                  <i class="ti ti-layout-dashboard"></i>
-                </span>
-                            <span class="hide-menu">Dashboard</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="./manageAccount" aria-expanded="false">
-                <span>
-                  <i class="ti ti-article"></i>
-                </span>
-                            <span class="hide-menu">Manage Account</span>
-                        </a>
-                    </li>
+
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="/productList" aria-expanded="false">
                 <span>

@@ -1,24 +1,17 @@
 <%--
   Created by IntelliJ IDEA.
   User: THINKPAD
-  Date: 6/10/2024
-  Time: 4:09 PM
+  Date: 7/5/2024
+  Time: 9:36 AM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>Manage Account</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <title>Saler Page</title>
     <link rel="shortcut icon" type="image/png" href="<c:url value='/template/admin/assets/images/logos/favicon.png'/>"/>
     <link rel="stylesheet" href="<c:url value='/template/admin/assets/css/styles.min.css' />"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="<c:url value='/template/homepage/css/style.css' />"/>
 </head>
 <body>
 <!--  Body Wrapper -->
@@ -44,19 +37,11 @@
                         <span class="hide-menu">Home</span>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="/adminDashBoard" aria-expanded="false">
+                        <a class="sidebar-link" href="/saler/productList" aria-expanded="false">
                 <span>
-                  <i class="ti ti-layout-dashboard"></i>
+                  <i class="ti ti-cards"></i>
                 </span>
-                            <span class="hide-menu">Dashboard</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="./manageAccount" aria-expanded="false">
-                <span>
-                  <i class="ti ti-article"></i>
-                </span>
-                            <span class="hide-menu">Manage Account</span>
+                            <span class="hide-menu">Product List</span>
                         </a>
                     </li>
 
@@ -88,7 +73,8 @@
         </div>
         <!-- End Sidebar scroll-->
     </aside>
-    <!--  Main wrapper -->
+    <!--  Sidebar End -->
+
     <div class="body-wrapper">
         <!--  Header Start -->
         <header class="app-header">
@@ -118,7 +104,7 @@
                             <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"
                                  aria-labelledby="drop2">
                                 <div class="message-body">
-                                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                                    <a href="/user/profile" class="d-flex align-items-center gap-2 dropdown-item">
                                         <i class="ti ti-user fs-6"></i>
                                         <p class="mb-0 fs-3">My Profile</p>
                                     </a>
@@ -130,8 +116,7 @@
                                         <i class="ti ti-list-check fs-6"></i>
                                         <p class="mb-0 fs-3">My Task</p>
                                     </a>
-                                    <a href="/logout"
-                                       class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
+                                    <a href="/logout" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
                                 </div>
                             </div>
                         </li>
@@ -141,115 +126,39 @@
         </header>
         <!--  Header End -->
         <div class="container-fluid">
-            <div class="container mt-4">
-                <div class="table-responsive">
-                    <table class="table table-bordered table-hover">
-                        <thead class="thead-dark">
+            <form method="POST" action="/saler/upload" enctype="multipart/form-data">
+                <input type="file" name="file"/>
+                <button type="submit">Upload</button>
+            </form>
+            <c:if test="${not empty error}">
+                <div class="alert alert-danger">${error}</div>
+            </c:if>
+
+            <c:if test="${not empty products}">
+                <table>
+                    <tr>
+                        <th>Product ID</th>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                    </tr>
+                    <c:forEach var="product" items="${products}">
                         <tr>
-                            <th>ID</th>
-                            <th>Email</th>
-                            <th>Full Name</th>
-                            <th>Address</th>
-                            <th>Avatar</th>
-                            <th>Phone</th>
-                            <th>Role</th>
-                            <th>Action</th>
+                            <td><c:out value="${product.productId}"/></td>
+                            <td><c:out value="${product.productName}"/></td>
+                            <td><c:out value="${product.productQuantity}"/></td>
                         </tr>
-                        </thead>
-                        <tbody>
-                        <c:forEach var="i" items="${listUser.content}">
-                            <tr>
-                                <td>${i.id}</td>
-                                <td>${i.email}</td>
-                                <td>${i.username}</td>
-                                <td>${i.address}</td>
-                                <td>${i.avatar}</td>
-                                <td>${i.phone}</td>
-                                <td>
-                                    <c:forEach var="role" items="${i.roles}">
-                                        ${role.name} <br/>
-                                    </c:forEach>
-                                </td>
-                                <td>
-                                    <a href="/updateAdmin/${i.id}" class="btn btn-primary mb-2">Update</a>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                        </tbody>
-
-                    </table>
-
-                    <a href="/addProductForm">Add product</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row mt-5">
-        <div class="col text-center">
-            <div class="block-27">
-                <ul>
-                    <c:if test="${listUser.hasPrevious()}">
-                        <li><a href="?page=${listUser.number - 1}&size=${listUser.size}">&lt;</a></li>
-                    </c:if>
-                    <c:forEach begin="1" end="${listUser.totalPages}" var="i">
-                        <c:choose>
-                            <c:when test="${i == (listUser.number + 1)}">
-                                <li class="active"><span>${i}</span></li>
-                            </c:when>
-                            <c:otherwise>
-                                <li><a href="?page=${i - 1}&size=${listUser.size}">${i}</a></li>
-                            </c:otherwise>
-                        </c:choose>
                     </c:forEach>
-                    <c:if test="${listUser.hasNext()}">
-                        <li><a href="?page=${listUser.number + 1}&size=${listUser.size}">&gt;</a></li>
-                    </c:if>
-                </ul>
-            </div>
+                </table>
+            </c:if>
         </div>
     </div>
 </div>
-<script type="text/javascript"
-        src="<c:url value="/template/admin/assets/libs/jquery/dist/jquery.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/template/admin/assets/libs/jquery/dist/jquery.min.js"/>"></script>
 <script type="text/javascript"
         src="<c:url value="/template/admin/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/template/admin/assets/js/sidebarmenu.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/template/admin/assets/js/app.min.js"/>"></script>
-<script type="text/javascript"
-        src="<c:url value="/template/admin/assets/libs/apexcharts/dist/apexcharts.min.js"/>"></script>
-<script type="text/javascript"
-        src="<c:url value="/template/admin/assets/libs/simplebar/dist/simplebar.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/template/admin/assets/libs/simplebar/dist/simplebar.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/template/admin/assets/js/dashboard.js"/>"></script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $(".deleteproduct").click(function (event) {
-            event.preventDefault();
-
-            var productId = $(this).data("id");
-            // Hiển thị hộp thoại xác nhận
-            var confirmation = confirm("Are you sure you want to delete this product?");
-            if (confirmation) {
-                // Người dùng chọn Yes, thực hiện xóa sản phẩm
-                $.ajax({
-                    url: "/api/products/" + productId,  // URL của API
-                    type: "DELETE",
-                    success: function (result) {
-                        alert(result);
-                        location.reload();  // Reload lại trang sau khi xóa thành công
-                    },
-                    error: function (e) {
-                        console.log(e);
-                        alert("Error: " + e.responseText);
-                    }
-                });
-            } else {
-                // Người dùng chọn No, hủy bỏ hành động xóa
-                alert("Delete action was cancelled.");
-            }
-
-        });
-    });
-</script>
-
 </body>
 </html>
