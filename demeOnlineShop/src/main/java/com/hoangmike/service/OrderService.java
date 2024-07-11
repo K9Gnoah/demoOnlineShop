@@ -1,18 +1,18 @@
 package com.hoangmike.service;
 
 import com.hoangmike.entity.*;
+import com.hoangmike.exception.AppException;
+import com.hoangmike.exception.ErrorCode;
 import com.hoangmike.repository.CartRepository;
-import com.hoangmike.repository.OrderItemRepository;
 import com.hoangmike.repository.OrderRepository;
 import com.hoangmike.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -35,6 +35,16 @@ public class OrderService {
         return orders;
     }
 
+    public List<Order> getAllOrdersSortedByDate() {
+        List<Order> orders = orderRepository.findAllOrdersSortedByDate();
+        orders.forEach(order -> order.getOrderItems().size());
+        return orders;
+    }
+
+    public List<Order> getOrdersByUserId(Long userId) {
+        return orderRepository.findByUserId(userId);
+    }
+
     public void createOrder(String address, String name, String phone) {
         // get the cart
         Cart cart = cartService.getCart();
@@ -48,12 +58,21 @@ public class OrderService {
         order.setName(name);
         order.setPhone(phone);
 
+
         // convert CartItems to OrderItems and add them to the order
         for (CartItem cartItem : cart.getItems()) {
+            int currentProductId = cartItem.getProduct().getProductId();
+            Optional<Product> currentProduct = productRepository.findById(Long.valueOf(currentProductId));
+            int quantityProductInCart = cartItem.getQuantity();
+            int quantityProductInStock = currentProduct.get().getProductQuantity();
+            if (quantityProductInStock < quantityProductInCart) {
+                throw new AppException(ErrorCode.PRODUCT_QUANTITY_EXCEED);
+            }
+
             OrderItem orderItem = new OrderItem();
             orderItem.setProduct(cartItem.getProduct());
             orderItem.setQuantity(cartItem.getQuantity());
-            order.addOrderItem(orderItem); // Use the addOrderItem method
+            order.addOrderItem(orderItem);
         }
 
         // save the order (order items will be saved because of cascade)
@@ -64,14 +83,32 @@ public class OrderService {
         cartRepository.save(cart);
     }
 
-    public void updateOrderStatus(Long orderId, OrderStatus status){
-        Order order = orderRepository.findById(orderId).orElseThrow(()-> new RuntimeException("Order not found"));
-        order.setStatus(status);
-        orderRepository.save(order);
+    public void updateOrderStatus(Long orderId, OrderStatus status) {
+        Order order = orderRepository.findById(orderId).orElseThrow(() -> new RuntimeException("Order not found"));
+        if (status == OrderStatus.DELIVERING && order.getStatus() == OrderStatus.PENDING) {
+            for (OrderItem item : order.getOrderItems()) {
+                Product product = item.getProduct();
+                int newQuantity = product.getProductQuantity() - item.getQuantity();
+                if (newQuantity < 0) {
+                    throw new AppException(ErrorCode.PRODUCT_QUANTITY_EXCEED);
+                }
+
+            }
+            for (OrderItem item : order.getOrderItems()) {
+                Product product = item.getProduct();
+                int newQuantity = product.getProductQuantity() - item.getQuantity();
+                product.setProductQuantity(newQuantity);
+                productRepository.save(product);
+            }
+            order.setStatus(status);
+            orderRepository.save(order);
+        }
     }
 
-    public List<Object[]> getProductStatistics(){
+    public List<Object[]> getProductStatistics() {
         return productRepository.getProductsStatistics();
     }
+
+    
 
 }

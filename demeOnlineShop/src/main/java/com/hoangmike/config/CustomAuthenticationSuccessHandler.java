@@ -38,13 +38,13 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
                 }
             } else if(authority.getAuthority().equals("ROLE_SALER")) {
                 try {
-                    redirectStrategy.sendRedirect(request, response, "/saler/salerPage");
+                    redirectStrategy.sendRedirect(request, response, "/saler/productList");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             } else if (authority.getAuthority().equals("ROLE_MARKETERS")) {
                 try {
-                    redirectStrategy.sendRedirect(request, response, "/home");
+                    redirectStrategy.sendRedirect(request, response, "/marketer/blogManagement");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

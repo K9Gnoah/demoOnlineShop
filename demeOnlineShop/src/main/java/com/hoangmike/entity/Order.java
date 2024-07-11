@@ -30,6 +30,9 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "delivery_person_id")
+    private User deliveryPerson;
     String address;
     String name;
     String phone;

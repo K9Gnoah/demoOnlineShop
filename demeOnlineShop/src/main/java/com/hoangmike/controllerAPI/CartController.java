@@ -3,11 +3,13 @@ package com.hoangmike.controllerAPI;
 import com.hoangmike.dto.request.ApiResponse;
 import com.hoangmike.dto.request.UpdateCartDTO;
 import com.hoangmike.entity.Cart;
+import com.hoangmike.exception.AppException;
 import com.hoangmike.service.CartService;
 import com.hoangmike.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @RestController
 @RequestMapping("/cart")
@@ -51,12 +53,16 @@ public class CartController {
     }
 
     @PostMapping("/checkout")
-    public ResponseEntity<Void> checkOut(@RequestParam String address, @RequestParam String name, @RequestParam String phone){
-        orderService.createOrder(address, name, phone);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<ApiResponse> checkOut(@RequestParam String address, @RequestParam String name, @RequestParam String phone) {
+        ApiResponse<Object> response = new ApiResponse<>();
+        try {
+            orderService.createOrder(address, name, phone);
+            response.setMessage("Order created successfully");
+            return ResponseEntity.ok(response);
+        } catch (AppException e) {
+            response.setCode(e.getErrorCode().getCode());
+            response.setMessage(e.getMessage());
+            return ResponseEntity.badRequest().body(response);
+        }
     }
-
-
-
-
 }

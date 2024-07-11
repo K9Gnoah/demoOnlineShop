@@ -1,5 +1,6 @@
 package com.hoangmike.config;
 
+import com.hoangmike.controller.MarketerController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,13 +31,15 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http, MarketerController marketerController) throws Exception {
         http.csrf().disable()
+                .csrf().disable()
                 .authorizeHttpRequests((authorize) ->
                         authorize.requestMatchers("/adminDashBoard").hasRole("ADMIN")
                                 .requestMatchers("/customer/**").hasRole("CUSTOMER")
                                 .requestMatchers("/deliver/**").hasRole("DELIVER")
                                 .requestMatchers("/saler/**").hasRole("SALER")
+                                .requestMatchers("/marketer/**").hasRole("MARKETERS")
                                 .requestMatchers("/user/**").authenticated()
                                 .requestMatchers("/common/**").permitAll()
                                 .anyRequest().permitAll()

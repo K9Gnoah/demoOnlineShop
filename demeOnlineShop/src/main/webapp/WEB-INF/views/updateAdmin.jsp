@@ -178,8 +178,8 @@
                                                required="" type="text" value="${userUpd.address}" readonly>
                                     </div>
                                     <div class="mb-3">
-                                        <labe class="form-label" for="role">ROLE</labe>
-                                        <input id="role" name="role" placeholder="ROLE" class="form-control" required="" type="text" value="${userUpd.roles.name}">
+                                        <label class="form-label" for="role">ROLE</label>
+                                        <input id="role" name="role" placeholder="ROLE" class="form-control" required="" type="text" value="<c:forEach items="${userUpd.roles}" var="role" varStatus="status">${role}${status.last ? '' : ', '}</c:forEach>" readonly>
                                     </div>
                                 </form>
                             </div>
@@ -198,38 +198,6 @@
 <script type="text/javascript" src="<c:url value="/template/admin/assets/js/app.min.js"/>"></script>
 <script type="text/javascript"
         src="<c:url value="/template/admin/assets/libs/simplebar/dist/simplebar.js"/>"></script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("#uploadbutton").click(function (event) {
-            event.preventDefault();
 
-            var productID = $("#product_id").val();
-            var formData = {
-                productName: $("#product_name").val(),
-                productDescription: $("#product_description").val(),
-                productPrice: parseFloat($("#product_price").val()),
-                // productImage: $("#product_image").val(), // Lưu ý: File uploads cần xử lý khác
-                productStatus: $("#product_status").val() === "true",
-                productQuantity: parseInt($("#available_quantity").val()),
-                categoryId: $("#product_categorie").val() === "1" ? 1 : 2
-            };
-
-            $.ajax({
-                url: "/api/products/" + productID,  // URL của API
-                type: "PUT",
-                contentType: "application/json",
-                data: JSON.stringify(formData),
-                success: function (result) {
-                    alert("update successfully");
-                    location.replace("/productList")
-                },
-                error: function (e) {
-                    console.log(e);
-                    alert("Error: " + e.responseText);
-                }
-            });
-        });
-    });
-</script>
 </body>
 </html>

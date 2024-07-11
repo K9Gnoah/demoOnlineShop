@@ -38,6 +38,14 @@
     <link rel="stylesheet" href="<c:url value='/template/homepage/css/flaticon.css' />"/>
     <link rel="stylesheet" href="<c:url value='/template/homepage/css/icomoon.css' />"/>
     <link rel="stylesheet" href="<c:url value='/template/homepage/css/style.css' />"/>
+    <script>
+        $(document).ready(function(){
+            var errorMessage = "${errorMessage}";
+            if (errorMessage) {
+                alert(errorMessage);
+            }
+        });
+    </script>
 </head>
 <body class="goto-here">
 <div class="py-1 bg-primary">
@@ -388,17 +396,19 @@
         $("#placeOrder").click(function (e){
             e.preventDefault();
             var formData = $("#checkoutForm").serialize();
+            console.log("Form data: " + formData); // Kiểm tra dữ liệu form
+
             $.ajax({
                 url: '/cart/checkout',
                 type: 'POST',
                 data: formData,
-                success: function(response){
-                    console.log(response);
-                    alert("Place an order successfully!")
-                },
-                error: function (error){
-                    console.log(error);
-                }
+            }).done(function(response) {
+                console.log("AJAX request successful");
+                alert("Order placed successfully!"); // Thông báo thành công
+                window.location.href = "/customer/cart"; // Chuyển hướng về trang cart
+            }).fail(function(jqXHR, textStatus, errorThrown) {
+                console.log("AJAX request failed: " + textStatus + ", " + errorThrown);
+                alert("Order failed because not enough product instock: " + textStatus); // Thông báo lỗi
             });
         });
 

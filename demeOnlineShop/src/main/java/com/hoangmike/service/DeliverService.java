@@ -19,10 +19,10 @@ public class DeliverService {
 
     public void updateOrderStatus(Long orderId, OrderStatus status){
         Order order = orderRepository.findById(orderId).orElseThrow(() -> new RuntimeException("Order not found"));
-        if(status == OrderStatus.DELIVERED){
-            for(OrderItem item: order.getOrderItems()){
-                Product product = item.getProduct();
-                product.setProductQuantity(product.getProductQuantity() - item.getQuantity());
+        if(status == OrderStatus.CANCELLED){
+            for(OrderItem orderItem : order.getOrderItems()){
+                Product product = orderItem.getProduct();
+                product.setProductQuantity(product.getProductQuantity() + orderItem.getQuantity());
                 productRepository.save(product);
             }
         }

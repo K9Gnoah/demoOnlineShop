@@ -1,7 +1,9 @@
 package com.hoangmike.service;
 
+import com.hoangmike.dto.request.ProductUpdateStockIn;
 import com.hoangmike.entity.Product;
 import com.hoangmike.repository.ProductRepository;
+import jakarta.transaction.Transactional;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -37,5 +39,14 @@ public class FileService {
             tempProductList.add(new Product(productId, productName, productQuantity));
         }
         return tempProductList;
+    }
+
+    @Transactional
+    public void updateWithStockIn(List<ProductUpdateStockIn> updates) throws Exception {
+        for (ProductUpdateStockIn update : updates) {
+            Long productId = update.getProductId();
+            int quantity = update.getQuantity();
+            productRepository.updateProductQuantity(productId, quantity);
+        }
     }
 }

@@ -1,6 +1,7 @@
 package com.hoangmike.service.impl;
 
 import com.hoangmike.dto.request.ProductCreationRequest;
+import com.hoangmike.dto.request.ProductUpdateStockIn;
 import com.hoangmike.dto.response.ProductResponse;
 import com.hoangmike.entity.Product;
 import com.hoangmike.exception.AppException;

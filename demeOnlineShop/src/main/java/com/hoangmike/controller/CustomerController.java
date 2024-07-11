@@ -1,9 +1,11 @@
 package com.hoangmike.controller;
 
+import com.hoangmike.entity.Order;
 import com.hoangmike.entity.Product;
 import com.hoangmike.entity.User;
 import com.hoangmike.service.CartService;
 import com.hoangmike.service.CustomUserDetailsService;
+import com.hoangmike.service.OrderService;
 import com.hoangmike.service.impl.ProductServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/customer")
 @EnableMethodSecurity
@@ -23,6 +27,8 @@ public class CustomerController {
     private ProductServiceImpl productService;
     @Autowired
     private CartService cartService;
+    @Autowired
+    private OrderService orderService;
 
     @GetMapping("/cart")
     public String cart(Model model){
@@ -38,6 +44,14 @@ public class CustomerController {
         User currentUser = CustomUserDetailsService.getCurrentUserEntity();
         model.addAttribute("user", currentUser);
         return "checkout";
+    }
+
+    @GetMapping("/myOrder")
+    public String myOrder(Model model){
+        User currentUser = CustomUserDetailsService.getCurrentUserEntity();
+        List<Order> orders = orderService.getOrdersByUserId(currentUser.getId());
+        model.addAttribute("orders", orders);
+        return "myOrder";
     }
 
 }

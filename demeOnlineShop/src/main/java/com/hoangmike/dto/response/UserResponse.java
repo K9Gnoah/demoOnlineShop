@@ -21,6 +21,6 @@ public class UserResponse {
     String address;
     String avatar;
     boolean userStatus;
-    List<Role> roles = new ArrayList<>();
+    List<String> roles;
 
 }

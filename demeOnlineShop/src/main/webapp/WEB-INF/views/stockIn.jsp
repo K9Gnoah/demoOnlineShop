@@ -37,32 +37,39 @@
                         <span class="hide-menu">Home</span>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="/saler/productList" aria-expanded="false">
+                        <a class="sidebar-link" href="./productList" aria-expanded="false">
                 <span>
                   <i class="ti ti-cards"></i>
                 </span>
                             <span class="hide-menu">Product List</span>
                         </a>
                     </li>
-
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="./stockIn" aria-expanded="false">
+                <span>
+                  <i class="ti ti-article"></i>
+                </span>
+                            <span class="hide-menu">Stock In</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="./manageOrder" aria-expanded="false">
+                <span>
+                  <i class="ti ti-file-description"></i>
+                </span>
+                            <span class="hide-menu">Manage Order</span>
+                        </a>
+                    </li>
                     <li class="nav-small-cap">
                         <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                         <span class="hide-menu">AUTH</span>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="./logout" aria-expanded="false">
+                        <a class="sidebar-link" href="/logout" aria-expanded="false">
                 <span>
                   <i class="ti ti-login"></i>
                 </span>
                             <span class="hide-menu">Log Out</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="./authentication-register.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-user-plus"></i>
-                </span>
-                            <span class="hide-menu">Register</span>
                         </a>
                     </li>
 
@@ -126,7 +133,7 @@
         </header>
         <!--  Header End -->
         <div class="container-fluid">
-            <form method="POST" action="/saler/upload" enctype="multipart/form-data">
+            <form method="POST" action="/saler/upload" id="uploadForm" enctype="multipart/form-data">
                 <input type="file" name="file"/>
                 <button type="submit">Upload</button>
             </form>
@@ -135,24 +142,54 @@
             </c:if>
 
             <c:if test="${not empty products}">
-                <table>
-                    <tr>
-                        <th>Product ID</th>
-                        <th>Product Name</th>
-                        <th>Quantity</th>
-                    </tr>
-                    <c:forEach var="product" items="${products}">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover table-bordered">
                         <tr>
-                            <td><c:out value="${product.productId}"/></td>
-                            <td><c:out value="${product.productName}"/></td>
-                            <td><c:out value="${product.productQuantity}"/></td>
+                            <th>Product ID</th>
+                            <th>Product Name</th>
+                            <th>Quantity</th>
                         </tr>
+                        <c:forEach var="product" items="${products}">
+                            <tr>
+                                <td><c:out value="${product.productId}"/></td>
+                                <td><c:out value="${product.productName}"/></td>
+                                <td><c:out value="${product.productQuantity}"/></td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </div>
+
+                <form method="POST" action="/saler/updateWithStockIn" id="updateForm">
+                    <c:forEach var="product" items="${products}" varStatus="status">
+                        <input type="hidden" name="updates[${status.index}].productId" value="${product.productId}" />
+                        <input type="hidden" name="updates[${status.index}].quantity" value="${product.productQuantity}" />
                     </c:forEach>
-                </table>
+                    <button type="submit">Update Quantities</button>
+                </form>
+                <c:if test="${not empty message}">
+                    <div class="alert alert-success">${message}</div>
+                </c:if>
+                <c:if test="${not empty error}">
+                    <div class="alert alert-danger">${error}</div>
+                </c:if>
             </c:if>
         </div>
     </div>
 </div>
+<script>
+    // JavaScript để xử lý thông báo thành công hoặc thất bại và redirect
+    var message = "${message}";
+    var error = "${error}";
+
+    if (message) {
+        alert(message);
+        window.location.href = "/saler/productList";
+    }
+
+    if (error) {
+        alert(error);
+    }
+</script>
 <script type="text/javascript" src="<c:url value="/template/admin/assets/libs/jquery/dist/jquery.min.js"/>"></script>
 <script type="text/javascript"
         src="<c:url value="/template/admin/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"/>"></script>
