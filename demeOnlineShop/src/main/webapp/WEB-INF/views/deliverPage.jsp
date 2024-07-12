@@ -128,36 +128,40 @@
         </thead>
         <tbody>
         <c:forEach items="${orders}" var="order">
-            <c:if test="${order.status eq 'DELIVERING'}">
-                <tr>
-                    <td>${order.id}</td>
-                    <td>${order.orderDate}</td>
-                    <td>${order.status}</td>
-                    <td>${order.address}</td>
-                    <td>${order.name}</td>
-                    <td>${order.phone}</td>
-                    <td>
-                        <ul>
-                            <c:forEach items="${order.orderItems}" var="item">
-                                <li>${item.product.productName} - Quantity: ${item.quantity}</li>
-                            </c:forEach>
-                        </ul>
-                    </td>
-                    <td>
-                        <form action="/deliver/updateOrderStatus" method="post">
-                            <input type="hidden" name="orderId" value="${order.id}"/>
-                            <input type="hidden" name="orderItemId" value="${item.id}"/>
-                            <input type="hidden" name="quantity" value="${item.quantity}"/>
+
+            <tr>
+                <td>${order.id}</td>
+                <td>${order.orderDate}</td>
+                <td>${order.status}</td>
+                <td>${order.address}</td>
+                <td>${order.name}</td>
+                <td>${order.phone}</td>
+                <td>
+                    <ul>
+                        <c:forEach items="${order.orderItems}" var="item">
+                            <li>${item.product.productName} - Quantity: ${item.quantity}</li>
+                        </c:forEach>
+                    </ul>
+                </td>
+                <td>
+                    <form action="/deliver/updateOrderStatus" method="post">
+                        <input type="hidden" name="orderId" value="${order.id}"/>
+                        <input type="hidden" name="orderItemId" value="${item.id}"/>
+                        <input type="hidden" name="quantity" value="${item.quantity}"/>
+                        <c:if test="${order.status eq 'DELIVERING'}">
                             <select name="status">
                                 <option value="DELIVERING">Delivering</option>
                                 <option value="DELIVERED">Delivered</option>
                                 <option value="CANCELLED">Cancelled</option>
                             </select>
                             <input type="submit" value="Update"/>
-                        </form>
-                    </td>
-                </tr>
-            </c:if>
+                        </c:if>
+                        <c:if test="${order.status != 'DELIVERING'}">
+                            Status cannot be updated
+                        </c:if>
+                    </form>
+                </td>
+            </tr>
         </c:forEach>
         </tbody>
     </table>

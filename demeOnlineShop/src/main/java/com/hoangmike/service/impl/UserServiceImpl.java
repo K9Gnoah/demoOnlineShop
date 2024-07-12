@@ -141,6 +141,11 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public List<User> getUsersByRoleName(String roleName) {
+        return userRepository.findUsersByRoleName(roleName);
+    }
+
     private UserDTO mapToUserDto(User user) {
         UserDTO userDTO = new UserDTO();
         String[] str = user.getUsername().split(" ");

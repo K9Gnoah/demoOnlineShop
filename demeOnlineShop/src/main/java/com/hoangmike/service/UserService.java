@@ -19,4 +19,5 @@ public interface UserService {
     public User findUserByEmail(String email);
     void saveUser(UserDTO userDto);
     UserResponse changePassword(String Id, ChangePasswordRequest request);
+    public List<User> getUsersByRoleName(String roleName);
 }

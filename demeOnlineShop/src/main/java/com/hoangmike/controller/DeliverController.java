@@ -29,7 +29,7 @@ public class DeliverController {
     public String listorder(Model model){
         User currentUser = CustomUserDetailsService.getCurrentUserEntity();
         model.addAttribute("user", currentUser);
-        model.addAttribute("orders", orderService.getAllOrders());
+        model.addAttribute("orders", orderService.getOrdersByDeliveryPersonId(currentUser.getId()));
         return "deliverPage";
     }
     @PostMapping("/updateOrderStatus")

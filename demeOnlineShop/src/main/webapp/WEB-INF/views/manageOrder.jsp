@@ -19,8 +19,36 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="<c:url value='/template/homepage/css/style.css' />"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .table-wrapper {
+            margin: 20px 0;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .table thead th {
+            background-color: #f8f9fa;
+            border-bottom: 2px solid #dee2e6;
+        }
+
+        .table tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .form-inline {
+            display: flex;
+            align-items: center;
+        }
+
+        .form-inline select, .form-inline input[type="submit"] {
+            margin: 0 5px;
+        }
+    </style>
+
     <script>
-        $(document).ready(function(){
+        $(document).ready(function () {
             var successMessage = "${successMessage}";
             var errorMessage = "${errorMessage}";
             if (successMessage) {
@@ -103,61 +131,71 @@
     </aside>
     <div class="container-fluid">
         <div class="container mt-4">
-        <div class="table-responsive">
-            <table class="table table-striped table-hover table-bordered">
-                <thead>
-                <tr>
-                    <th>Order ID</th>
-                    <th>Date</th>
-                    <th>Status</th>
-                    <th>Address</th>
-                    <th>Name</th>
-                    <th>Phone</th>
-                    <th>Items</th>
-                    <th>Update Status</th>
-                </tr>
-                </thead>
-                <tbody>
-                <c:forEach items="${orders}" var="order">
-                    <tr>
-                        <td>${order.id}</td>
-                        <td>${order.orderDate}</td>
-                        <td>${order.status}</td>
-                        <td>${order.address}</td>
-                        <td>${order.name}</td>
-                        <td>${order.phone}</td>
-                        <td>
-                            <ul>
-                                <c:forEach items="${order.orderItems}" var="item">
-                                    <li>${item.product.productName} - Quantity: ${item.quantity}</li>
-                                </c:forEach>
-                            </ul>
-                        </td>
-                        <td>
-                            <c:if test="${order.status == 'PENDING'}">
-                                <form action="/saler/updateOrderStatus" method="post">
-                                    <input type="hidden" name="orderId" value="${order.id}"/>
-                                    <input type="hidden" name="orderItemId" value="${item.id}"/>
-                                    <input type="hidden" name="quantity" value="${item.quantity}"/>
-                                    <select name="status">
-                                        <option value="PENDING">Pending</option>
-                                        <option value="DELIVERING">Delivering</option>
-                                    </select>
-                                    <input type="submit" value="Update"/>
-                                </form>
-                            </c:if>
-                            <c:if test="${order.status != 'PENDING'}">
-                                Status cannot be updated
-                            </c:if>
-                        </td>
-                    </tr>
-                </c:forEach>
-                </tbody>
-            </table>
-        </div>
+            <div class="table-wrapper">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Address</th>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Items</th>
+                            <th>Update Status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach items="${orders}" var="order">
+                            <tr>
+                                <td>${order.id}</td>
+                                <td>${order.orderDate}</td>
+                                <td>${order.status}</td>
+                                <td>${order.address}</td>
+                                <td>${order.name}</td>
+                                <td>${order.phone}</td>
+                                <td>
+                                    <ul>
+                                        <c:forEach items="${order.orderItems}" var="item">
+                                            <li>${item.product.productName} - Quantity: ${item.quantity}</li>
+                                        </c:forEach>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <c:if test="${order.status == 'PENDING'}">
+                                        <form action="/saler/updateOrderStatus" method="post" class="form-inline">
+                                            <input type="hidden" name="orderId" value="${order.id}"/>
+                                            <input type="hidden" name="orderItemId" value="${item.id}"/>
+                                            <input type="hidden" name="quantity" value="${item.quantity}"/>
+                                            <select name="status" class="form-control">
+                                                <option value="PENDING">Pending</option>
+                                                <option value="DELIVERING">Delivering</option>
+                                            </select>
+                                            <select name="deliveryPersonId" class="form-control">
+                                                <c:forEach items="${listDeliveryPerson}" var="deliverer">
+                                                    <option value="${deliverer.id}">${deliverer.username}</option>
+                                                </c:forEach>
+                                            </select>
+                                            <input type="submit" value="Update" class="btn btn-primary"/>
+                                        </form>
+                                    </c:if>
+                                    <c:if test="${order.status != 'PENDING'}">
+                                        Status cannot be updated
+                                    </c:if>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script type="text/javascript"
         src="<c:url value="/template/admin/assets/libs/jquery/dist/jquery.min.js"/>"></script>
 <script type="text/javascript"

@@ -9,7 +9,10 @@ import com.hoangmike.repository.ProductRepository;
 import com.hoangmike.service.CustomUserDetailsService;
 import com.hoangmike.service.FileService;
 import com.hoangmike.service.OrderService;
+import com.hoangmike.service.impl.UserServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,6 +37,8 @@ public class SalerController {
     OrderService orderService;
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    private UserServiceImpl userService;
 
     @GetMapping("/stockIn")
     public String salerPage() {
@@ -79,23 +84,47 @@ public class SalerController {
         User currentUser = CustomUserDetailsService.getCurrentUserEntity();
         model.addAttribute("user", currentUser);
         model.addAttribute("orders", orderService.getAllOrdersSortedByDate());
+        model.addAttribute("listDeliveryPerson", userService.getUsersByRoleName("ROLE_DELIVER"));
         return "manageOrder";
     }
 
+//    @PostMapping("/updateOrderStatus")
+//    public String updateOrderStatus(@RequestParam("orderId") Long orderId, @RequestParam("status") String status, @RequestParam("deliveryPersonId") String deliveryPersonId
+//            ,RedirectAttributes redirectAttributes) {
+//        try {
+//            OrderStatus orderStatus = OrderStatus.valueOf(status.toUpperCase());
+//            orderService.updateOrderStatus(orderId, orderStatus, Long.valueOf(deliveryPersonId));
+//            redirectAttributes.addFlashAttribute("successMessage", "Order status updated successfully!");
+//        } catch (IllegalArgumentException e) {
+//            redirectAttributes.addFlashAttribute("errorMessage", "Invalid order status provided.");
+//        } catch (AppException e) {
+//            redirectAttributes.addFlashAttribute("errorMessage", "Insufficient product quantity for order.");
+//        } catch (Exception e) {
+//            redirectAttributes.addFlashAttribute("errorMessage", "Could not update order status.");
+//        }
+//        return "redirect:/saler/manageOrder";
+//    }
+
+    private static final Logger logger = LoggerFactory.getLogger(SalerController.class);
+
+
     @PostMapping("/updateOrderStatus")
-    public String updateOrderStatus(@RequestParam("orderId") Long orderId, @RequestParam("status") String status, RedirectAttributes redirectAttributes) {
+    public String updateOrderStatus(@RequestParam("orderId") Long orderId, @RequestParam("status") String status, @RequestParam("deliveryPersonId") String deliveryPersonId, RedirectAttributes redirectAttributes) {
         try {
+            logger.info("Updating order status for orderId: {}, status: {}, deliveryPersonId: {}", orderId, status, deliveryPersonId);
             OrderStatus orderStatus = OrderStatus.valueOf(status.toUpperCase());
-            orderService.updateOrderStatus(orderId, orderStatus);
+            orderService.updateOrderStatus(orderId, orderStatus, Long.valueOf(deliveryPersonId));
             redirectAttributes.addFlashAttribute("successMessage", "Order status updated successfully!");
         } catch (IllegalArgumentException e) {
+            logger.error("Invalid argument provided", e);
             redirectAttributes.addFlashAttribute("errorMessage", "Invalid order status provided.");
         } catch (AppException e) {
+            logger.error("Application exception occurred", e);
             redirectAttributes.addFlashAttribute("errorMessage", "Insufficient product quantity for order.");
         } catch (Exception e) {
+            logger.error("Could not update order status", e);
             redirectAttributes.addFlashAttribute("errorMessage", "Could not update order status.");
         }
         return "redirect:/saler/manageOrder";
     }
-
 }

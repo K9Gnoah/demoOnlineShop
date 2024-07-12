@@ -6,6 +6,7 @@ import com.hoangmike.exception.ErrorCode;
 import com.hoangmike.repository.CartRepository;
 import com.hoangmike.repository.OrderRepository;
 import com.hoangmike.repository.ProductRepository;
+import com.hoangmike.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,12 @@ public class OrderService {
 
     @Autowired
     private CartRepository cartRepository;
+    @Autowired
+    private UserRepository userRepository;
+
+    public List<Order> getOrdersByDeliveryPersonId(Long deliveryPersonId) {
+        return orderRepository.findOrdersByDeliveryPersonIdOrderByOrderDateDesc(deliveryPersonId);
+    }
 
     public List<Order> getAllOrders() {
         List<Order> orders = orderRepository.findAll();
@@ -83,8 +90,32 @@ public class OrderService {
         cartRepository.save(cart);
     }
 
-    public void updateOrderStatus(Long orderId, OrderStatus status) {
-        Order order = orderRepository.findById(orderId).orElseThrow(() -> new RuntimeException("Order not found"));
+//    public void updateOrderStatus(Long orderId, OrderStatus status) {
+//        Order order = orderRepository.findById(orderId).orElseThrow(() -> new RuntimeException("Order not found"));
+//        if (status == OrderStatus.DELIVERING && order.getStatus() == OrderStatus.PENDING) {
+//            for (OrderItem item : order.getOrderItems()) {
+//                Product product = item.getProduct();
+//                int newQuantity = product.getProductQuantity() - item.getQuantity();
+//                if (newQuantity < 0) {
+//                    throw new AppException(ErrorCode.PRODUCT_QUANTITY_EXCEED);
+//                }
+//
+//            }
+//            for (OrderItem item : order.getOrderItems()) {
+//                Product product = item.getProduct();
+//                int newQuantity = product.getProductQuantity() - item.getQuantity();
+//                product.setProductQuantity(newQuantity);
+//                productRepository.save(product);
+//            }
+//            order.setStatus(status);
+//            orderRepository.save(order);
+//        }
+//    }
+
+    public void updateOrderStatus(Long orderId, OrderStatus status, Long deliveryPersonId) {
+        Order order = orderRepository.findById(orderId).orElseThrow(() -> new AppException(ErrorCode.ORDER_NOT_FOUND));
+        User deliveryPerson = userRepository.findById(String.valueOf(deliveryPersonId)).orElseThrow(() -> new AppException(ErrorCode.DELIVERY_PERSON_NOT_FOUND));
+
         if (status == OrderStatus.DELIVERING && order.getStatus() == OrderStatus.PENDING) {
             for (OrderItem item : order.getOrderItems()) {
                 Product product = item.getProduct();
@@ -101,6 +132,7 @@ public class OrderService {
                 productRepository.save(product);
             }
             order.setStatus(status);
+            order.setDeliveryPerson(deliveryPerson);
             orderRepository.save(order);
         }
     }
@@ -109,6 +141,6 @@ public class OrderService {
         return productRepository.getProductsStatistics();
     }
 
-    
+
 
 }

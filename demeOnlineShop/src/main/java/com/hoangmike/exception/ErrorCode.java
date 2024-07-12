@@ -13,6 +13,8 @@ public enum ErrorCode {
     PASSWORD_INCORRCECT(1009, "Password is incorrect"),
     PASSWORD_INVALID(1010, "New password must be different from the old password"),
     PRODUCT_QUANTITY_EXCEED(1011, "Not enough stock for product"),
+    ORDER_NOT_FOUND(1012, "Order not found"),
+    DELIVERY_PERSON_NOT_FOUND(1013, "Delivery person not found"),
     ;
 
     ErrorCode(int code, String message) {

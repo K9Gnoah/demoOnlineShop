@@ -121,8 +121,40 @@
     <h1>${user.password}!</h1>
     <h1>${user.username}!</h1>
     <h1>${user.address}!</h1>
-    <h1>${user.avatar}!</h1>
+    <form id="uploadForm" enctype="multipart/form-data">
+        <input type="file" id="file" name="file" required/>
+        <button type="submit">Upload</button>
+    </form>
+    Avatar : <p><img src="${user.avatar}" alt="User avatar" width="200"/></p>
     <h1>${user.phone}!</h1>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const uploadForm = document.getElementById('uploadForm');
+        if (uploadForm) {
+            uploadForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const fileInput = document.getElementById('file');
+                const formData = new FormData();
+                formData.append('file', fileInput.files[0]);
+
+                fetch('/api/files/upload', {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(response => response.text())
+                    .then(data => {
+                        alert(data);
+                        location.reload(); // Reload page to update the avatar image
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Failed to upload file.');
+                    });
+            });
+        }
+    });
+</script>
 <script type="text/javascript" src="<c:url value="/template/homepage/js/jquery.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/template/homepage/js/jquery-migrate-3.0.1.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/template/homepage/js/popper.min.js"/>"></script>
@@ -136,8 +168,7 @@
 <script type="text/javascript" src="<c:url value="/template/homepage/js/jquery.animateNumber.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/template/homepage/js/bootstrap-datepicker.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/template/homepage/js/scrollax.min.js"/>"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"/>
-"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"/></script>
 <script type="text/javascript" src="<c:url value="/template/homepage/js/google-map.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/template/homepage/js/main.js"/>"></script>
 </body>

@@ -42,6 +42,7 @@ public class SecurityConfig {
                                 .requestMatchers("/marketer/**").hasRole("MARKETERS")
                                 .requestMatchers("/user/**").authenticated()
                                 .requestMatchers("/common/**").permitAll()
+                                .requestMatchers("/api/**").permitAll()
                                 .anyRequest().permitAll()
                 ).formLogin(
                         form -> form
