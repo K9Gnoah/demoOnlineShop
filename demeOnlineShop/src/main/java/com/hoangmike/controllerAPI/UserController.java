@@ -1,6 +1,6 @@
 package com.hoangmike.controllerAPI;
 
-import com.hoangmike.dto.request.ApiResponse;
+import com.hoangmike.dto.response.ApiResponse;
 import com.hoangmike.dto.request.ChangePasswordRequest;
 import com.hoangmike.dto.request.UserCreationRequest;
 import com.hoangmike.dto.response.UserResponse;
@@ -9,7 +9,6 @@ import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 

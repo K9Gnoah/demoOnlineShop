@@ -57,7 +57,7 @@
 </div>
 <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
     <div class="container">
-        <a class="navbar-brand" href="/home">Vegefoods</a>
+        <a class="navbar-brand" href="/common/home">Vegefoods</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
                 aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="oi oi-menu"></span> Menu
@@ -65,8 +65,8 @@
 
         <div class="collapse navbar-collapse" id="ftco-nav">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active"><a href="home" class="nav-link">Home</a></li>
-                <li class="nav-item dropdown">
+                <li class="nav-item"><a href="/common/home" class="nav-link">Home</a></li>
+                <li class="nav-item active dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">Shop</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown04">
@@ -80,40 +80,40 @@
                 <li class="nav-item"><a href="/common/aboutPage" class="nav-link">About</a></li>
                 <li class="nav-item"><a href="/common/blog" class="nav-link">Blog</a></li>
                 <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-                <li class="nav-item cta cta-colored"><a href="customer/cart" class="nav-link"><span id="cart-count"
-                                                                                                    class="icon-shopping_cart"></span></a>
-                </li>
-                <%--                info--%>
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2"
-                       data-bs-toggle="dropdown"
-                       aria-expanded="false">
-                        <img src="<c:url value="/template/admin/assets/images/profile/user-1.jpg"/>" alt=""
-                             width="35" height="35" class="rounded-circle">
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"
-                         aria-labelledby="drop2">
-                        <div class="message-body">
-                            <a href="/user/profile" class="d-flex align-items-center gap-2 dropdown-item">
-                                <i class="ti ti-user fs-6"></i>
-                                <p class="mb-0 fs-3">My Profile</p>
-                            </a>
-                            <a href="/user/changepass" class="d-flex align-items-center gap-2 dropdown-item">
-                                <i class="ti ti-mail fs-6"></i>
-                                <p class="mb-0 fs-3">Change Password</p>
-                            </a>
-                            <a href="/customer/myOrder" class="d-flex align-items-center gap-2 dropdown-item">
-                                <i class="ti ti-list-check fs-6"></i>
-                                <p class="mb-0 fs-3">My Order</p>
-                            </a>
-                            <a href="./logout"
-                               class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
-                        </div>
-                    </div>
+                <li class="nav-item cta cta-colored"><a href="/customer/cart" class="nav-link"><span id="cart-count"
+                                                                                                     class="icon-shopping_cart"></span></a>
                 </li>
             </ul>
         </div>
+        <a class="navbar-brand"> Hello ${user.username}</a>
+        <div class="nav-item dropdown">
+            <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2"
+               data-bs-toggle="dropdown"
+               aria-expanded="false">
+                <img src="${user.avatar}" alt=""
+                     width="35" height="35" class="rounded-circle">
+            </a>
+            <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"
+                 aria-labelledby="drop2">
+                <div class="message-body">
+                    <a href="/user/profile" class="d-flex align-items-center gap-2 dropdown-item">
+                        <i class="ti ti-user fs-6"></i>
+                        <p class="mb-0 fs-3">My Profile</p>
+                    </a>
+                    <a href="/user/changepass/${user.id}" class="d-flex align-items-center gap-2 dropdown-item">
+                        <i class="ti ti-mail fs-6"></i>
+                        <p class="mb-0 fs-3">Change Password</p>
+                    </a>
+                    <a href="/customer/myOrder" class="d-flex align-items-center gap-2 dropdown-item">
+                        <i class="ti ti-list-check fs-6"></i>
+                        <p class="mb-0 fs-3">My Order</p>
+                    </a>
+                    <a href="/logout"
+                       class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
+                </div>
+            </div>
+        </div>
+
     </div>
 </nav>
 <!-- END nav -->

@@ -22,11 +22,6 @@ public class AuthController {
         this.userServiceImpl = userServiceImpl;
     }
 
-    @GetMapping("/home")
-    public String home(Model model) {
-        return "homepage";
-    }
-
     //handler method to handle user registration form submit request
     @PostMapping("/register/save")
     public String registration(@Valid @ModelAttribute("user") UserDTO userDto,

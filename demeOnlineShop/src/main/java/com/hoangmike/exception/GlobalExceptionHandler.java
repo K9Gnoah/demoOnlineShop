@@ -1,6 +1,6 @@
 package com.hoangmike.exception;
 
-import com.hoangmike.dto.request.ApiResponse;
+import com.hoangmike.dto.response.ApiResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;

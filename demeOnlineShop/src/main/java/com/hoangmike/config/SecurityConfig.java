@@ -7,11 +7,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
@@ -19,6 +21,11 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfig {
     @Autowired
     private UserDetailsService userDetailsService;
+
+    @Bean
+    public JwtAuthenticationFilter jwtAuthenticationFilter() {
+        return new JwtAuthenticationFilter();
+    }
 
     @Bean
     public static PasswordEncoder passwordEncoder() {
@@ -31,18 +38,18 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http, MarketerController marketerController) throws Exception {
-        http.csrf().disable()
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
                 .csrf().disable()
                 .authorizeHttpRequests((authorize) ->
-                        authorize.requestMatchers("/adminDashBoard").hasRole("ADMIN")
+                        authorize.requestMatchers("/common/**").permitAll()
+                                .requestMatchers("/api/**").permitAll()
+                                .requestMatchers("/adminDashBoard").hasRole("ADMIN")
                                 .requestMatchers("/customer/**").hasRole("CUSTOMER")
                                 .requestMatchers("/deliver/**").hasRole("DELIVER")
                                 .requestMatchers("/saler/**").hasRole("SALER")
                                 .requestMatchers("/marketer/**").hasRole("MARKETERS")
                                 .requestMatchers("/user/**").authenticated()
-                                .requestMatchers("/common/**").permitAll()
-                                .requestMatchers("/api/**").permitAll()
                                 .anyRequest().permitAll()
                 ).formLogin(
                         form -> form

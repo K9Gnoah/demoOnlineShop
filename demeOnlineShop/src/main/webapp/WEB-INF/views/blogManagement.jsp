@@ -7,12 +7,14 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html>
 <head>
     <title>Blog Management</title>
     <link rel="shortcut icon" type="image/png" href="<c:url value='/template/admin/assets/images/logos/favicon.png'/>"/>
     <link rel="stylesheet" href="<c:url value='/template/admin/assets/css/styles.min.css' />"/>
 </head>
+<body>
 <!--  Body Wrapper -->
 <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
      data-sidebar-position="fixed" data-header-position="fixed">
@@ -43,14 +45,14 @@
                             <span class="hide-menu">Blog Management</span>
                         </a>
                     </li>
-<%--                    <li class="sidebar-item">--%>
-<%--                        <a class="sidebar-link" href="./salerPage" aria-expanded="false">--%>
-<%--                <span>--%>
-<%--                  <i class="ti ti-article"></i>--%>
-<%--                </span>--%>
-<%--                            <span class="hide-menu">Stock In</span>--%>
-<%--                        </a>--%>
-<%--                    </li>--%>
+                    <%--                    <li class="sidebar-item">--%>
+                    <%--                        <a class="sidebar-link" href="./salerPage" aria-expanded="false">--%>
+                    <%--                <span>--%>
+                    <%--                  <i class="ti ti-article"></i>--%>
+                    <%--                </span>--%>
+                    <%--                            <span class="hide-menu">Stock In</span>--%>
+                    <%--                        </a>--%>
+                    <%--                    </li>--%>
                     <li class="nav-small-cap">
                         <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                         <span class="hide-menu">AUTH</span>
@@ -91,6 +93,7 @@
                     </li>
                 </ul>
                 <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
+                    <a class="navbar-brand"> Hello ${user.username}</a>
                     <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
                         <li class="nav-item dropdown">
                             <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2"
@@ -125,14 +128,119 @@
         <!--  Header End -->
 
         <div class="container-fluid">
+            <div class="container mt-4">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Content</th>
+                            <th>Image</th>
+                            <th>Create At</th>
+                            <th>Update At</th>
+                            <th>Status</th>
+                            <th>Views</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach var="blog" items="${blogs}">
+                            <tr>
+                                <td>${blog.id}</td>
+                                <td>${blog.title}</td>
+                                <td>${blog.content}</td>
+                                <td><img src="${blog.image}" class="img-fluid" style="max-width: 100px;"></td>
+                                <td>${blog.createAt}</td>
+                                <td>${blog.updateAt}</td>
+                                <td>${blog.status}</td>
+                                <td>${blog.views}</td>
+                                <td>
+                                    <a href="/marketer/updateBlog/${blog.id}" class="btn btn-primary mb-2">Update</a>
+                                    <button class="deleteblog btn btn-danger" data-id="${blog.id}">Delete
+                                    </button>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
+            <form id="createBlogForm">
+                <div class="form-group">
+                    <label for="title">Title:</label>
+                    <input type="text" id="title" name="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="content">Content:</label>
+                    <textarea id="content" name="content" required></textarea>
+                </div>
+                <button id="createblog" name="createblog" class="btn btn-primary">Create Blog</button>
+            </form>
         </div>
-        <script type="text/javascript" src="<c:url value="/template/admin/assets/libs/jquery/dist/jquery.min.js"/>"></script>
-        <script type="text/javascript"
-                src="<c:url value="/template/admin/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/template/admin/assets/js/sidebarmenu.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/template/admin/assets/js/app.min.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/template/admin/assets/libs/simplebar/dist/simplebar.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/template/admin/assets/js/dashboard.js"/>"></script>
+    </div>
+</div>
+
+<script type="text/javascript" src="<c:url value="/template/admin/assets/libs/jquery/dist/jquery.min.js"/>"></script>
+<script type="text/javascript"
+        src="<c:url value="/template/admin/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/template/admin/assets/js/sidebarmenu.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/template/admin/assets/js/app.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/template/admin/assets/libs/simplebar/dist/simplebar.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/template/admin/assets/js/dashboard.js"/>"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".deleteblog").click(function (event) {
+            event.preventDefault();
+
+            var id = $(this).data("id");
+            // Hiển thị hộp thoại xác nhận
+            var confirmation = confirm("Are you sure you want to delete this blog ?");
+            if(confirmation) {
+                $.ajax({
+                    url:"/api/blogs/" + id,
+                    type: "DELETE",
+                    success: function (result) {
+                        alert(result);
+                        location.reload();
+                    },
+                    error: function(e){
+                        console.log(e);
+                        alert("Error: " + e.responseText);
+                    }
+                });
+            } else{
+                alert("Delete blog canceled");
+            }
+        });
+
+        $("#createblog").click(function (event) {
+            event.preventDefault();
+
+            var formData = {
+                author: "${user.username}",
+                title: $("#title").val(),
+                content: $("#content").val()
+            };
+
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                url: "/api/blogs",
+                data: JSON.stringify(formData),
+                dataType: 'json',
+                success: function (result) {
+                    console.log("Blog created successfully:", result);
+                    alert("Blog created successfully");
+                },
+                error: function (e) {
+                    console.log("Error creating blog:", e);
+                    alert("Error: " + e.responseText);
+                }
+            });
+        });
+    });
+</script>
 </body>
 </html>

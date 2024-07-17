@@ -28,6 +28,46 @@
     <link rel="stylesheet" href="<c:url value='/template/homepage/css/flaticon.css' />"/>
     <link rel="stylesheet" href="<c:url value='/template/homepage/css/icomoon.css' />"/>
     <link rel="stylesheet" href="<c:url value='/template/homepage/css/style.css' />"/>
+
+    <style>
+        .profile-header {
+            background: #f8f9fa;
+            padding: 30px 0;
+        }
+        .profile-header .profile-info {
+            text-align: center;
+        }
+        .profile-header .profile-info img {
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+        .profile-header .profile-info h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .profile-header .profile-info p {
+            font-size: 16px;
+        }
+        .profile-content {
+            padding: 30px 0;
+        }
+        .profile-content .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .profile-content .card .card-body {
+            padding: 20px;
+        }
+        .profile-content .card .card-body h5 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .profile-content .card .card-body p {
+            font-size: 16px;
+            margin-bottom: 0;
+        }
+    </style>
 </head>
 <body class="goto-here">
 <div class="py-1 bg-primary">
@@ -46,7 +86,7 @@
                         <span class="text">youremail@email.com</span>
                     </div>
                     <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
-                        <span class="text">3-5 Business days delivery &amp; Free Returns</span>
+                        <span class="text">3-5 Business days delivery & Free Returns</span>
                     </div>
                 </div>
             </div>
@@ -63,7 +103,7 @@
 
         <div class="collapse navbar-collapse" id="ftco-nav">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><a href="/home" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="/common/home" class="nav-link">Home</a></li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">Shop</a>
@@ -79,15 +119,11 @@
                 <li class="nav-item"><a href="/common/blog" class="nav-link">Blog</a></li>
                 <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
                 <li class="nav-item cta cta-colored"><a href="/customer/cart" class="nav-link"><span id="cart-count"
-                                                                                                     class="icon-shopping_cart"></span></a>
-                </li>
-                <%--                info--%>
-
+                                                                                                     class="icon-shopping_cart"></span></a></li>
                 <li class="nav-item dropdown">
                     <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2"
-                       data-bs-toggle="dropdown"
-                       aria-expanded="false">
-                        <img src="<c:url value="/template/admin/assets/images/profile/user-1.jpg"/>" alt=""
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="${user.avatar}" alt=""
                              width="35" height="35" class="rounded-circle">
                     </a>
                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"
@@ -97,16 +133,15 @@
                                 <i class="ti ti-user fs-6"></i>
                                 <p class="mb-0 fs-3">My Profile</p>
                             </a>
-                            <a href="/user" class="d-flex align-items-center gap-2 dropdown-item">
+                            <a href="/user/changepass" class="d-flex align-items-center gap-2 dropdown-item">
                                 <i class="ti ti-mail fs-6"></i>
-                                <p class="mb-0 fs-3">My Account</p>
+                                <p class="mb-0 fs-3">Change Password</p>
                             </a>
                             <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
                                 <i class="ti ti-list-check fs-6"></i>
                                 <p class="mb-0 fs-3">My Task</p>
                             </a>
-                            <a href="/logout"
-                               class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
+                            <a href="/logout" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
                         </div>
                     </div>
                 </li>
@@ -116,17 +151,48 @@
 </nav>
 <!-- END nav -->
 
-    <h1>${user.id}!</h1>
-    <h1>${user.email}!</h1>
-    <h1>${user.password}!</h1>
-    <h1>${user.username}!</h1>
-    <h1>${user.address}!</h1>
-    <form id="uploadForm" enctype="multipart/form-data">
-        <input type="file" id="file" name="file" required/>
-        <button type="submit">Upload</button>
-    </form>
-    Avatar : <p><img src="${user.avatar}" alt="User avatar" width="200"/></p>
-    <h1>${user.phone}!</h1>
+<div class="profile-header">
+    <div class="container">
+        <div class="profile-info">
+            <img src="${user.avatar}" alt="User avatar" width="150" height="150">
+            <h1>${user.username}</h1>
+            <p>${user.email}</p>
+            <p>${user.phone}</p>
+        </div>
+    </div>
+</div>
+
+<div class="profile-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="card">
+                    <div class="card-body">
+                        <h5>User Details</h5>
+                        <p><strong>ID:</strong> ${user.id}</p>
+                        <p><strong>Email:</strong> ${user.email}</p>
+                        <p><strong>Password:</strong> ${user.password}</p>
+                        <p><strong>Address:</strong> ${user.address}</p>
+                        <p><strong>Username:</strong> ${user.username}</p>
+                        <p><strong>Phone:</strong> ${user.phone}</p>
+                    </div>
+                </div>
+                <div class="card mt-4">
+                    <div class="card-body">
+                        <h5>Upload Avatar</h5>
+                        <form id="uploadForm" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <input type="file" id="file" name="file" class="form-control" required/>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Upload</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const uploadForm = document.getElementById('uploadForm');
@@ -155,21 +221,21 @@
         }
     });
 </script>
-<script type="text/javascript" src="<c:url value="/template/homepage/js/jquery.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/template/homepage/js/jquery-migrate-3.0.1.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/template/homepage/js/popper.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/template/homepage/js/bootstrap.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/template/homepage/js/jquery.easing.1.3.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/template/homepage/js/jquery.waypoints.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/template/homepage/js/jquery.stellar.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/template/homepage/js/owl.carousel.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/template/homepage/js/jquery.magnific-popup.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/template/homepage/js/aos.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/template/homepage/js/jquery.animateNumber.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/template/homepage/js/bootstrap-datepicker.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/template/homepage/js/scrollax.min.js"/>"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"/></script>
-<script type="text/javascript" src="<c:url value="/template/homepage/js/google-map.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/template/homepage/js/main.js"/>"></script>
+<script type="text/javascript" src="<c:url value='/template/homepage/js/jquery.min.js'/>"></script>
+<script type="text/javascript" src="<c:url value='/template/homepage/js/jquery-migrate-3.0.1.min.js'/>"></script>
+<script type="text/javascript" src="<c:url value='/template/homepage/js/popper.min.js'/>"></script>
+<script type="text/javascript" src="<c:url value='/template/homepage/js/bootstrap.min.js'/>"></script>
+<script type="text/javascript" src="<c:url value='/template/homepage/js/jquery.easing.1.3.js'/>"></script>
+<script type="text/javascript" src="<c:url value='/template/homepage/js/jquery.waypoints.min.js'/>"></script>
+<script type="text/javascript" src="<c:url value='/template/homepage/js/jquery.stellar.min.js'/>"></script>
+<script type="text/javascript" src="<c:url value='/template/homepage/js/owl.carousel.min.js'/>"></script>
+<script type="text/javascript" src="<c:url value='/template/homepage/js/jquery.magnific-popup.min.js'/>"></script>
+<script type="text/javascript" src="<c:url value='/template/homepage/js/aos.js'/>"></script>
+<script type="text/javascript" src="<c:url value='/template/homepage/js/jquery.animateNumber.min.js'/>"></script>
+<script type="text/javascript" src="<c:url value='/template/homepage/js/bootstrap-datepicker.js'/>"></script>
+<script type="text/javascript" src="<c:url value='/template/homepage/js/scrollax.min.js'/>"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+<script type="text/javascript" src="<c:url value='/template/homepage/js/google-map.js'/>"></script>
+<script type="text/javascript" src="<c:url value='/template/homepage/js/main.js'/>"></script>
 </body>
 </html>

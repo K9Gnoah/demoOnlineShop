@@ -49,7 +49,7 @@
                                 <c:if test="${not empty message}">
                                     <div class="alert alert-success" >${message}</div>
                                 </c:if>
-                                <form id="login-form" method="post" action="${pageContext.request.contextPath}/login" role="form" style="display: block;">
+                                <form id="login-form" method="post" action="<c:url value='/login'/>" role="form" style="display: block;">
                                     <div class="form-group">
                                         <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="" required>
                                     </div>

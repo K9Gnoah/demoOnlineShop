@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: THINKPAD
-  Date: 7/2/2024
-  Time: 11:20 AM
+  Date: 7/16/2024
+  Time: 4:59 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -103,122 +103,151 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 ftco-animate">
-                <div class="row">
-                    <%--                    <div class="col-md-12 d-flex ftco-animate">--%>
-                    <%--                        <div class="blog-entry align-self-stretch d-md-flex">--%>
-                    <%--                            <a href="blog-single.html" class="block-20" style="background-image: url('<c:url value="/template/homepage/images/image_1.jpg"/>')">--%>
-                    <%--                            </a>--%>
-                    <%--                            <div class="text d-block pl-md-4">--%>
-                    <%--                                <div class="meta mb-3">--%>
-                    <%--                                    <div><a href="#">July 20, 2019</a></div>--%>
-                    <%--                                    <div><a href="#">Admin</a></div>--%>
-                    <%--                                    <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>--%>
-                    <%--                                </div>--%>
-                    <%--                                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>--%>
-                    <%--                                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>--%>
-                    <%--                                <p><a href="blog-single.html" class="btn btn-primary py-2 px-3">Read more</a></p>--%>
-                    <%--                            </div>--%>
-                    <%--                        </div>--%>
-                    <%--                    </div>--%>
-                    <%--                    <div class="col-md-12 d-flex ftco-animate">--%>
-                    <%--                        <div class="blog-entry align-self-stretch d-md-flex">--%>
-                    <%--                            <a href="blog-single.html" class="block-20" style="background-image: url('<c:url value="/template/homepage/images/image_2.jpg"/>')">--%>
-                    <%--                            </a>--%>
-                    <%--                            <div class="text d-block pl-md-4">--%>
-                    <%--                                <div class="meta mb-3">--%>
-                    <%--                                    <div><a href="#">July 20, 2019</a></div>--%>
-                    <%--                                    <div><a href="#">Admin</a></div>--%>
-                    <%--                                    <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>--%>
-                    <%--                                </div>--%>
-                    <%--                                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>--%>
-                    <%--                                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>--%>
-                    <%--                                <p><a href="blog-single.html" class="btn btn-primary py-2 px-3">Read more</a></p>--%>
-                    <%--                            </div>--%>
-                    <%--                        </div>--%>
-                    <%--                    </div>--%>
-                    <%--                    <div class="col-md-12 d-flex ftco-animate">--%>
-                    <%--                        <div class="blog-entry align-self-stretch d-md-flex">--%>
-                    <%--                            <a href="blog-single.html" class="block-20" style="background-image: url('<c:url value="/template/homepage/images/image_3.jpg"/>')">--%>
-                    <%--                            </a>--%>
-                    <%--                            <div class="text d-block pl-md-4">--%>
-                    <%--                                <div class="meta mb-3">--%>
-                    <%--                                    <div><a href="#">July 20, 2019</a></div>--%>
-                    <%--                                    <div><a href="#">Admin</a></div>--%>
-                    <%--                                    <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>--%>
-                    <%--                                </div>--%>
-                    <%--                                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>--%>
-                    <%--                                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>--%>
-                    <%--                                <p><a href="blog-single.html" class="btn btn-primary py-2 px-3">Read more</a></p>--%>
-                    <%--                            </div>--%>
-                    <%--                        </div>--%>
-                    <%--                    </div>--%>
-                    <%--                    <div class="col-md-12 d-flex ftco-animate">--%>
-                    <%--                        <div class="blog-entry align-self-stretch d-md-flex">--%>
-                    <%--                            <a href="blog-single.html" class="block-20" style="background-image: url('<c:url value="/template/homepage/images/image_4.jpg"/>')">--%>
-                    <%--                            </a>--%>
-                    <%--                            <div class="text d-block pl-md-4">--%>
-                    <%--                                <div class="meta mb-3">--%>
-                    <%--                                    <div><a href="#">July 20, 2019</a></div>--%>
-                    <%--                                    <div><a href="#">Admin</a></div>--%>
-                    <%--                                    <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>--%>
-                    <%--                                </div>--%>
-                    <%--                                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>--%>
-                    <%--                                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>--%>
-                    <%--                                <p><a href="blog-single.html" class="btn btn-primary py-2 px-3">Read more</a></p>--%>
-                    <%--                            </div>--%>
-                    <%--                        </div>--%>
-                    <%--                    </div>--%>
-                    <%--                    <div class="col-md-12 d-flex ftco-animate">--%>
-                    <%--                        <div class="blog-entry align-self-stretch d-md-flex">--%>
-                    <%--                            <a href="blog-single.html" class="block-20" style="background-image: url('<c:url value="/template/homepage/images/image_5.jpg"/>')">--%>
-                    <%--                            </a>--%>
-                    <%--                            <div class="text d-block pl-md-4">--%>
-                    <%--                                <div class="meta mb-3">--%>
-                    <%--                                    <div><a href="#">July 20, 2019</a></div>--%>
-                    <%--                                    <div><a href="#">Admin</a></div>--%>
-                    <%--                                    <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>--%>
-                    <%--                                </div>--%>
-                    <%--                                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>--%>
-                    <%--                                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>--%>
-                    <%--                                <p><a href="blog-single.html" class="btn btn-primary py-2 px-3">Read more</a></p>--%>
-                    <%--                            </div>--%>
-                    <%--                        </div>--%>
-                    <%--                    </div>--%>
-                    <%--                    <div class="col-md-12 d-flex ftco-animate">--%>
-                    <%--                        <div class="blog-entry align-self-stretch d-md-flex">--%>
-                    <%--                            <a href="blog-single.html" class="block-20" style="background-image: url('<c:url value="/template/homepage/images/image_6.jpg"/>')">--%>
-                    <%--                            </a>--%>
-                    <%--                            <div class="text d-block pl-md-4">--%>
-                    <%--                                <div class="meta mb-3">--%>
-                    <%--                                    <div><a href="#">July 20, 2019</a></div>--%>
-                    <%--                                    <div><a href="#">Admin</a></div>--%>
-                    <%--                                    <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>--%>
-                    <%--                                </div>--%>
-                    <%--                                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>--%>
-                    <%--                                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>--%>
-                    <%--                                <p><a href="blog-single.html" class="btn btn-primary py-2 px-3">Read more</a></p>--%>
-                    <%--                            </div>--%>
-                    <%--                        </div>--%>
-                    <%--                    </div>--%>
-                    <c:forEach var="i" items="${listBlog.content}">
-                        <div class="col-md-12 d-flex ftco-animate">
-                            <div class="blog-entry align-self-stretch d-md-flex">
-                                <a href="/common/blogDetails/${i.id}" class="block-20" style="background-image: url('<c:url
-                                        value="/template/homepage/images/image_2.jpg"/>')">
-                                </a>
-                                <div class="text d-block pl-md-4">
-                                    <div class="meta mb-3">
-                                        <div><a href="#">${i.formattedCreateAt}</a></div>
-                                        <div><a href="#">${i.author}</a></div>
-                                        <div><a href="#" class="meta-chat"><span class="icon-chat"></span> ${i.views}</a></div>
-                                    </div>
-                                    <h3 class="heading"><a href="/common/blogDetails/${i.id}">${i.title}</a></h3>
-                                    <p>${i.content}</p>
-                                    <p><a href="/common/blogDetails/${i.id}" class="btn btn-primary py-2 px-3">Read more</a></p>
-                                </div>
+                <h2 class="mb-3">${blog.title}</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, eius mollitia suscipit, quisquam doloremque distinctio perferendis et doloribus unde architecto optio laboriosam porro adipisci sapiente officiis nemo accusamus ad praesentium? Esse minima nisi et. Dolore perferendis, enim praesentium omnis, iste doloremque quia officia optio deserunt molestiae voluptates soluta architecto tempora.</p>
+                <p>
+                    <img src="images/image_1.jpg" alt="" class="img-fluid">
+                </p>
+                <p>Molestiae cupiditate inventore animi, maxime sapiente optio, illo est nemo veritatis repellat sunt doloribus nesciunt! Minima laborum magni reiciendis qui voluptate quisquam voluptatem soluta illo eum ullam incidunt rem assumenda eveniet eaque sequi deleniti tenetur dolore amet fugit perspiciatis ipsa, odit. Nesciunt dolor minima esse vero ut ea, repudiandae suscipit!</p>
+                <h2 class="mb-3 mt-5">${blog.content}</h2>
+                <p>Temporibus ad error suscipit exercitationem hic molestiae totam obcaecati rerum, eius aut, in. Exercitationem atque quidem tempora maiores ex architecto voluptatum aut officia doloremque. Error dolore voluptas, omnis molestias odio dignissimos culpa ex earum nisi consequatur quos odit quasi repellat qui officiis reiciendis incidunt hic non? Debitis commodi aut, adipisci.</p>
+                <p>
+                    <img src="images/image_2.jpg" alt="" class="img-fluid">
+                </p>
+                <p>Quisquam esse aliquam fuga distinctio, quidem delectus veritatis reiciendis. Nihil explicabo quod, est eos ipsum. Unde aut non tenetur tempore, nisi culpa voluptate maiores officiis quis vel ab consectetur suscipit veritatis nulla quos quia aspernatur perferendis, libero sint. Error, velit, porro. Deserunt minus, quibusdam iste enim veniam, modi rem maiores.</p>
+                <p>Odit voluptatibus, eveniet vel nihil cum ullam dolores laborum, quo velit commodi rerum eum quidem pariatur! Quia fuga iste tenetur, ipsa vel nisi in dolorum consequatur, veritatis porro explicabo soluta commodi libero voluptatem similique id quidem? Blanditiis voluptates aperiam non magni. Reprehenderit nobis odit inventore, quia laboriosam harum excepturi ea.</p>
+                <p>Adipisci vero culpa, eius nobis soluta. Dolore, maxime ullam ipsam quidem, dolor distinctio similique asperiores voluptas enim, exercitationem ratione aut adipisci modi quod quibusdam iusto, voluptates beatae iure nemo itaque laborum. Consequuntur et pariatur totam fuga eligendi vero dolorum provident. Voluptatibus, veritatis. Beatae numquam nam ab voluptatibus culpa, tenetur recusandae!</p>
+                <p>Voluptas dolores dignissimos dolorum temporibus, autem aliquam ducimus at officia adipisci quasi nemo a perspiciatis provident magni laboriosam repudiandae iure iusto commodi debitis est blanditiis alias laborum sint dolore. Dolores, iure, reprehenderit. Error provident, pariatur cupiditate soluta doloremque aut ratione. Harum voluptates mollitia illo minus praesentium, rerum ipsa debitis, inventore?</p>
+                <div class="tag-widget post-tag-container mb-5 mt-5">
+                    <div class="tagcloud">
+                        <a href="#" class="tag-cloud-link">Life</a>
+                        <a href="#" class="tag-cloud-link">Sport</a>
+                        <a href="#" class="tag-cloud-link">Tech</a>
+                        <a href="#" class="tag-cloud-link">Travel</a>
+                    </div>
+                </div>
+
+                <div class="about-author d-flex p-4 bg-light">
+                    <div class="bio align-self-md-center mr-4">
+                        <img src="images/person_1.jpg" alt="Image placeholder" class="img-fluid mb-4">
+                    </div>
+                    <div class="desc align-self-md-center">
+                        <h3>${blog.author}</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
+                    </div>
+                </div>
+
+
+                <div class="pt-5 mt-5">
+                    <h3 class="mb-5">6 Comments</h3>
+                    <ul class="comment-list">
+                        <li class="comment">
+                            <div class="vcard bio">
+                                <img src="images/person_1.jpg" alt="Image placeholder">
                             </div>
-                        </div>
-                    </c:forEach>
+                            <div class="comment-body">
+                                <h3>John Doe</h3>
+                                <div class="meta">June 27, 2018 at 2:21pm</div>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
+                                <p><a href="#" class="reply">Reply</a></p>
+                            </div>
+                        </li>
+
+                        <li class="comment">
+                            <div class="vcard bio">
+                                <img src="images/person_1.jpg" alt="Image placeholder">
+                            </div>
+                            <div class="comment-body">
+                                <h3>John Doe</h3>
+                                <div class="meta">June 27, 2018 at 2:21pm</div>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
+                                <p><a href="#" class="reply">Reply</a></p>
+                            </div>
+
+                            <ul class="children">
+                                <li class="comment">
+                                    <div class="vcard bio">
+                                        <img src="images/person_1.jpg" alt="Image placeholder">
+                                    </div>
+                                    <div class="comment-body">
+                                        <h3>John Doe</h3>
+                                        <div class="meta">June 27, 2018 at 2:21pm</div>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
+                                        <p><a href="#" class="reply">Reply</a></p>
+                                    </div>
+
+
+                                    <ul class="children">
+                                        <li class="comment">
+                                            <div class="vcard bio">
+                                                <img src="images/person_1.jpg" alt="Image placeholder">
+                                            </div>
+                                            <div class="comment-body">
+                                                <h3>John Doe</h3>
+                                                <div class="meta">June 27, 2018 at 2:21pm</div>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
+                                                <p><a href="#" class="reply">Reply</a></p>
+                                            </div>
+
+                                            <ul class="children">
+                                                <li class="comment">
+                                                    <div class="vcard bio">
+                                                        <img src="images/person_1.jpg" alt="Image placeholder">
+                                                    </div>
+                                                    <div class="comment-body">
+                                                        <h3>John Doe</h3>
+                                                        <div class="meta">June 27, 2018 at 2:21pm</div>
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
+                                                        <p><a href="#" class="reply">Reply</a></p>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="comment">
+                            <div class="vcard bio">
+                                <img src="images/person_1.jpg" alt="Image placeholder">
+                            </div>
+                            <div class="comment-body">
+                                <h3>John Doe</h3>
+                                <div class="meta">June 27, 2018 at 2:21pm</div>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
+                                <p><a href="#" class="reply">Reply</a></p>
+                            </div>
+                        </li>
+                    </ul>
+                    <!-- END comment-list -->
+
+                    <div class="comment-form-wrap pt-5">
+                        <h3 class="mb-5">Leave a comment</h3>
+                        <form action="#" class="p-5 bg-light">
+                            <div class="form-group">
+                                <label for="name">Name *</label>
+                                <input type="text" class="form-control" id="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" class="form-control" id="email">
+                            </div>
+                            <div class="form-group">
+                                <label for="website">Website</label>
+                                <input type="url" class="form-control" id="website">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea name="" id="message" cols="30" rows="10" class="form-control"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Post Comment" class="btn py-3 px-4 btn-primary">
+                            </div>
+
+                        </form>
+                    </div>
                 </div>
             </div> <!-- .col-md-8 -->
             <div class="col-lg-4 sidebar ftco-animate">
@@ -243,11 +272,9 @@
                 <div class="sidebar-box ftco-animate">
                     <h3 class="heading">Recent Blog</h3>
                     <div class="block-21 mb-4 d-flex">
-                        <a class="blog-img mr-4"
-                           style="background-image: url('<c:url value="/template/homepage/images/image_1.jpg"/>')"></a>
+                        <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
                         <div class="text">
-                            <h3 class="heading-1"><a href="#">Even the all-powerful Pointing has no control about the
-                                blind texts</a></h3>
+                            <h3 class="heading-1"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
                             <div class="meta">
                                 <div><a href="#"><span class="icon-calendar"></span> April 09, 2019</a></div>
                                 <div><a href="#"><span class="icon-person"></span> Admin</a></div>
@@ -256,11 +283,9 @@
                         </div>
                     </div>
                     <div class="block-21 mb-4 d-flex">
-                        <a class="blog-img mr-4"
-                           style="background-image: url('<c:url value="/template/homepage/images/image_2.jpg"/>')"></a>
+                        <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
                         <div class="text">
-                            <h3 class="heading-1"><a href="#">Even the all-powerful Pointing has no control about the
-                                blind texts</a></h3>
+                            <h3 class="heading-1"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
                             <div class="meta">
                                 <div><a href="#"><span class="icon-calendar"></span> April 09, 2019</a></div>
                                 <div><a href="#"><span class="icon-person"></span> Admin</a></div>
@@ -269,11 +294,9 @@
                         </div>
                     </div>
                     <div class="block-21 mb-4 d-flex">
-                        <a class="blog-img mr-4"
-                           style="background-image: url('<c:url value="/template/homepage/images/image_3.jpg"/>')"></a>
+                        <a class="blog-img mr-4" style="background-image: url(images/image_3.jpg);"></a>
                         <div class="text">
-                            <h3 class="heading-1"><a href="#">Even the all-powerful Pointing has no control about the
-                                blind texts</a></h3>
+                            <h3 class="heading-1"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
                             <div class="meta">
                                 <div><a href="#"><span class="icon-calendar"></span> April 09, 2019</a></div>
                                 <div><a href="#"><span class="icon-person"></span> Admin</a></div>
@@ -299,9 +322,7 @@
 
                 <div class="sidebar-box ftco-animate">
                     <h3 class="heading">Paragraph</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus
-                        voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur
-                        similique, inventore eos fugit cupiditate numquam!</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
                 </div>
             </div>
 
@@ -363,12 +384,9 @@
                     <h2 class="ftco-heading-2">Have a Questions?</h2>
                     <div class="block-23 mb-3">
                         <ul>
-                            <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span>
-                            </li>
-                            <li><a href="#"><span class="icon icon-phone"></span><span
-                                    class="text">+2 392 3929 210</span></a></li>
-                            <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a>
-                            </li>
+                            <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
+                            <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
+                            <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a></li>
                         </ul>
                     </div>
                 </div>
@@ -378,10 +396,7 @@
             <div class="col-md-12 text-center">
 
                 <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    Copyright &copy;<script>document.write(new Date().getFullYear());</script>
-                    All rights reserved | This template is made with <i class="icon-heart color-danger"
-                                                                        aria-hidden="true"></i> by <a
-                            href="https://colorlib.com" target="_blank">Colorlib</a>
+                    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                 </p>
             </div>
@@ -390,14 +405,9 @@
 </footer>
 
 
+
 <!-- loader -->
-<div id="ftco-loader" class="show fullscreen">
-    <svg class="circular" width="48px" height="48px">
-        <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/>
-        <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
-                stroke="#F96D00"/>
-    </svg>
-</div>
+<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
 
 <script type="text/javascript" src="<c:url value="/template/homepage/js/jquery.min.js"/>"></script>

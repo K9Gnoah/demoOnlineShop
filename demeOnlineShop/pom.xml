@@ -26,14 +26,6 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
-
-<!--		&lt;!&ndash; JSP API &ndash;&gt;-->
-<!--		<dependency>-->
-<!--			<groupId>org.apache.tomcat.embed</groupId>-->
-<!--			<artifactId>tomcat-embed-jasper</artifactId>-->
-<!--			<scope>provided</scope>-->
-<!--		</dependency>-->
-
 		<!-- Jakarta JSTL for JSP -->
 		<dependency>
 			<groupId>jakarta.servlet.jsp.jstl</groupId>
@@ -77,11 +69,13 @@
 			<version>${mapstruct.version}</version>
 		</dependency>
 
-		<dependency>
-			<groupId>com.nimbusds</groupId>
-			<artifactId>nimbus-jose-jwt</artifactId>
-			<version>9.30.1</version>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>com.nimbusds</groupId>-->
+<!--			<artifactId>nimbus-jose-jwt</artifactId>-->
+<!--			<version>9.30.1</version>-->
+<!--		</dependency>-->
+
+
 
 <!--		read excel file-->
 		<dependency>
@@ -109,6 +103,13 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+
+		<!-- JWT Support -->
+		<dependency>
+			<groupId>com.auth0</groupId>
+			<artifactId>java-jwt</artifactId>
+			<version>3.18.2</version> <!-- Use the latest version -->
 		</dependency>
 
 		<dependency>

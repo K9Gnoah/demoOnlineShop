@@ -1,4 +1,4 @@
-package com.hoangmike.dto.request;
+package com.hoangmike.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;

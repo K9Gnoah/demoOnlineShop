@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Data
@@ -14,12 +15,14 @@ public class Blog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    String tittle;
+    String title;
 
     @Lob
     String content;
 
     String author;
+
+    String image;
 
     LocalDateTime createAt;
 
@@ -27,8 +30,10 @@ public class Blog {
 
     boolean status;
 
+    Long views = 0L;
 
-
-
-
+    public String getFormattedCreateAt() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy HH:mm");
+        return this.createAt.format(formatter);
+    }
 }

@@ -15,6 +15,7 @@ public enum ErrorCode {
     PRODUCT_QUANTITY_EXCEED(1011, "Not enough stock for product"),
     ORDER_NOT_FOUND(1012, "Order not found"),
     DELIVERY_PERSON_NOT_FOUND(1013, "Delivery person not found"),
+    BLOG_NOT_FOUND(1014, "Blog not found"),
     ;
 
     ErrorCode(int code, String message) {

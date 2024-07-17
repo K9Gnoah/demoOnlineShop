@@ -1,7 +1,7 @@
 package com.hoangmike.service.impl;
 
 
-import com.hoangmike.dto.request.ApiResponse;
+import com.hoangmike.dto.response.ApiResponse;
 import com.hoangmike.dto.request.ChangePasswordRequest;
 import com.hoangmike.dto.request.UserCreationRequest;
 import com.hoangmike.dto.request.UserDTO;

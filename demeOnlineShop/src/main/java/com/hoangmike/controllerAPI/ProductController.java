@@ -1,6 +1,6 @@
 package com.hoangmike.controllerAPI;
 
-import com.hoangmike.dto.request.ApiResponse;
+import com.hoangmike.dto.response.ApiResponse;
 import com.hoangmike.dto.request.ProductCreationRequest;
 import com.hoangmike.dto.response.ProductResponse;
 import com.hoangmike.entity.Product;
