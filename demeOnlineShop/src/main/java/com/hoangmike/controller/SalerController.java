@@ -88,22 +88,6 @@ public class SalerController {
         return "manageOrder";
     }
 
-//    @PostMapping("/updateOrderStatus")
-//    public String updateOrderStatus(@RequestParam("orderId") Long orderId, @RequestParam("status") String status, @RequestParam("deliveryPersonId") String deliveryPersonId
-//            ,RedirectAttributes redirectAttributes) {
-//        try {
-//            OrderStatus orderStatus = OrderStatus.valueOf(status.toUpperCase());
-//            orderService.updateOrderStatus(orderId, orderStatus, Long.valueOf(deliveryPersonId));
-//            redirectAttributes.addFlashAttribute("successMessage", "Order status updated successfully!");
-//        } catch (IllegalArgumentException e) {
-//            redirectAttributes.addFlashAttribute("errorMessage", "Invalid order status provided.");
-//        } catch (AppException e) {
-//            redirectAttributes.addFlashAttribute("errorMessage", "Insufficient product quantity for order.");
-//        } catch (Exception e) {
-//            redirectAttributes.addFlashAttribute("errorMessage", "Could not update order status.");
-//        }
-//        return "redirect:/saler/manageOrder";
-//    }
 
     private static final Logger logger = LoggerFactory.getLogger(SalerController.class);
 

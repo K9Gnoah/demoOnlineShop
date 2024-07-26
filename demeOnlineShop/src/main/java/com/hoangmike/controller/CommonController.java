@@ -8,8 +8,12 @@ import com.hoangmike.entity.User;
 import com.hoangmike.service.BlogService;
 import com.hoangmike.service.CustomUserDetailsService;
 import com.hoangmike.service.impl.ProductServiceImpl;
+import com.hoangmike.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,18 +32,25 @@ public class CommonController {
     private ProductServiceImpl productService;
     @Autowired
     private BlogService blogService;
+    @Autowired
+    private UserServiceImpl userServiceImpl;
 
     @GetMapping("/aboutPage")
     public String aboutPage(Model model) {
-        User currentuser = CustomUserDetailsService.getCurrentUserEntity();
-        model.addAttribute("user", currentuser);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && !(authentication instanceof AnonymousAuthenticationToken)) {
+            User currentuser = CustomUserDetailsService.getCurrentUserEntity();
+            model.addAttribute("user", currentuser);
+        }
         return "aboutPage";
     }
 
     @GetMapping("/home")
     public String home(Model model) {
-        if(CustomUserDetailsService.getCurrentUserEntity() != null) {
-            model.addAttribute("user", CustomUserDetailsService.getCurrentUserEntity());
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && !(authentication instanceof AnonymousAuthenticationToken)) {
+            User currentuser = CustomUserDetailsService.getCurrentUserEntity();
+            model.addAttribute("user", currentuser);
         }
 
         return "homepage";
@@ -52,15 +63,20 @@ public class CommonController {
         Page<Blog> blogPage;
         blogPage = blogService.findActiveBlogPag(page, size);
         model.addAttribute("listBlog", blogPage);
-        User currentuser = CustomUserDetailsService.getCurrentUserEntity();
-        model.addAttribute("user", currentuser);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && !(authentication instanceof AnonymousAuthenticationToken)) {
+            User currentuser = CustomUserDetailsService.getCurrentUserEntity();
+            model.addAttribute("user", currentuser);
+        }
         return "blog";
     }
     @GetMapping("/blogDetails/{id}")
     public String blogDetails(Model model, @PathVariable("id") Integer id) {
         try {
             BlogResponse blog = blogService.getBlogById(id);
+            User author = userServiceImpl.findUserByUsername(blog.getAuthor());
             model.addAttribute("blog", blog);
+            model.addAttribute("author", author);
             blogService.incrementBlogViews(Long.valueOf(id));
             return "blogDetails";
         } catch (Exception e) {
@@ -85,8 +101,11 @@ public class CommonController {
         }
 //        Page<Product> productPage = productService.findActiveProductPag(page, size);
         model.addAttribute("listProduct", productPage);
-        User currentUser = CustomUserDetailsService.getCurrentUserEntity();
-        model.addAttribute("user", currentUser);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && !(authentication instanceof AnonymousAuthenticationToken)) {
+            User currentuser = CustomUserDetailsService.getCurrentUserEntity();
+            model.addAttribute("user", currentuser);
+        }
         model.addAttribute("selectedCategory", category);
         return "showProduct";
         } catch (Exception e) {

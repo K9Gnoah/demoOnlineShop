@@ -55,7 +55,7 @@
 </div>
 <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
     <div class="container">
-        <a class="navbar-brand" href="/home">Vegefoods</a>
+        <a class="navbar-brand" href="/">Vegefoods</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
                 aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="oi oi-menu"></span> Menu
@@ -63,7 +63,7 @@
 
         <div class="collapse navbar-collapse" id="ftco-nav">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><a href="/home" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">Shop</a>
@@ -83,6 +83,34 @@
                 </li>
 
             </ul>
+        </div>
+        <a class="navbar-brand"> Hello ${user.username}</a>
+        <div class="nav-item dropdown">
+            <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2"
+               data-bs-toggle="dropdown"
+               aria-expanded="false">
+                <img src="${user.avatar}" alt=""
+                     width="35" height="35" class="rounded-circle">
+            </a>
+            <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"
+                 aria-labelledby="drop2">
+                <div class="message-body">
+                    <a href="/user/profile" class="d-flex align-items-center gap-2 dropdown-item">
+                        <i class="ti ti-user fs-6"></i>
+                        <p class="mb-0 fs-3">My Profile</p>
+                    </a>
+                    <a href="/user/changepass/${user.id}" class="d-flex align-items-center gap-2 dropdown-item">
+                        <i class="ti ti-mail fs-6"></i>
+                        <p class="mb-0 fs-3">Change Password</p>
+                    </a>
+                    <a href="/customer/myOrder" class="d-flex align-items-center gap-2 dropdown-item">
+                        <i class="ti ti-list-check fs-6"></i>
+                        <p class="mb-0 fs-3">My Order</p>
+                    </a>
+                    <a href="/logout"
+                       class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
+                </div>
+            </div>
         </div>
     </div>
 </nav>
@@ -129,7 +157,7 @@
 
                 <div class="about-author d-flex p-4 bg-light">
                     <div class="bio align-self-md-center mr-4">
-                        <img src="images/person_1.jpg" alt="Image placeholder" class="img-fluid mb-4">
+                        <img src="${author.avatar}" alt="Image placeholder" class="img-fluid mb-4">
                     </div>
                     <div class="desc align-self-md-center">
                         <h3>${blog.author}</h3>
@@ -143,10 +171,10 @@
                     <ul class="comment-list">
                         <li class="comment">
                             <div class="vcard bio">
-                                <img src="images/person_1.jpg" alt="Image placeholder">
+                                <img src="<c:url value="/template/homepage/images/person_1.jpg"/>" alt="Image placeholder">
                             </div>
                             <div class="comment-body">
-                                <h3>John Doe</h3>
+                                <h3>Scarlet Mike</h3>
                                 <div class="meta">June 27, 2018 at 2:21pm</div>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
                                 <p><a href="#" class="reply">Reply</a></p>
@@ -155,10 +183,10 @@
 
                         <li class="comment">
                             <div class="vcard bio">
-                                <img src="images/person_1.jpg" alt="Image placeholder">
+                                <img src="<c:url value="/template/homepage/images/person_2.jpg"/>" alt="Image placeholder">
                             </div>
                             <div class="comment-body">
-                                <h3>John Doe</h3>
+                                <h3>Michael Jackson</h3>
                                 <div class="meta">June 27, 2018 at 2:21pm</div>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
                                 <p><a href="#" class="reply">Reply</a></p>
@@ -167,10 +195,10 @@
                             <ul class="children">
                                 <li class="comment">
                                     <div class="vcard bio">
-                                        <img src="images/person_1.jpg" alt="Image placeholder">
+                                        <img src="<c:url value="/template/homepage/images/person_1.jpg"/>" alt="Image placeholder">
                                     </div>
                                     <div class="comment-body">
-                                        <h3>John Doe</h3>
+                                        <h3>Will Smith</h3>
                                         <div class="meta">June 27, 2018 at 2:21pm</div>
                                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
                                         <p><a href="#" class="reply">Reply</a></p>
@@ -180,10 +208,10 @@
                                     <ul class="children">
                                         <li class="comment">
                                             <div class="vcard bio">
-                                                <img src="images/person_1.jpg" alt="Image placeholder">
+                                                <img src="<c:url value="/template/homepage/images/person_2.jpg"/>" alt="Image placeholder">
                                             </div>
                                             <div class="comment-body">
-                                                <h3>John Doe</h3>
+                                                <h3>Donald Trump</h3>
                                                 <div class="meta">June 27, 2018 at 2:21pm</div>
                                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
                                                 <p><a href="#" class="reply">Reply</a></p>
@@ -192,10 +220,10 @@
                                             <ul class="children">
                                                 <li class="comment">
                                                     <div class="vcard bio">
-                                                        <img src="images/person_1.jpg" alt="Image placeholder">
+                                                        <img src="<c:url value="/template/homepage/images/person_4.jpg"/>" alt="Image placeholder">
                                                     </div>
                                                     <div class="comment-body">
-                                                        <h3>John Doe</h3>
+                                                        <h3>Vladimir Putin</h3>
                                                         <div class="meta">June 27, 2018 at 2:21pm</div>
                                                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
                                                         <p><a href="#" class="reply">Reply</a></p>
@@ -210,10 +238,10 @@
 
                         <li class="comment">
                             <div class="vcard bio">
-                                <img src="images/person_1.jpg" alt="Image placeholder">
+                                <img src="<c:url value="/template/homepage/images/person_3.jpg"/>" alt="Image placeholder">
                             </div>
                             <div class="comment-body">
-                                <h3>John Doe</h3>
+                                <h3>John Smith</h3>
                                 <div class="meta">June 27, 2018 at 2:21pm</div>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
                                 <p><a href="#" class="reply">Reply</a></p>
@@ -272,7 +300,7 @@
                 <div class="sidebar-box ftco-animate">
                     <h3 class="heading">Recent Blog</h3>
                     <div class="block-21 mb-4 d-flex">
-                        <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
+                        <a class="blog-img mr-4" style="background-image: url('<c:url value="/template/homepage/images/image_1.jpg"/>')"></a>
                         <div class="text">
                             <h3 class="heading-1"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
                             <div class="meta">
@@ -283,7 +311,7 @@
                         </div>
                     </div>
                     <div class="block-21 mb-4 d-flex">
-                        <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
+                        <a class="blog-img mr-4" style="background-image: url('<c:url value="/template/homepage/images/image_2.jpg"/>')"></a>
                         <div class="text">
                             <h3 class="heading-1"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
                             <div class="meta">
@@ -294,7 +322,7 @@
                         </div>
                     </div>
                     <div class="block-21 mb-4 d-flex">
-                        <a class="blog-img mr-4" style="background-image: url(images/image_3.jpg);"></a>
+                        <a class="blog-img mr-4" style="background-image: url('<c:url value="/template/homepage/images/image_3.jpg"/>')"></a>
                         <div class="text">
                             <h3 class="heading-1"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
                             <div class="meta">

@@ -204,7 +204,7 @@
                 const formData = new FormData();
                 formData.append('file', fileInput.files[0]);
 
-                fetch('/api/files/upload', {
+                fetch('/api/files/uploadAvatar', {
                     method: 'POST',
                     body: formData
                 })

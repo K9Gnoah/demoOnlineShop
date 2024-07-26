@@ -1,5 +1,6 @@
 package com.hoangmike.controllerAPI;
 
+import com.hoangmike.dto.request.BlogUpdateRequest;
 import com.hoangmike.dto.response.ApiResponse;
 import com.hoangmike.dto.request.BlogCreationRequest;
 import com.hoangmike.dto.response.BlogResponse;
@@ -38,5 +39,13 @@ public class BlogController {
     public String deleteBlog(@PathVariable("id") Long id){
         blogService.deleteBlog(id);
         return "delete blog success";
+    }
+
+    @PutMapping("/{id}")
+    ApiResponse<Blog> updateBlog(@PathVariable("id") int id, @RequestBody BlogUpdateRequest request) {
+        ApiResponse<Blog> apiResponse = new ApiResponse();
+        Blog blog = blogService.updateBlog(id, request);
+        apiResponse.setResult(blog);
+        return apiResponse;
     }
 }

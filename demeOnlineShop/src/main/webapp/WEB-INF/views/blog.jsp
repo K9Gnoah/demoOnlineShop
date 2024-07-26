@@ -55,7 +55,7 @@
 </div>
 <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
     <div class="container">
-        <a class="navbar-brand" href="/home">Vegefoods</a>
+        <a class="navbar-brand" href="/">Vegefoods</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
                 aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="oi oi-menu"></span> Menu
@@ -69,8 +69,6 @@
                        aria-haspopup="true" aria-expanded="false">Shop</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown04">
                         <a class="dropdown-item" href="/common/showProduct">Shop</a>
-                        <a class="dropdown-item" href="wishlist.html">Wishlist</a>
-                        <a class="dropdown-item" href="product-single.html">Single Product</a>
                         <a class="dropdown-item" href="/customer/cart">Cart</a>
                         <a class="dropdown-item" href="/customer/checkout">Checkout</a>
                     </div>
@@ -83,6 +81,34 @@
                 </li>
 
             </ul>
+        </div>
+        <a class="navbar-brand"> Hello ${user.username}</a>
+        <div class="nav-item dropdown">
+            <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2"
+               data-bs-toggle="dropdown"
+               aria-expanded="false">
+                <img src="${user.avatar}" alt=""
+                     width="35" height="35" class="rounded-circle">
+            </a>
+            <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"
+                 aria-labelledby="drop2">
+                <div class="message-body">
+                    <a href="/user/profile" class="d-flex align-items-center gap-2 dropdown-item">
+                        <i class="ti ti-user fs-6"></i>
+                        <p class="mb-0 fs-3">My Profile</p>
+                    </a>
+                    <a href="/user/changepass/${user.id}" class="d-flex align-items-center gap-2 dropdown-item">
+                        <i class="ti ti-mail fs-6"></i>
+                        <p class="mb-0 fs-3">Change Password</p>
+                    </a>
+                    <a href="/customer/myOrder" class="d-flex align-items-center gap-2 dropdown-item">
+                        <i class="ti ti-list-check fs-6"></i>
+                        <p class="mb-0 fs-3">My Order</p>
+                    </a>
+                    <a href="/logout"
+                       class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
+                </div>
+            </div>
         </div>
     </div>
 </nav>
@@ -104,117 +130,23 @@
         <div class="row">
             <div class="col-lg-8 ftco-animate">
                 <div class="row">
-                    <%--                    <div class="col-md-12 d-flex ftco-animate">--%>
-                    <%--                        <div class="blog-entry align-self-stretch d-md-flex">--%>
-                    <%--                            <a href="blog-single.html" class="block-20" style="background-image: url('<c:url value="/template/homepage/images/image_1.jpg"/>')">--%>
-                    <%--                            </a>--%>
-                    <%--                            <div class="text d-block pl-md-4">--%>
-                    <%--                                <div class="meta mb-3">--%>
-                    <%--                                    <div><a href="#">July 20, 2019</a></div>--%>
-                    <%--                                    <div><a href="#">Admin</a></div>--%>
-                    <%--                                    <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>--%>
-                    <%--                                </div>--%>
-                    <%--                                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>--%>
-                    <%--                                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>--%>
-                    <%--                                <p><a href="blog-single.html" class="btn btn-primary py-2 px-3">Read more</a></p>--%>
-                    <%--                            </div>--%>
-                    <%--                        </div>--%>
-                    <%--                    </div>--%>
-                    <%--                    <div class="col-md-12 d-flex ftco-animate">--%>
-                    <%--                        <div class="blog-entry align-self-stretch d-md-flex">--%>
-                    <%--                            <a href="blog-single.html" class="block-20" style="background-image: url('<c:url value="/template/homepage/images/image_2.jpg"/>')">--%>
-                    <%--                            </a>--%>
-                    <%--                            <div class="text d-block pl-md-4">--%>
-                    <%--                                <div class="meta mb-3">--%>
-                    <%--                                    <div><a href="#">July 20, 2019</a></div>--%>
-                    <%--                                    <div><a href="#">Admin</a></div>--%>
-                    <%--                                    <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>--%>
-                    <%--                                </div>--%>
-                    <%--                                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>--%>
-                    <%--                                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>--%>
-                    <%--                                <p><a href="blog-single.html" class="btn btn-primary py-2 px-3">Read more</a></p>--%>
-                    <%--                            </div>--%>
-                    <%--                        </div>--%>
-                    <%--                    </div>--%>
-                    <%--                    <div class="col-md-12 d-flex ftco-animate">--%>
-                    <%--                        <div class="blog-entry align-self-stretch d-md-flex">--%>
-                    <%--                            <a href="blog-single.html" class="block-20" style="background-image: url('<c:url value="/template/homepage/images/image_3.jpg"/>')">--%>
-                    <%--                            </a>--%>
-                    <%--                            <div class="text d-block pl-md-4">--%>
-                    <%--                                <div class="meta mb-3">--%>
-                    <%--                                    <div><a href="#">July 20, 2019</a></div>--%>
-                    <%--                                    <div><a href="#">Admin</a></div>--%>
-                    <%--                                    <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>--%>
-                    <%--                                </div>--%>
-                    <%--                                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>--%>
-                    <%--                                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>--%>
-                    <%--                                <p><a href="blog-single.html" class="btn btn-primary py-2 px-3">Read more</a></p>--%>
-                    <%--                            </div>--%>
-                    <%--                        </div>--%>
-                    <%--                    </div>--%>
-                    <%--                    <div class="col-md-12 d-flex ftco-animate">--%>
-                    <%--                        <div class="blog-entry align-self-stretch d-md-flex">--%>
-                    <%--                            <a href="blog-single.html" class="block-20" style="background-image: url('<c:url value="/template/homepage/images/image_4.jpg"/>')">--%>
-                    <%--                            </a>--%>
-                    <%--                            <div class="text d-block pl-md-4">--%>
-                    <%--                                <div class="meta mb-3">--%>
-                    <%--                                    <div><a href="#">July 20, 2019</a></div>--%>
-                    <%--                                    <div><a href="#">Admin</a></div>--%>
-                    <%--                                    <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>--%>
-                    <%--                                </div>--%>
-                    <%--                                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>--%>
-                    <%--                                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>--%>
-                    <%--                                <p><a href="blog-single.html" class="btn btn-primary py-2 px-3">Read more</a></p>--%>
-                    <%--                            </div>--%>
-                    <%--                        </div>--%>
-                    <%--                    </div>--%>
-                    <%--                    <div class="col-md-12 d-flex ftco-animate">--%>
-                    <%--                        <div class="blog-entry align-self-stretch d-md-flex">--%>
-                    <%--                            <a href="blog-single.html" class="block-20" style="background-image: url('<c:url value="/template/homepage/images/image_5.jpg"/>')">--%>
-                    <%--                            </a>--%>
-                    <%--                            <div class="text d-block pl-md-4">--%>
-                    <%--                                <div class="meta mb-3">--%>
-                    <%--                                    <div><a href="#">July 20, 2019</a></div>--%>
-                    <%--                                    <div><a href="#">Admin</a></div>--%>
-                    <%--                                    <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>--%>
-                    <%--                                </div>--%>
-                    <%--                                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>--%>
-                    <%--                                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>--%>
-                    <%--                                <p><a href="blog-single.html" class="btn btn-primary py-2 px-3">Read more</a></p>--%>
-                    <%--                            </div>--%>
-                    <%--                        </div>--%>
-                    <%--                    </div>--%>
-                    <%--                    <div class="col-md-12 d-flex ftco-animate">--%>
-                    <%--                        <div class="blog-entry align-self-stretch d-md-flex">--%>
-                    <%--                            <a href="blog-single.html" class="block-20" style="background-image: url('<c:url value="/template/homepage/images/image_6.jpg"/>')">--%>
-                    <%--                            </a>--%>
-                    <%--                            <div class="text d-block pl-md-4">--%>
-                    <%--                                <div class="meta mb-3">--%>
-                    <%--                                    <div><a href="#">July 20, 2019</a></div>--%>
-                    <%--                                    <div><a href="#">Admin</a></div>--%>
-                    <%--                                    <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>--%>
-                    <%--                                </div>--%>
-                    <%--                                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>--%>
-                    <%--                                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>--%>
-                    <%--                                <p><a href="blog-single.html" class="btn btn-primary py-2 px-3">Read more</a></p>--%>
-                    <%--                            </div>--%>
-                    <%--                        </div>--%>
-                    <%--                    </div>--%>
                     <c:forEach var="i" items="${listBlog.content}">
                         <div class="col-md-12 d-flex ftco-animate">
                             <div class="blog-entry align-self-stretch d-md-flex">
-                                <a href="/common/blogDetails/${i.id}" class="block-20" style="background-image: url('<c:url
-                                        value="/template/homepage/images/image_2.jpg"/>')">
+                                <a href="/common/blogDetails/${i.id}" class="block-20"><img class="img-fluid"
+                                                                                            src="${i.image}"/>
                                 </a>
                                 <div class="text d-block pl-md-4">
                                     <div class="meta mb-3">
                                         <div><a href="#">${i.formattedCreateAt}</a></div>
                                         <div><a href="#">${i.author}</a></div>
-                                        <div><a href="#" class="meta-chat"><span class="icon-chat"></span> ${i.views}</a></div>
+                                        <div><a href="#" class="meta-chat"><span class="icon-chat"></span> ${i.views}
+                                        </a></div>
                                     </div>
                                     <h3 class="heading"><a href="/common/blogDetails/${i.id}">${i.title}</a></h3>
                                     <p>${i.content}</p>
-                                    <p><a href="/common/blogDetails/${i.id}" class="btn btn-primary py-2 px-3">Read more</a></p>
+                                    <p><a href="/common/blogDetails/${i.id}" class="btn btn-primary py-2 px-3">Read
+                                        more</a></p>
                                 </div>
                             </div>
                         </div>

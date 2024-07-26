@@ -8,6 +8,7 @@ import com.hoangmike.entity.User;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService {
     public UserResponse createUser(UserCreationRequest request);
@@ -17,6 +18,7 @@ public interface UserService {
     public void deleteUserById(String id);
     public Page<User> findPaginated(int page, int size);
     public User findUserByEmail(String email);
+    public User findUserByUsername(String username);
     void saveUser(UserDTO userDto);
     UserResponse changePassword(String Id, ChangePasswordRequest request);
     public List<User> getUsersByRoleName(String roleName);
